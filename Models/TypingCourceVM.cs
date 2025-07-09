@@ -11,6 +11,7 @@ namespace ComputerTypingWebApp.Models
         public string PracticeData { get; set; }
         public List<TypingCourceVM> ListTypingCource { get; set; }
         public List<coursepractices> Listcoursepractices { get; set; }
+        public List<speedPracticeUpload> Listspeedpractices { get; set; }
         public List<Course> ListCourse { get; set; }
         public List<Subject> ListSubject { get; set; }
         public List<Students> ListOfSubject { get; set; }

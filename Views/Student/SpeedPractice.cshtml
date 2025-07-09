@@ -31,377 +31,644 @@
     </style>
 </head>
 
-<div class="row col-12">
-    @foreach (var subject in Model.ListOfSubject)
-    {
-        var subjectList30 = (subject.SelectSub30wpm ?? "").Split(',').ToList();
-        var subjectList40 = (subject.SelectSub40wpm ?? "").Split(',').ToList();
 
-        if (subjectList30.Contains("English30"))
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        @foreach (var subject in Model.ListOfSubject)
         {
-            @*  //English 30 *@
-            <div class="row" style="text-align: center;">
-                <h2 class="card heading" >English30WPM</h2>
+
+            var subjectList30 = (subject.SelectSub30wpm ?? "").Split(',').ToList();
+            var subjectList40 = (subject.SelectSub40wpm ?? "").Split(',').ToList();
+
+            <!-- 30WPM -->
+            <h5>30 WPM</h5>
+            <div class="row g-6">
+                @if (subjectList30.Contains("English30"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">English 30 WPM</small>
+                        <div class="accordion mt-4" id="english30WPM">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng30HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accEng30HomeKey">
+                                        Passage
+                                    </button>
+                                </h2>
+
+                                <div id="accEng30HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 1))
+                                        {
+                                            if (practice.sectionid == 1)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 1, sectionId = 1})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng30UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accEng30UpperKey">
+                                        Letter
+                                    </button>
+                                </h2>
+                                <div id="accEng30UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 1))
+                                        {
+                                            if (practice.sectionid == 2)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 1, sectionId = 2})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng30LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accEng30LowerKey">
+                                        Statement
+                                    </button>
+                                </h2>
+                                <div id="accEng30LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 1))
+                                        {
+                                            if (practice.sectionid == 3)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 1, sectionId = 3})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (subjectList30.Contains("Hindi30"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">Hindi 30 WPM</small>
+                        <div class="accordion mt-4" id="accordionExample">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin30HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accHin30HomeKey">
+                                        Passage
+                                    </button>
+                                </h2>
+
+                                <div id="accHin30HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 2))
+                                        {
+                                            if (practice.sectionid == 1)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 2, sectionId = 1})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin30UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accHin30UpperKey">
+                                        Letter
+                                    </button>
+                                </h2>
+                                <div id="accHin30UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 2))
+                                        {
+                                            if (practice.sectionid == 2)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 2, sectionId = 2})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin30LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accHin30LowerKey">
+                                        Statement
+                                    </button>
+                                </h2>
+                                <div id="accHin30LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 2))
+                                        {
+                                            if (practice.sectionid == 3)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 2, sectionId = 3})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (subjectList30.Contains("Marathi30"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">Marathi 30 WPM</small>
+                        <div class="accordion mt-4" id="accordionExample">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi30HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accMarathi30HomeKey">
+                                        Passage
+                                    </button>
+                                </h2>
+
+                                <div id="accMarathi30HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 3))
+                                        {
+                                            if (practice.sectionid == 1)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 3, sectionId = 1})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi30UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accMarathi30UpperKey">
+                                        Letter
+                                    </button>
+                                </h2>
+                                <div id="accMarathi30UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 3))
+                                        {
+                                            if (practice.sectionid == 2)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 3, sectionId = 2})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi30LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accMarathi30LowerKey">
+                                        Statement
+                                    </button>
+                                </h2>
+                                <div id="accMarathi30LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 3))
+                                        {
+                                            if (practice.sectionid == 3)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 3, sectionId = 3})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
             </div>
-            <div class="row col-12">
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Passage"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
+            <!--/ 30WPM -->
+            <!-- 40WPM -->
+            <h5>40 WPM</h5>
+            <div class="row g-6">
+                @if (subjectList40.Contains("English40"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">English 40 WPM</small>
+                        <div class="accordion mt-4" id="english30WPM">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng40HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accEng40HomeKey">
+                                        Passage
+                                    </button>
+                                </h2>
+
+                                <div id="accEng40HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 4))
+                                        {
+                                            if (practice.sectionid == 1)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 4, sectionId = 1})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng40UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accEng40UpperKey">
+                                        Letter
+                                    </button>
+                                </h2>
+                                <div id="accEng40UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 4))
+                                        {
+                                            if (practice.sectionid == 2)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 4, sectionId = 2})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng40LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accEng40LowerKey">
+                                        Statement
+                                    </button>
+                                </h2>
+                                <div id="accEng40LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 4))
+                                        {
+                                            if (practice.sectionid == 3)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 4, sectionId = 3})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Letter"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
+                }
+
+                @if (subjectList40.Contains("Hindi40"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">Hindi 40 WPM</small>
+                        <div class="accordion mt-4" id="accordionExample">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin40HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accHin40HomeKey">
+                                        Passage
+                                    </button>
+                                </h2>
+
+                                <div id="accHin40HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 5))
+                                        {
+                                            if (practice.sectionid == 1)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 5, sectionId = 1})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin40UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accHin40UpperKey">
+                                        Letter
+                                    </button>
+                                </h2>
+                                <div id="accHin40UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 5))
+                                        {
+                                            if (practice.sectionid == 2)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 5, sectionId = 2})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin40LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accHin40LowerKey">
+                                        Statement
+                                    </button>
+                                </h2>
+                                <div id="accHin40LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 5))
+                                        {
+                                            if (practice.sectionid == 3)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 5, sectionId = 3})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Statement"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
+                }
+
+                @if (subjectList40.Contains("Marathi40"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">Marathi 40 WPM</small>
+                        <div class="accordion mt-4" id="accordionExample">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi40HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accMarathi40HomeKey">
+                                        Passage
+                                    </button>
+                                </h2>
+
+                                <div id="accMarathi40HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 6))
+                                        {
+                                            if (practice.sectionid == 1)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 6, sectionId = 1})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi40UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accMarathi40UpperKey">
+                                        Letter
+                                    </button>
+                                </h2>
+                                <div id="accMarathi40UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 6))
+                                        {
+                                            if (practice.sectionid == 2)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 6, sectionId = 2})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi40LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accMarathi40LowerKey">
+                                        Statement
+                                    </button>
+                                </h2>
+                                <div id="accMarathi40LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listspeedpractices.Where(x => x.SubjectId == 6))
+                                        {
+                                            if (practice.sectionid == 3)
+                                            {
+                                                var cleanPracticeName = practice.FileName;
+                                                <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 6, sectionId = 3})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+
             </div>
+            <!--/ 40WPM -->
         }
-        <br />
-        if (subjectList30.Contains("Hindi30"))
-        {
-            @*  //Hindi 30 *@
-            <div class="row" style="text-align: center; margin-top:20px;">
-                <h2 class="card heading" >Hindi30WPM</h2>
-            </div>
-            <div class="row col-12">
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Passage"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Letter"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Statement"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        <br />
-        if (subjectList30.Contains("Marathi30"))
-        {
-            @*  //Marathi 30 *@
-            <div class="row" style="text-align: center; margin-top:20px;">
-                <h2 class="card heading" >Marathi 30 WPM</h2>
-            </div>
-            <div class="row col-12">
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Passage"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Letter"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Statement"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        <br />
-        if (subjectList40.Contains("English40"))
-        {
-            @*  //English 40 *@
-            <div class="row" style="text-align: center; margin-top:20px;">
-                <h2 class="card heading" >English40WPM</h2>
-            </div>
-            <div class="row col-12">
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Passage"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Letter"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Statement"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        <br />
-        if (subjectList40.Contains("Hindi40"))
-        {
-            @*  //Hindi 40 *@
-            <div class="row" style="text-align: center; margin-top:20px;">
-                <h2 class="card heading" >Hindi40WPM</h2>
-            </div>
-            <div class="row col-12">
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Passage"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Letter"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Statement"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        <br />
-        if (subjectList40.Contains("Marathi40"))
-        {
-            @*  //Marathi 40 *@
-            <div class="row" style="text-align: center; margin-top:20px;">
-                <h2 class="card heading" >Marathi 40 WPM</h2>
-            </div>
-            <div class="row col-12">
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Passage"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Letter"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="dropdown" tabindex="0">
-                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
-                        <div class="submenu custom-dropdown-width">
-                            @foreach (var practice in Model.Listcoursepractices)
-                            {
-                                if (practice.PracticeName.Contains("Statement"))
-                                {
-                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
-                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
-                                        @cleanPracticeName
-                                    </a>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    }
+
+    </div>
+    <!-- / Content -->
 </div>
 

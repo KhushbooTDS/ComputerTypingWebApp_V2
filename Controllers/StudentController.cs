@@ -172,7 +172,18 @@ namespace ComputerTypingWebApp.Controllers
                             SelectSub30wpm = stu.SelectSub30wpm,
                             SelectSub40wpm = stu.SelectSub40wpm
 
-                        }).ToListAsync()
+                        }).ToListAsync(),
+
+                    Listspeedpractices = myDbContext.speedPracticeUpload
+                    .Where(x => x.IsDeleted == false && x.InstituteId == Convert.ToInt32(HttpContext.Session.GetString("InstituteID")))
+                        .Select(speed => new speedPracticeUpload
+                        {
+                            Id = speed.Id,
+                            SubjectId = speed.SubjectId,
+                            FilePath = speed.FilePath,
+                            FileName = speed.FileName,
+                            sectionid = speed.sectionid
+                        }).ToList(),
                 };
 
                 return View(typingCourceVM);
