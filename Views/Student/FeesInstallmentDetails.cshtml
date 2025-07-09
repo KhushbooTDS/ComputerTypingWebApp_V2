@@ -6,56 +6,99 @@
 
 <p class="h3">Fee Installment Details</p>
 <hr />
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
 
-<table class="table">
-    <tr>
-        <th>
-            Student UserName
-        </th>
-        <th>
-            Subjects
-        </th>
-        <th>
-            Total Amount Due
-        </th>
-        <th>
-            Amount Paid
-        </th>
-        <th>
-            Balance Amount Due
-        </th>
-        <th>
-            Payment Made By
-        </th>
-        <th>
-            Installment Date
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StudentUserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalAmountDue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AmountPaid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BalanceAmountDue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentMadeBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InstallmentDate)
-            </td>
-        </tr>
-    }
-</table>
+<div style="overflow-x:auto;">
+    <div class="container">
+        <div class="card">
+            <h5 class="card-header">Students Report</h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tbStudents" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Student UserName
+                                </th>
+                                <th>
+                                    Subjects
+                                </th>
+                                <th>
+                                    Total Amount Due
+                                </th>
+                                <th>
+                                    Amount Paid
+                                </th>
+                                <th>
+                                    Balance Amount Due
+                                </th>
+                                <th>
+                                    Payment Made By
+                                </th>
+                                <th>
+                                    Installment Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StudentUserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SubjectName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TotalAmountDue)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AmountPaid)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BalanceAmountDue)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PaymentMadeBy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InstallmentDate)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tbStudents').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            //to select and search from grid
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    });
+</script>
