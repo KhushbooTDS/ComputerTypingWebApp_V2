@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+@model ComputerTypingWebApp.Models.InstituteVM
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(function () {
+            $("#btnSubmit").click(function () {
+
+                // contact number validation
+                var regex = /^(0|91)?[0-9][0-9]{9}$/;
+                if (regex.test($("#contactno").val())) {
+                    $("#lblError").css("visibility", "hidden");
+                    //return true;
+                } else {
+                    $("#lblError").css("visibility", "visible");
+                    return false;
+                }
+
+                // email validation
+                var emailRegex = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+                if (emailRegex.test($("#email").val())) {
+                    $("#invalid_email").css("visibility", "hidden");
+                    //return true;
+                } else {
+                    $("#invalid_email").css("visibility", "visible");
+                    return false;
+                }
+
+                return true;
+
+            });
+        });
+
+    });
+</script>
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        height: 20px;
+        width: 40%;
+    }
+
+    .error {
+        color: Red;
+        visibility: hidden;
+    }
+</style>
+<label style="color:red;">@TempData["ErrorMsg"]</label>
+<h5 class="card-header">Add New Institute</h5>
+<form method="post" enctype="multipart/form-data" asp-action="Submit" asp-controller="SuperAdmin">
+    <div class="row g-6">
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header">Institute Details</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+                    <label class="form-label" for="nameofinstitute">Name of Institute</label>
+                    <div class="input-group">
+                        <input type="text" asp-for="InstituteName" class="form-control" name="nameofinstitute" id="nameofinstitute" required />
+                    </div>
+
+                    <label class="form-label" for="nameofprincipal">Name of Principal</label>
+                    <div class="input-group">
+                        <input type="text" asp-for="PrincipalName" class="form-control" name="nameofprincipal" id="nameofprincipal" required />
+                    </div>
+
+                    <label class="form-label" for="instituteaddress">Institute Address</label>
+                    <div class="input-group">
+                        <input type="text" asp-for="InstituteAddress" class="form-control" name="instituteaddress" id="instituteaddress" required />
+                    </div>
+
+                    <label class="form-label" for="instituteaddress">Institute Code</label>
+                    <div class="input-group">
+                        <input type="text" asp-for="InstituteCode" class="form-control" name="institutecode" id="institutecode" required />
+                    </div>
+
+                    <label class="form-label" for="contactno">Contact No</label>
+                    <label id="lblError" class="error">Invalid Mobile Number.</label>
+                    <div class="input-group">
+                        <input type="text" asp-for="ContactNo" class="form-control" name="contactno" id="contactno" required />
+
+                    </div>
+
+                    <label class="form-label" for="email">Email</label>
+                    <label id="invalid_email" class="error">Invalid Email.</label>
+                    <div class="input-group">
+                        <input type="text" asp-for="Email" class="form-control" name="email" id="email" required />
+                    </div>
+
+                    <label class="form-label" for="noofcomputer">NoOfComputer</label>
+                    <div class="input-group">
+                        <input type="number" asp-for="NoOfComputer" class="form-control" name="noofcomputer" id="noofcomputer" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header">Photo Upload</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+                    <label class="form-label" for="principalphotourl">PrincipalPhoto</label>
+                    <div class="input-group">
+                        <input type="file" asp-for="PrincipalPhotoUrl" class="form-control" name="principalphotourl" id="principalphotourl" />
+                    </div>
+
+                    <label class="form-label" for="institutesymbolurl">InstituteSymbol</label>
+                    <div class="input-group">
+                        <input type="file" asp-for="InstituteSymbolUrl" class="form-control" name="institutesymbolurl" id="institutesymbolurl" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input id="btnSubmit" type="submit" class="btn btn-primary" value="Submit" asp-action="Submit" asp-controller="SuperAdmin" />
+    </div>
+</form>

@@ -1,0 +1,38 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Add MCQ Section</h5><span style="text-align:right; margin-right:2%;"> <a href="~/SampleFile/UploadMCQQuestionSample.xlsx">Download Sample File</a> </span>
+
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="Subject">Subject</label><br />
+                    @Html.DropDownList("Subject", ViewBag.SubjectList3, "-- Select Subject --", new { @class = "form-control select", @required="required" })
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="Section">Section</label><br />
+                    @Html.DropDownList("Section", ViewBag.SectionList3, "-- Select Section --", new { @class = "form-control select", @required="required" })
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="Section">Upload MCQ File</label><br />
+                    <input type="file" class="form-control" name="file" required />
+                </div>
+                <br /><br />
+                <input type="submit" class="btn btn-primary" value="Upload" asp-action="UploadMCQQuestions" asp-controller="Admin" />
+            </form>
+        </div>
+    </div>
+</div>

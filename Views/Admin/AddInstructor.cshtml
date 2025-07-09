@@ -1,0 +1,108 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@*@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}*@
+@{
+    ViewData["Title"] = "AddInstructor";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h4>
+    <u>Add Instructor</u>
+</h4>
+<form method="post" enctype="multipart/form-data">
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row g-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">Instructor Basic Information</h5>
+                        <span style="color:red; margin-left:5%;">@TempData["ErrorMessage"]</span>
+                        <div class="card-body demo-vertical-spacing demo-only-element">
+
+
+                            <div class="form-group">
+                                <label for="InstructorFirstName">First Name</label> <span style="color:red;">*</span>
+                                <input type="text" class="form-control" name="InstructorFirstName" id="InstructorFirstName" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="LastName">Last Name</label> <span style="color:red;">*</span>
+                                <input type="text" class="form-control" name="LastName" id="LastName" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="FatherName">Father Name</label> <span style="color:red;">*</span>
+                                <input type="text" class="form-control" name="FatherName" id="FatherName" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="MotherName">Mother Name</label> <span style="color:red;">*</span>
+                                <input type="text" class="form-control" name="MotherName" id="MotherName" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="MobileNo">Mobile No.</label> <span style="color:red;">*</span>
+                                <input type="number" class="form-control" name="MobileNo" id="MobileNo" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length>10) return false;" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">Email</label> <span style="color:red;">*</span>
+                                <input type="email" class="form-control" name="Email" id="Email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="Gender">Gender</label><br /> <span style="color:red;">*</span>
+                                @Html.DropDownList("Gender",ViewBag.GenderList,"-- Select Gender--",new{ @class = "form-control", @required="required"})
+                            </div>
+                            <div class="form-group">
+                                <label for="PermanentAddress">Permanent Address</label> <span style="color:red;">*</span>
+                                <input type="text" class="form-control" name="PermanentAddress" id="PermanentAddress" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="Education">Education</label>
+                                <input type="text" class="form-control" name="Education" id="Education" />
+                            </div>
+
+                            <input type="submit" class="btn btn-primary" value="Submit" asp-action="SavInstructor" asp-controller="Admin" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body demo-vertical-spacing demo-only-element">
+                            <div class="form-group">
+                                <label for="PhotoIdentity">Photo Identity</label>
+                                <input type="file" class="form-control" name="Identity" id="PhotoIdentity" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="IdentityNo">Identity No</label>
+                                <input type="text" class="form-control" name="IdentityNo" id="IdentityNo" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="InstructorPic">Instructor Pic</label>
+                                <input type="file" class="form-control" name="Pic" id="InstructorPic" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="InstructorUserName">Instructor UserName</label>
+                                <input type="text" class="form-control" name="InstructorUserName" id="InstructorUserName" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="IdentityPic">Instructor Passsword</label>
+                                <input type="password" class="form-control" name="Instructorpassword" id="Instructorpassword" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+

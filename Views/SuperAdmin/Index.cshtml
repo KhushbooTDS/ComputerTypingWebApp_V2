@@ -1,0 +1,125 @@
+﻿@{
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+<!-- Quick Action Toolbar Starts-->
+<!--
+<div class="row quick-action-toolbar">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-header d-block d-md-flex">
+                <h5 class="mb-0">Quick Actions</h5>
+            </div>
+            <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
+                <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                    <a class="btn px-0" href="@Url.Action("InstituteReport", "SuperAdmin")"><i class="icon-user me-2"></i><span style="font-weight:bold;">@ViewBag.InstituteCount </span>Total Institute </a>
+@*<button type="button" class="btn px-0"> <i class="icon-user me-2"></i> Total Institute</button></br>*@
+@*<button type="button" class="btn px-0"> <i class="icon-user me-2" onclick="location.href='@Url.Action("AddInstitute", "SuperAdmin")'"></i> Add Institute</button>*@
+                    <a class="btn px-0" href="@Url.Action("AddInstitute", "SuperAdmin")"><i class="icon-user me-2"></i> Add Institute</a>
+                </div>
+                <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+@*<button type="button" class="btn px-0"><i class="icon-docs me-2"></i> Total Student</button>*@
+                    <a class="btn px-0" href="@Url.Action("StudentReport", "SuperAdmin")"><i class="icon-user me-2"></i><span style="font-weight:bold;">@ViewBag.StudentCount </span>Total Student </a>
+                </div>
+                <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+@*<button type="button" class="btn px-0"><i class="icon-docs me-2"></i> Total Instructer</button>*@
+                    <a class="btn px-0" href="@Url.Action("InstructorReport", "SuperAdmin")"><i class="icon-user me-2"></i><span style="font-weight:bold;">@ViewBag.InstructorCount </span>Total Instructor </a>
+                </div>
+                <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                    <a type="button" class="btn px-0" href="@Url.Action("Revenue", "SuperAdmin")"><i class="icon-docs me-2"></i><span style="font-weight:bold;">@ViewBag.Revenue </span>Total Revenue</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<!-- Quick Action Toolbar Ends-->
+<div class="row">
+    <div class="col-md-12 col-xx1-4">
+        <div class="row">
+            <div class="col-sm-4 col-md-2 col-sm-4 mb-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                                <a class="btn p-0" href="@Url.Action("InstituteReport", "SuperAdmin")">
+                                    <img src="../assets/img/icons/unicons/chart-success.png"
+                                         alt="chart success"
+                                         class="rounded" />
+                                </a>
+                            </div>
+                        </div>
+                        <p class="mb-1">Total Institute</p>
+                        <h4 class="card-title mb-3">@ViewBag.InstituteCount</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-sm-4 mb-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                                <a class="btn p-0" href="@Url.Action("AddInstitute", "SuperAdmin")">
+                                    <img src="../assets/img/icons/unicons/cc-primary.png"
+                                         alt="chart success"
+                                         class="rounded" />
+                                </a>
+                            </div>
+                        </div>
+                        <p class="mb-1">Add Institute</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-sm-4 mb-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                                <a class="btn p-0" href="@Url.Action("StudentReport", "SuperAdmin")">
+                                    <img src="../assets/img/icons/unicons/chart-success.png"
+                                         alt="chart success"
+                                         class="rounded" />
+                                </a>
+                            </div>
+                        </div>
+                        <p class="mb-1">Total Student</p>
+                        <h4 class="card-title mb-3">@ViewBag.StudentCount</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-sm-4 mb-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                                <a class="btn p-0" href="@Url.Action("InstructorReport", "SuperAdmin")">
+                                    <img src="../assets/img/icons/unicons/chart-success.png"
+                                         alt="chart success"
+                                         class="rounded" />
+                                </a>
+                            </div>
+                        </div>
+                        <p class="mb-1">Total Instructor</p>
+                        <h4 class="card-title mb-3">@ViewBag.InstructorCount</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-sm-4 mb-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                                <a class="btn p-0" href="@Url.Action("Revenue", "SuperAdmin")">
+                                    <img src="../assets/img/icons/unicons/chart-success.png"
+                                         alt="chart success"
+                                         class="rounded" />
+                                </a>
+                            </div>
+                        </div>
+                        <p class="mb-1">Total Revenue</p>
+                        <h4 class="card-title mb-3">$@ViewBag.Revenue</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@*@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}*@
+
+@{
+    ViewData["Title"] = "AddInstituteSessions";
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        height: 20px;
+        width: 20%;
+    }
+
+    .select {
+        border-color: black;
+        height: 40px;
+        width: 40%;
+    }
+</style>
+
+<h5 class="card-header">Add New Institute Session</h5>
+<form method="post">
+
+    @if (TempData["ErrorMsg"] != "" && @TempData["ErrorMsg"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMsg"]
+        </div>
+    }
+
+    <div class="row g-6">
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header">Institute Session Details</h5>
+                <div class="card-body demo-vertical-spacing demo-only-element">
+                    <label class="form-label" for="Institute">Institute</label>
+                    <div class="input-group">
+                        @Html.DropDownList("Institute",ViewBag.InstituteList,"-- Select Institute--",new{ @class = "form-control", @required="required"})
+                    </div>
+
+                    <label class="form-label" for="StartSessions">StartSessions</label>
+                    <div class="input-group">
+                        @*<select class="form-control" name="StartSessionMM" required>
+                            <option value="0">--Select Month--</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <select class="form-control" name="StartSessionYY" required>
+                            <option value="0">--Select Year--</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                        </select>*@
+
+                        <input type="date" name="StartSession" class="form-control" />
+                    </div>
+
+                    <label class="form-label" for="EndSessions">EndSessions</label>
+                    <div class="input-group">
+                        @*<select class="form-control" name="EndSessionsMM" required>
+                            <option value="0">--Select Month--</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <select class="form-control" name="EndSessionsYY" required>
+                            <option value="0">--Select Year--</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                        </select>*@
+
+                        <input type="date" name="EndSessions" class="form-control" />
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveInstituteSessions" asp-controller="Admin" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

@@ -1,0 +1,27 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "AddGrNumber";
+}
+
+<p class="h4"> <u>Add GrNumber</u> </p>
+
+<form method="post">
+    <div class="form-group">
+        <label for="StartSessions">Gr Number</label>
+        <input type="text" class="form-control textbox" name="grnumber" id="grnumber" />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveGrNumber" asp-controller="Admin" />
+</form>
+
+

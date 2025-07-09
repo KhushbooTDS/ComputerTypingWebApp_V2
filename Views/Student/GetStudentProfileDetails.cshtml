@@ -1,0 +1,53 @@
+﻿@model ComputerTypingWebApp.Models.StudentProfileDetailsVM
+
+@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<style>
+    p {
+        font-size: 0.9375rem;
+        line-height: 1.5;
+        justify-content: left;
+        display: -webkit-box;
+    }
+    </style>
+<div class="row quick-action-toolbar">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Profile Details</h5>
+            </div>
+            <div class="card-body student-profile">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p><strong>First Name:</strong> @Model.FirstName</p>
+                        <p><strong>Last Name:</strong> @Model.LastName</p>
+                        <p><strong>Father's Name:</strong> @Model.FatherName</p>
+                        <p><strong>Mother's Name:</strong> @Model.MotherName</p>
+                        <p><strong>Gender:</strong> @Model.Gender</p>
+                        <p><strong>Handicap:</strong> @Model.Handicap</p>
+                        <p><strong>School:</strong> @Model.School</p>
+                        <p><strong>Education:</strong> @Model.Education</p>
+                        <p><strong>Institute Name:</strong> @Model.InstituteName</p>
+                        <p><strong>Institute Address:</strong> @Model.InstituteAddress</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <p><strong>Email ID:</strong> @Model.EmailId</p>
+                        <p><strong>Mobile Number:</strong> @Model.MobileNumber</p>
+                        <p><strong>Date of Birth:</strong> @Model.DOB</p>
+                        <p><strong>Identity Number:</strong> @Model.IdentityNo</p>
+                        <p>
+                            <strong>Photo Identity:</strong>
+                            <img src="~/ProfileImages/@Model.StudentPicURL" alt="Student Identity Image" class="identity-image" style="width: 100px; height: 110px; border-radius: 50%;margin-left:9px;" />
+                        </p>
+                        <p>
+                            <strong>IdentityPic:</strong>
+                            <img src="~/IdentityImages/@Model.IdentityPicURL" alt="Student Identity Image" class="identity-image" style="width: 126px; height: 100px; border-radius:11px ; margin-left:9px;" />
+                        </p>
+                    </div>
+                </div>
+            </div> <!-- End of card-body -->
+        </div> <!-- End of card -->
+    </div> <!-- End of col-md-12 grid-margin -->
+</div> <!-- End of quick-action-toolbar -->

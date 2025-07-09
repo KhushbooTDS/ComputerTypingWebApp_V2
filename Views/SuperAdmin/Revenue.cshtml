@@ -1,0 +1,47 @@
+﻿@model List<RevenueReportVM>
+@{
+
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+<div class="card">
+    <h5 class="card-header">Total Revenue</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Institute Name
+                </th>
+                <th>
+                    Money Received
+                </th>
+                <th>
+                    Mode
+                </th>
+                <th>
+                    Payment Date
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.InstituteName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MoneyReceived)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentDate)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

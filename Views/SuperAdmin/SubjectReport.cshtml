@@ -1,0 +1,42 @@
+﻿@model List<SubjectReportVM>
+@{
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+<input class="btn-info" type="button" value="Add Subject" onclick="location.href='@Url.Action("AddSubject","SuperAdmin")'" />
+<hr />
+
+
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Student Report</h5>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            CourseName
+                        </th>
+
+
+                        <th>
+                            SubjectName
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CourseName)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubjectName)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

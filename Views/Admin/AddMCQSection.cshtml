@@ -1,0 +1,56 @@
+﻿@model List<mcqsectionVM>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+<input class="btn btn-info btn-icon" style="width:200px;" type="button" value="Add MCQ Section" onclick="location.href='@Url.Action("AddMCQSec", "Admin",new{dashId = 3})'" />
+<hr />
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Add MCQ Section</h5>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table id="courseTable" class="table table-bordered">
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            SubjectName
+                        </th>
+                        <th>
+                            SectionName
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+
+                                @Html.DisplayFor(modelItem => item.Id)
+
+                            </td>
+                            <td>
+
+                                @Html.DisplayFor(modelItem => item.SubjectName)
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SectionName)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

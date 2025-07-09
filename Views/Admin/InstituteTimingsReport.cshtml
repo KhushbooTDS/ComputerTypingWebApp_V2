@@ -1,0 +1,153 @@
+﻿@model List<InstituteTimings>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string DashId = (string)@TempData["DashId"];
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (DashId != null)
+    {
+        CurrentDashboard = DashId;
+    }
+
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "InstituteTimingsReport";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script>
+
+    function DeleteInstituteTimings(id) {
+        // ajax call for deleting institute timings
+        if (confirm("Are you sure you want to delete this timing?")) {
+            $.ajax({
+                url: '@Url.Action("DeleteInstituteTiming", "Admin")',
+                type: 'POST',
+                data: { id: id },
+                success: function (response) {
+                    if (response.success) {
+                        alert("Institute timing deleted successfully.");
+                        location.reload(); // Reload the page to reflect changes
+                    } else {
+                        alert("Error deleting institute timing: " + response.message);
+                    }
+                },
+                error: function () {
+                    alert("An error occurred while trying to delete the institute timing.");
+                }
+            });
+        }
+    }
+    function FillTimeDetail(Id, StartTime, EndTime) {
+        // Fill the modal with details
+
+        var startTimeParts = StartTime.split(' ');
+        var endTimeParts = EndTime.split(' ');
+        var startTime = startTimeParts[0];
+        var endTime = endTimeParts[0];
+        var startAMPM = startTimeParts[1];
+        var endAMPM = endTimeParts[1];
+        // Set the values in the modal inputs
+        $('#StartAMPM').val(startAMPM);
+        $('#EndAMPM').val(endAMPM);
+        $('#starttime').val(startTime);
+        $('#endtime').val(endTime);
+
+        $('#hdnTimingId').val(Id);
+    }
+
+
+</script>
+
+<input class="btn btn-info btn-icon" style="width:200px;" type="button" value="Add InstituteTimings" onclick="location.href='@Url.Action("AddInstituteTimings", "Admin",new{dashId = CurrentDashboard})'" />
+<hr />
+<div class="card">
+    <span style="color:red; margin-top:2%;">@TempData["ErrorMessage"]</span>
+    <h5 class="card-header">Institute Timings</h5>
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        Start Time
+                    </th>
+                    <th>
+                        End Time
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndTime)
+                        </td>
+                        <td>
+                            <input type="hidden" name="hdnInstituteTimingID" value="@item.Id">
+                            <button class="btn btn-danger btn-icon" style="width:100px;" onclick="DeleteInstituteTimings(@item.Id)">
+                                <i class="fa fa-trash"></i> Delete
+                            </button>
+                            <button id="btnEditTimings" type="button" asp-route-id="@item.Id" class="btn btn-success btn-icon" style="width:100px;" data-toggle="modal" data-target="#EditTimingsModal" onclick="FillTimeDetail(@item.Id,'@item.StartTime','@item.EndTime');">
+                                <i class="fa fa-pencil-square"></i> Edit
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+    <div id="EditTimingsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                    <h4 class="modal-title">Update Institute Timings</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <input type="hidden" id="hdnTimingId" name="hdnTimingId" />
+                            <label for="starttime">StartTime:</label>
+                            <input type="text" name="starttime" id="starttime" class="form-control" />
+                            <select id="StartAMPM" name="StartAMPM" class="form-control">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="endtime">EndTime:</label>
+                            <input type="text" name="endtime" id="endtime" class="form-control" />
+                            <select id="EndAMPM" name="EndAMPM" class="form-control">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                        <button id="btnUpdateTime" type="submit" class="btn btn-primary" asp-action="UpdateTime" asp-controller="Admin">Save Changes</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

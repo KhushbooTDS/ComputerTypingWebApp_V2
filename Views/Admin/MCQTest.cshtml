@@ -1,0 +1,62 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+<form method="post" enctype="multipart/form-data">
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row g-6">
+                <div class="col-md-7">
+                    <div class="card">
+                        <h5 class="card-header">MCQ Test</h5><span style="text-align:right; margin-right:5%;"> <a href="~/SampleFile/UploadMCQQuestionSample.xlsx">Download Sample File</a> </span>
+                        <div class="card-body demo-vertical-spacing demo-only-element">                           
+                            <div class="form-group">
+                                <label for="StudentName">Date</label>
+                                <input type="date" class="form-control" name="date" id="date" />
+                            </div>
+                            <div class="form-group">
+                                <label for="StudentSub">Subject Name</label>
+                                @Html.DropDownList("Subject5",ViewBag.SubjectList5, "-- Select Subject --", new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="CenterName">Section</label>
+                                @Html.DropDownList("Section5",ViewBag.SectionList5, "-- Select Section --", new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="CenterName">NO Of Question</label>
+                                <input type="text" class="form-control" name="noofquestion" id="noofquestion" />
+                            </div>
+                            <div class="form-group">
+                                <label for="CenterName">Marks/Question</label>
+                                <input type="text" class="form-control" name="markquestion" id="markquestion" />
+                            </div>
+                            <div class="form-group">
+                                <label for="CenterName">Passing Marks</label>
+                                <input type="text" class="form-control" name="passingmarks" id="passingmarks" />
+                            </div>
+                            <div class="form-group">
+                                <label for="CenterName">Test Duration(Min)</label>
+                                <input type="text" class="form-control" name="testduration" id="testduration" />
+                            </div>
+                            <div class="form-group">
+                                <label for="file1"></label>
+                                <input type="file" class="form-control" name="file1"  />
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Submit" asp-action="MCQTestSubmit" asp-controller="Admin" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

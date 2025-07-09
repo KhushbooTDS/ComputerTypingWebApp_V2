@@ -1,0 +1,63 @@
+﻿@model List<GrNumber>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string DashId = (string)@TempData["DashId"];
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (DashId != null)
+    {
+        CurrentDashboard = DashId;
+    }
+
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "GrNumberReport";
+}
+
+
+@if (Model != null)
+{
+    @if (Model.Count < 1)
+    {
+        <input class="btn-info" type="button" value="Add GrNumber" onclick="location.href='@Url.Action("AddGrNumber", "Admin",new{dashId = 4})'" />
+    }
+}
+
+<hr />
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">GR Number Report</h5>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Gr Number
+                        </th>
+
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+
+                                @Html.DisplayFor(modelItem => item.Gr_Number)
+
+                            </td>
+
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

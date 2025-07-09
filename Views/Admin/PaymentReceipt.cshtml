@@ -1,0 +1,115 @@
+﻿@model ReceiptVM;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PaymentReceipt</title>
+</head>
+<body>
+    <form>
+
+        <table border="1" style="width:50%; float:left; font-weight:bold; border-color:darkgrey">
+            <tr style="height:100px; text-align:center;">
+                <td colspan="2">
+                    @Model.InstituteName
+                    <br />
+                    @Model.InstituteAddress
+                </td>
+            </tr>
+            <tr style="height:70px; font-size:24px; text-align:center;">
+                <td colspan="2">FEES RECEIPT</td>
+            </tr>
+            <tr>
+                <td>Receipt No.</td>
+                <td>@Model.ReceiptNo &nbsp;&nbsp; Date: &nbsp;&nbsp; @Model.InstallmentDate</td>
+            </tr>
+            <tr>
+                <td>Student Name</td>
+                <td>@Model.StudentName</td>
+            </tr>
+            <tr>
+                <td>Father's Name</td>
+                <td>@Model.FatherName</td>
+            </tr>
+            <tr style="text-align:center;">
+                <td>Student's Fees Details</td>
+                <td>Amount</td>
+            </tr>
+            <tr style="text-align:center; height:20px;">
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="text-align:center; background-color:dimgrey;">
+                <td></td>
+                <td>@Model.AmountPaid</td>
+            </tr>
+            <tr style="text-align:center;">
+                <td>Total Fee</td>
+                <td>@Model.TotalAmountDue</td>
+            </tr>
+            <tr style="text-align:center;">
+                <td>Paid Fee</td>
+                <td>@Model.AmountPaid</td>
+            </tr>
+            <tr style="text-align:center;">
+                <td>Balance Fee</td>
+                <td>@Model.BalanceAmountDue</td>
+            </tr>
+        </table>
+        <table border="1" style="width:50%; float:right; font-weight:bold; border-color:darkgrey">
+            <tr style="height:100px; text-align:center;">
+                <td colspan="2">
+                    @Model.InstituteName
+                    <br />
+                    @Model.InstituteAddress
+                </td>
+            </tr>
+            <tr style="height:70px; font-size:24px; text-align:center;">
+                <td colspan="2">FEES RECEIPT</td>
+            </tr>
+            <tr>
+                <td>Receipt No.</td>
+                <td>@Model.ReceiptNo &nbsp;&nbsp; Date: &nbsp;&nbsp; @Model.InstallmentDate</td>
+            </tr>
+            <tr>
+                <td>Student Name</td>
+                <td>@Model.StudentName</td>
+            </tr>
+            <tr>
+                <td>Father's Name</td>
+                <td>@Model.FatherName</td>
+            </tr>
+            <tr style="text-align:center;">
+                <td>Student's Fees Details</td>
+                <td>Amount</td>
+            </tr>
+            <tr style="text-align:center; height:20px;">
+                <td></td>
+                <td></td>
+            </tr>
+            <tr style="text-align:center; background-color:dimgrey;">
+                <td></td>
+                <td>@Model.AmountPaid</td>
+            </tr>
+            <tr style="text-align:center;">
+                <td>Total Fee</td>
+                <td>@Model.TotalAmountDue</td>
+            </tr>
+            <tr style="text-align:center;">
+                <td>Paid Fee</td>
+                <td>@Model.AmountPaid</td>
+            </tr>
+            <tr style="text-align:center;">
+                <td>Balance Fee</td>
+                <td>@Model.BalanceAmountDue</td>
+            </tr>
+        </table>
+
+    </form>
+</body>
+</html>

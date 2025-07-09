@@ -1,0 +1,49 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        width: 40%;
+        height: 40px;
+    }
+
+    .select {
+        border-color: black;
+        height: 40px;
+        width: 40%;
+    }
+</style>
+
+<p class="h4"> <u>Add Master Keyboard</u> </p>
+
+<form method="post" enctype="multipart/form-data" asp-action="SaveMasterKeyboard" asp-controller="Admin">
+    <div class="form-group">
+        <label class="form-label" for="Subject">Subject</label><br />
+        @Html.DropDownList("Subject", ViewBag.SubjectList, "-- Select Subject --", new { @class = "select", @required = "required" })
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <label class="form-label" for="PracticeName">Practice Name</label><br />
+        <input class="textbox" type="text" name="practicename" required />
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>

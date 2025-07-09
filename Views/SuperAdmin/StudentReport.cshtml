@@ -1,0 +1,97 @@
+﻿@model List<StudentViewVM>
+
+@{
+
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+@*<link rel="Stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>*@
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Student Report</h5>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table id="tbStudents" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Sr. No.
+                            </th>
+                            <th>
+                                Student Name
+                            </th>
+                            <th>
+                                Student Number
+                            </th>
+                            <th>
+                                Institute Name
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                        {
+                            <tr>
+                                <td>
+                                    @item.Index
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.MobileNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.InstituteName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.Status)
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tbStudents').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            //to select and search from grid
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    });
+</script>

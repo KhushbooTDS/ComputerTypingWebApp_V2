@@ -1,0 +1,66 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string DashId = (string)@TempData["DashId"];
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (DashId != null)
+    {
+        CurrentDashboard = DashId;
+    }
+
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "AddHallTicket";
+}
+
+<p class="h4"> <u>Add HallTicket</u> </p>
+
+
+<form method="post">
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row g-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">Hall Information</h5>
+                        <div class="card-body demo-vertical-spacing demo-only-element">
+
+
+                            @*<div class="form-group">
+                                <label for="GrNumber">Student Gr Number</label>
+                                <input type="text" class="form-control textbox" name="GrNumber" id="GrNumber" />
+                            </div>*@
+                            <div class="form-group">
+                                <label for="StudentName">Student Name</label>
+                                @Html.DropDownList("StudentName",ViewBag.StudentList,"-- Select StudentName--",new{@class="form-select"})
+                            </div>
+                            <div class="form-group">
+                                <label for="StudentSub">Student Sub</label>
+                                @Html.DropDownList("StudentSub",ViewBag.StudentSubList,"-- Select StudentSub--",new{@class="form-select"})
+                            </div>
+                            <div class="form-group">
+                                <label for="CenterName">Center Name</label>
+                                <input type="text" class="form-control textbox" name="CenterName" id="CenterName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="ExamTime">Exam Time</label>
+                                <input type="datetime-local" class="form-control textbox" name="ExamTime" id="ExamTime" />
+                            </div>
+
+                            <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveHallTicket" asp-controller="Admin" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

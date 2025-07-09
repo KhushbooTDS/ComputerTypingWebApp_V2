@@ -1,0 +1,158 @@
+﻿@model List<ComputerTypingWebApp.Models.StudentViewVM>
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "StudentReport";
+    if (TempData["AlertMessage"] != null)
+    {
+        <script>
+            alert('@TempData["AlertMessage"]');
+        </script>
+    }
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div id="alertMessage" class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+<script>
+    setTimeout(function () {
+        var alertMessage = document.getElementById("alertMessage");
+        if (alertMessage) {
+            alertMessage.style.display = 'none';
+        }
+    }, 5000); // 5000 ms = 5 seconds
+</script>
+
+
+<input class="btn btn-info btn-icon" style="width:200px;" type="button" value="Add Student" onclick="location.href='@Url.Action("AddStudent", "Admin",new{dashId = CurrentDashboard})'" />
+<hr />
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<div style="overflow-x:auto;">
+    <div class="container">
+        <div class="card">
+            <h5 class="card-header">Students Report</h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tbStudents" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    StudentName
+                                </th>
+                                <th>
+                                    Mobile No
+                                </th>
+                                <th>
+                                    Gender
+                                </th>
+                                <th>
+                                    Handicap
+                                </th>
+                                <th>
+                                    School
+                                </th>
+                                <th>
+                                    Data of Add
+                                </th>
+                                <th>
+                                    Student Sub 30
+                                </th>
+                                <th>
+                                    Student Sub 40
+                                </th>
+                                <th>
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var Model in Model)
+                            {
+                                <tr>
+                                    <td>
+
+                                        @Html.DisplayFor(modelModel => Model.Students.FirstName)  &nbsp; @Html.DisplayFor(modelModel => Model.Students.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Students.MobileNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Genders.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Handicaps.HadicapName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Students.School)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Students.DateAdd)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Students.SelectSub30wpm)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Students.SelectSub40wpm)
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("ViewStudent", "Admin", new{dashId = CurrentDashboard, id = @Model.Students.Id })" class="btn btn-info btn-icon" style="width:100px;">
+                                            <i class="fa fa-eye"></i> View
+                                        </a>
+                                        <a onclick="DeleteStudent(@Model.Students.Id)" class="btn btn-danger btn-icon" style="width:100px;">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </a>
+                                        <a href="@Url.Action("EditStudent", "Admin", new{dashId = CurrentDashboard, id = @Model.Students.Id })" class="btn btn-warning btn-icon" style="width:100px;">
+                                            <i class="fa fa-pencil-square"></i> Edit
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/site.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tbStudents').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            //to select and search from grid
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    });
+</script>

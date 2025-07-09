@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ComputerTypingWebApp.Models.Students>
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string DashId = (string)@TempData["DashId"];
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (DashId != null)
+    {
+        CurrentDashboard = DashId;
+    }
+
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "Total Student";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<h6 style="color:indianred">Curresnt Session: @ViewBag.startsession To  @ViewBag.endsession </h6>
+
+<div class="row col-lg-12">
+    <div class="form-group">
+        <h5 class="row col-12 card py-2" style="background-color:ghostwhite; text-align: center;">
+            Total Student
+        </h5>
+    </div>
+</div>
+    <div class="row col-12">
+        <table class="table table-bordered">
+            <thead style="background-color: #f8f9fa; color: #333; text-align: center; font-weight: bold; font-size: 1.1rem;">
+                <tr>
+                    <th style="padding: 10px; border-bottom: 2px solid #dee2e6;">Date</th>
+                    <th style="padding: 10px; border-bottom: 2px solid #dee2e6;">Student First Name</th>
+                    <th style="padding: 10px; border-bottom: 2px solid #dee2e6;">Student Last Name</th>
+                    <th style="padding: 10px; border-bottom: 2px solid #dee2e6;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var student in Model)
+            {
+                        <tr style="text-align: center; background-color: #ffffff; transition: background-color 0.3s ease;">
+                            <td style="padding: 10px;">@student.DateAdd</td>
+                            <td style="padding: 10px;">@student.FirstName</td>
+                            <td style="padding: 10px;">@student.LastName</td>
+                            <td style="padding: 10px;">
+                                @student.Status
+                                @*<img src="~/uploads/@student.IdentityPicURL" alt="Profile Photo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1px solid #ccc;" />*@
+                            </td>
+                        </tr>
+            }
+            </tbody>
+        </table>
+    </div>

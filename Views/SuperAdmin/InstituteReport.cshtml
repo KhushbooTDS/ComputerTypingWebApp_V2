@@ -1,0 +1,123 @@
+﻿@model List<Institute>
+
+@{
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+<input class="btn btn-primary" type="button" value="Add Institute" onclick="location.href='@Url.Action("AddInstitute", "SuperAdmin")'" />
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+
+<hr />
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Institute Report</h5>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="dtTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Action
+                            </th>
+                            <th>
+                                Institute Name
+                            </th>
+                            <th>
+                                Principal Name
+                            </th>
+                            <th>
+                                Institute Address
+                            </th>
+                            <th>
+                                Institute Code
+                            </th>
+                            <th>
+                                Contact No
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                No Of Computer in Lab
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @if (item.Status == "Active")
+                                    {
+                                        <a class="btn btn-danger" href="@Url.Action("DeactivateInstitute", "SuperAdmin", new { id = item.Id })">Deactivate</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-success" href="@Url.Action("ActivateInstitute", "SuperAdmin", new { id = item.Id})">Activate</a>
+                                    }
+                                </td>
+
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.InstituteName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PrincipalName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InstituteAddress)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InstituteCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NoOfComputer)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dtTable').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            //to select and search from grid
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    });
+</script>

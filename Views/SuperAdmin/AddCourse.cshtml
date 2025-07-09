@@ -1,0 +1,23 @@
+﻿@model List<Course>
+@{
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        height: 20px;
+        width: 40%;
+    }
+</style>
+
+<p class="h4"> <u>Add Course</u> </p>
+
+<form method="post">
+    <div class="form-group">
+        <label for="coursename">Course Name</label>
+        <input type="text" class="form-control textbox" name="coursename" id="coursename" />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveCourse" asp-controller="SuperAdmin" />
+</form>

@@ -1,0 +1,26 @@
+#handGesture{
+    max-width: 900px;
+    margin-top: -300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#leftHand{
+    background-image: url();
+    max-width: 450px;
+    height: 500px;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: 550px;
+    margin-top: 50px;
+    margin-left: -40px;
+}
+#rightHand{
+    background-image: url();
+    max-width: 450px;
+    height: 500px;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: 550px;
+    margin-top: 50px;
+    margin-left: -20px;
+}

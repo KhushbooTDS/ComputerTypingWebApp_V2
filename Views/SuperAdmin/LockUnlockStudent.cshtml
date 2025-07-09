@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "LockUnlockStudent";
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+<p class="h3">Lock/Unlock Student Profile</p>
+<hr />
+
+<form method="post">
+    
+    <div class="form-group">
+        <label style="color:green; font-weight:bold;"> @ViewBag.Message </label>
+    </div>
+    <div class="form-group">
+        <label for="StudentName">Student Name</label>
+        @Html.DropDownList("StudentName",ViewBag.StudentList,"-- Select StudentName--",null)
+    </div>
+    
+
+    <input type="submit" class="btn btn-primary" value="Lock" asp-action="LockStudent" asp-controller="SuperAdmin" />
+    <input type="submit" class="btn btn-primary" value="Unlock" asp-action="UnlockLockStudent" asp-controller="SuperAdmin" />
+
+    
+</form>
+

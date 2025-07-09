@@ -1,0 +1,60 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string DashId = @ViewBag.DashId;
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+
+    if (DashId != null)
+    {
+        CurrentDashboard = DashId;
+    }
+
+    ViewData["Title"] = "AddNotice";
+
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        if (CurrentDashboard == "3")
+        {
+            Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+        }
+    }
+}
+
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        height: 20px;
+        width: 40%;
+    }
+
+    .select {
+        border-color: black;
+        height: 40px;
+        width: 40%;
+    }
+</style>
+
+<p class="h4"> <u>Add New Notice</u> </p>
+<hr /><br />
+
+<form method="post">
+    <div class="form-group">
+        <label for="UserName">UserName</label><br />
+        @Html.DropDownList("UserName",ViewBag.UsersList,"-- Select User--",new{ @class = "select", @required = "required"})
+        
+    </div>
+    <div class="form-group">
+        <label for="NoticeText">Notice Text</label>
+        <textarea class="form-control textbox" style="height:100px;" name="NoticeText" id="NoticeText" required></textarea>
+    </div>
+    <br></br>
+    <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveNotice" asp-controller="SuperAdmin" />
+</form>

@@ -1,0 +1,28 @@
+﻿@model ComputerTypingWebApp.Models.speedPracticeUpload
+
+@{
+    Layout = null;
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script>
+$(document).ready(function () {
+        //alert("Token: @Model.FilToken");
+    });
+</script>
+
+<center>
+    <h4>Instructions</h4>
+    <p>
+       Please install the Test tool given here, ignore if already installed.        
+    </p>
+    <p>
+        Copy this generated Token in Test tool & start the Test.
+    </p>
+    <a href="@Url.Action("DownloadExe", "Student")">Test Tool</a>
+    <p>
+        Token : @Model.FilToken
+    </p>
+</center>

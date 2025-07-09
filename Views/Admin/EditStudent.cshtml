@@ -1,0 +1,295 @@
+﻿@model ComputerTypingWebApp.Models.StudentEditVM
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "EditStudent";
+}
+
+<h1>EditStudent</h1>
+
+<title>Update Student</title>
+
+<div class="form-container">
+    <div class="col-md-8 mx-auto">
+        <h3 class="text-center mb-4">Update Student Information</h3>
+        <span class="fw-bold text-primary">Personal Information</span>
+        <input type="hidden" asp-for="@Model.StudentId" name="@Model.StudentId" id="hiddenstudentId" />
+        <div class="mb-3">
+            <label for="LastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+            <input type="text" asp-for="@Model.LastName" class="form-control" name="@Model.LastName" id="EditLastName" required />
+        </div>
+        <div class="mb-3">
+            <label for="FirstName" class="form-label">First Name <span class="text-danger">*</span></label>
+            <input type="text" asp-for="@Model.FirstName" class="form-control" name="@Model.FirstName" id="EditFirstName" required />
+        </div>
+        <div class="mb-3">
+            <label for="FatherName" class="form-label">Father Name</label>
+            <input type="text" asp-for="@Model.FatherName" class="form-control" name="@Model.FatherName" id="EditFatherName" />
+        </div>
+        <div class="mb-3">
+            <label for="MotherName" class="form-label">Mother Name</label>
+            <input type="text" asp-for="@Model.MotherName" class="form-control" name="@Model.MotherName" id="EditMotherName" />
+        </div>
+        <div class="mb-3">
+            <label for="MobileNo" class="form-label">Mobile No.</label>
+            <input type="text" asp-for="@Model.MobileNo" class="form-control" name="@Model.MobileNo" id="EditmobileNo" />
+        </div>
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email</label>
+            <input type="email" asp-for="@Model.Email" class="form-control" name="@Model.Email" id="EditEmail" />
+        </div>
+        <div class="mb-3">
+            <label for="IdentityNo" class="form-label">IdentityNo</label>
+            <input type="text" asp-for="@Model.IdentityNo" class="form-control" name="@Model.IdentityNo" id="EditIdentityNo" />
+        </div>
+        <!--Photo Identity-->
+        <div class="row">
+            <div class="mb-6">
+                <label for="PhotoIdentity" class="form-label">Photo Identity</label>
+                <input type="file" asp-for="@Model.PhotoIdentity" class="form-control" name="@Model.PhotoIdentity" id="EditPhotoIdentity" accept="image/*" onchange="previewImage(this, 'photoIdentityPreview')" />
+            </div>
+            <div class="mb-6">
+                <img src="~/uploads/@Model.PhotoIdentity" id="photoIdentityPreview" alt="Student Identity Image" style="width:100px; height:100px;" class="identity-image" />
+            </div>
+        </div>
+        <!--Other Identity-->
+        <div class="row">
+            <div class="mb-6">
+                <label for="IdentityPic" class="form-label">Other Identity</label>
+                <input type="file" asp-for="@Model.OtherIdentity" class="form-control" name="@Model.OtherIdentity" id="EditOtherIdentity" accept="image/*" onchange="previewImage(this, 'otherIdentityPreview')" />
+            </div>
+            <div class="mb-6">
+                <img src="~/uploads/@Model.OtherIdentity" id="otherIdentityPreview" alt="Student Identity Image" style="width:100px; height:100px;" class="identity-image" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="IdentityNo" class="form-label">Date of Birth</label>
+            <input type="text" asp-for="@Model.DOB" class="form-control" name="@Model.DOB" id="EditDOB" />
+        </div>
+        <div class="mb-3">
+            <label for="IdentityNo" class="form-label">Date Added</label>
+            <input type="text" asp-for="@Model.DateAdd" class="form-control" name="@Model.DateAdd" id="EditDateAdd" />
+        </div>
+        <div class="mb-3">
+            <label for="Gender" class="form-label">Gender</label>
+            <select asp-for="Gender" name="Gender" asp-items="(IEnumerable<SelectListItem>)ViewBag.GenderList" class="form-select" id="EditGendar">
+                <option value="">-- Select Gender --</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="Handicap" class="form-label">Handicap</label>
+            <select asp-for="Handicap" name="Handicap" asp-items="(IEnumerable<SelectListItem>)ViewBag.HandicapList" class="form-select" id="EditHandicap">
+                <option value="">-- Select Handicap --</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="PermanentAddress" class="form-label">Permanent Address</label>
+            <input type="text" asp-for="@Model.PaermentAddress" class="form-control" name="@Model.PaermentAddress" id="EditPermanentAddress" />
+        </div>
+        <div class="mb-3">
+            <label for="School" class="form-label">School</label>
+            <input type="text" asp-for="@Model.School" class="form-control" name="@Model.School" id="EditSchool" />
+        </div>
+        <div class="mb-3">
+            <label for="Edu" class="form-label">Education</label>
+            <input type="text" asp-for="Education" class="form-control" name="@Model.School" id="EditEdu" />
+        </div>
+        <span>Subjects</span>
+
+        <div class="mb-3">
+            <label>Subjects (30 WPM):</label>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="subjectEnglish30" name="SelectSub30WPM"
+                @(ViewBag.SelectSub30wpm != null && ViewBag.SelectSub30wpm.Contains("English") ? "checked" : "") />
+                <label class="form-check-label" for="subjectEnglish30">English</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="subjectHindi30" name="SelectSub30WPM"
+                @(ViewBag.SelectSub30wpm != null && ViewBag.SelectSub30wpm.Contains("Hindi") ? "checked" : "") />
+                <label class="form-check-label" for="subjectHindi30">Hindi</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="subjectMarathi30" name="SelectSub30WPM"
+                @(ViewBag.SelectSub30wpm != null && ViewBag.SelectSub30wpm.Contains("Marathi") ? "checked" : "") />
+                <label class="form-check-label" for="subjectMarathi30">Marathi</label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label>Subjects (40 WPM):</label>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="subjectEnglish40" name="SelectSub40WPM"
+                @(ViewBag.SelectSub40wpm != null && ViewBag.SelectSub40wpm.Contains("English") ? "checked" : "") />
+                <label class="form-check-label" for="subjectEnglish40">English</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="subjectHindi40" name="SelectSub40WPM"
+                @(ViewBag.SelectSub40wpm != null && ViewBag.SelectSub40wpm.Contains("Hindi") ? "checked" : "") />
+                <label class="form-check-label" for="subjectHindi40">Hindi</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="subjectMarathi40" name="SelectSub40WPM"
+                @(ViewBag.SelectSub40wpm != null && ViewBag.SelectSub40wpm.Contains("Marathi") ? "checked" : "") />
+                <label class="form-check-label" for="subjectMarathi40">Marathi</label>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="Handicap">Session</label>
+            <select asp-for="@Model.Session" name="@Model.Session" id="EditSessionId" asp-items="(IEnumerable<SelectListItem>)ViewBag.SessionList" class="form-control">
+                <option value="">--Select Sessionp --</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="Edu" class="form-label">UserName</label>
+            <input type="text" asp-for="@Model.StudentUserName" class="form-control" name="@Model.StudentUserName" id="EditStudentUserName" />
+        </div>
+        <!--Student Pic URL-->
+        <div class="row">
+            <div class="mb-6">
+                <label for="StudentPicURL" class="form-label">Student Picture</label>
+                <input type="file" class="form-control" name="@Model.StudentPicURL" id="EditStudentPicURL" accept="image/*" onchange="previewImage(this, 'StudentPicURLPreview')" />
+            </div>
+            <div class="mb-6">
+                <img src="~/uploads/@Model.StudentPicURL" id="StudentPicURLPreview" alt="Student Picture Image" style="width:100px; height:100px;" class="identity-image" />
+            </div>
+        </div>
+        <!--Identity Pic URL-->
+        <div class="row">
+            <div class="mb-6">
+                <label for="IdentityPic" class="form-label">Identity Picture</label>
+                <input type="file" class="form-control" name="@Model.IdentityPicURL" id="EditIdentityPicURL" accept="image/*" onchange="previewImage(this, 'identityPicURLPreview')" />
+            </div>
+            <div class="mb-6">
+                <img src="~/uploads/@Model.IdentityPicURL" id="identityPicURLPreview" alt="Identity Pic URL Preview" style="width:100px; height:100px;" class="identity-image" />
+            </div>
+        </div>
+
+        <button type="button" onclick="UpdateStudentRecord()" class="btn btn-primary w-100">Update Student</button>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<div>
+    <a href="@Url.Action("StudentReport", "Admin", new{dashId = CurrentDashboard })">Back to List</a>
+</div>
+
+<script>
+    function previewImage(input, previewId) {
+        var preview = document.getElementById(previewId);
+        if (!previewId) {
+        console.error("Error: Preview element not found for ID:", previewId);
+        return;
+        }
+        var file = input.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = "block"; // Show the image
+            };
+            reader.readAsDataURL(file); // Convert file to Base64 URL
+        } else {
+            preview.src = "#"; // Reset image preview
+            preview.style.display = "none"; // Hide preview if no file is selected
+        }
+    }
+
+
+    function UpdateStudentRecord()
+    {
+        var formData = new FormData();
+        formData.append("StudentId", $("#hiddenstudentId").val());
+        formData.append("FirstName", $("#EditFirstName").val());
+        formData.append("LastName", $("#EditLastName").val());
+        formData.append("FatherName", $("#EditFatherName").val());
+        formData.append("MotherName", $("#EditMotherName").val());
+        formData.append("MobileNo", $("#EditmobileNo").val());
+        formData.append("DateAdd", $("#EditDateAdd").val());
+        formData.append("StudentUserName", $("#EditStudentUserName").val());
+        formData.append("Gender", $("#EditGendar").val());
+        formData.append("Session", $("#EditSessionId").val());
+        formData.append("Email", $("#EditEmail").val());
+        formData.append("Handicap", $("#EditHandicap").val());
+        formData.append("IdentityNo", $("#EditIdentityNo").val());
+        formData.append("DOB", $("#EditDOB").val().trim());
+        formData.append("PaermentAddress", $("#EditPermanentAddress").val());
+        formData.append("School", $("#EditSchool").val());
+        formData.append("Education", $("#EditEdu").val());
+
+        // <!-- Student Pic-->
+        if ($('#EditStudentPicURL')[0].files.length > 0) {
+            formData.append('StudentPic_File', $('#EditStudentPicURL')[0].files[0]);
+        } else if ($('#hdnId').val() !== "0") {
+            formData.append('StudentPicURL', $('#StudentPicURLPreview').attr('src').split('\\').pop());
+        }
+
+        // <!-- Identity Pic-->
+        if ($('#EditIdentityPicURL')[0].files.length > 0) {
+            formData.append('IdentityPic_File', $('#EditIdentityPicURL')[0].files[0]);
+        } else if ($('#hdnId').val() !== "0") {
+            formData.append('IdentityPicURL', $('#identityPicURLPreview').attr('src').split('\\').pop());
+        }
+
+        // <!-- Photo Identity-->
+        if ($('#EditPhotoIdentity')[0].files.length > 0) {
+            formData.append('PhotoIdentity_File', $('#EditPhotoIdentity')[0].files[0]);
+        } else if ($('#hdnId').val() !== "0") {
+            formData.append('PhotoIdentity', $('#photoIdentityPreview').attr('src').split('\\').pop());
+        }
+
+        // <!--Other Identity-->
+        if ($('#EditOtherIdentity')[0].files.length > 0) {
+            formData.append('OtherIdentity_File', $('#EditOtherIdentity')[0].files[0]);
+        } else if ($('#hdnId').val() !== "0") {
+            formData.append('OtherIdentity', $('#otherIdentityPreview').attr('src').split('\\').pop());
+        }
+
+        let sub30 = [];
+        let sub40 = [];
+
+        $('input[name="SelectSub30WPM"]:checked').each(function () {
+            sub30.push($(this).attr('id'));
+        });
+        $('input[name="SelectSub40WPM"]:checked').each(function () {
+            sub40.push($(this).attr('id'));
+        });
+        formData.append("SelectSub30WPM", sub30.join(','));
+        formData.append("SelectSub40WPM", sub40.join(','));
+        $.ajax({
+            url: '/Admin/UpdateStudent',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+             debugger;
+                if (response.success) {
+                    alert('Student details updated successfully!');
+                } else {
+                    alert('Error updating student details: ' + response.message || '');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX error:', status, error);
+                alert('Something went wrong. Please try again later.');
+            }
+        });
+    }
+</script>

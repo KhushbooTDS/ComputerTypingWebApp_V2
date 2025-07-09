@@ -1,0 +1,101 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string DashId = (string)@TempData["DashId"];
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (DashId != null)
+    {
+        CurrentDashboard = DashId;
+    }
+
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "AddCoursefee";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h1>AddCoursefee</h1>
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        width: 40%;
+    }
+
+    .select {
+        border-color: black;
+        height: 40px;
+        width: 40%;
+    }
+</style>
+
+<p class="h4"> <u>Add Course fee</u> </p>
+<span style="color:red;">@TempData["ErrorMsg"]</span>
+<form method="post">
+    <div class="form-group">
+        <label for="StartSessions">Course</label><br />
+        @Html.DropDownList("Course",ViewBag.CourseList,"-- Select Course--",new{ @class = "select"})
+    </div>
+    <div class="form-group">
+        <label for="Subject">Subject Name</label><br />
+        @Html.DropDownList("Subject",ViewBag.SubjectList,"-- Select Subject--",new{ @class = "select"})
+    </div>
+    <div class="form-group">
+        <label for="StudentType">
+            StudentType
+        </label><br />
+        @Html.DropDownList("StudentType",ViewBag.StudentTypeList,"-- Select Student Type--",new{ @class = "select"})
+    </div>
+    <div class="form-group">
+        <label for="fees">
+            Fees
+        </label>
+        <input type="text" class="form-control textbox" name="fees" id="fees" />
+    </div>
+    <br /><br />
+    <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveCoursefee" asp-controller="Admin" />
+</form>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#Course").change(function () {
+            var courseId = $("#Course").val();
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/GetSubjects?courseId=' + courseId,
+                //data: { courseId: courseId },
+                dataType: "json",
+                success: function (data) {
+                    var result = JSON.parse(data);
+
+                    $(result).each(function () {
+                        console.log(this.Id);
+                        console.log(this.SubjectName);
+                        //this refers to the current item being iterated over
+
+                        var option = $('<option />');
+                        option.attr('value', this.Id).text(this.SubjectName);
+
+                        $('#Subject').append(option);
+                    });
+
+                }
+
+            });
+        });
+
+
+    });
+</script>
+
+

@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "AddIdentityDoc";
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        height: 20px;
+        width: 40%;
+    }
+</style>
+
+<h1>AddIdentityDoc</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="Handicap">DocName</label>
+        <input type="text" class="form-control textbox" name="docname" id="Handicap" />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveIdentityDoc" asp-controller="SuperAdmin" />
+</form>
+
+

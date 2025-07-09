@@ -1,0 +1,670 @@
+﻿@model ComputerTypingWebApp.Models.TypingCourceVM
+
+@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Training</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .custom-dropdown-width {
+            min-width: 300px; /* Set the desired dropdown width */
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown {
+            width: 300px;
+        }
+
+        .submenu a {
+            display: block;
+            margin: 5px 0;
+            color: #333;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        @foreach (var subject in Model.ListOfSubject)
+        {
+
+            var subjectList30 = (subject.SelectSub30wpm ?? "").Split(',').ToList();
+            var subjectList40 = (subject.SelectSub40wpm ?? "").Split(',').ToList();
+
+            <!-- 30WPM -->
+            <h5>30 WPM</h5>
+            <div class="row g-6">
+                @if (subjectList30.Contains("English30"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">English 30 WPM</small>
+                        <div class="accordion mt-4" id="english30WPM">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng30HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accEng30HomeKey">
+                                        Home Key
+                                    </button>
+                                </h2>
+
+                                <div id="accEng30HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x=>x.SubjectId == 1))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("home key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeChapter", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a><br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng30UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accEng30UpperKey">
+                                        Upper Key
+                                    </button>
+                                </h2>
+                                <div id="accEng30UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 1))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("upper key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeChapter", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng30LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accEng30LowerKey">
+                                        Lower Key
+                                    </button>
+                                </h2>
+                                <div id="accEng30LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 1))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("lower key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeChapter", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (subjectList30.Contains("Hindi30"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">Hindi 30 WPM</small>
+                        <div class="accordion mt-4" id="accordionExample">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin30HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accHin30HomeKey">
+                                        Home Key
+                                    </button>
+                                </h2>
+
+                                <div id="accHin30HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 2))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("home key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeHindi", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin30UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accHin30UpperKey">
+                                        Upper Key
+                                    </button>
+                                </h2>
+                                <div id="accHin30UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 2))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("upper key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeHindi", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin30LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accHin30LowerKey">
+                                        Lower Key
+                                    </button>
+                                </h2>
+                                <div id="accHin30LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 2))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("lower key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeHindi", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (subjectList30.Contains("Marathi30"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">Marathi 30 WPM</small>
+                        <div class="accordion mt-4" id="accordionExample">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi30HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accMarathi30HomeKey">
+                                        Home Key
+                                    </button>
+                                </h2>
+
+                                <div id="accMarathi30HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 3))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("home key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeMarathi", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi30UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accMarathi30UpperKey">
+                                        Upper Key
+                                    </button>
+                                </h2>
+                                <div id="accMarathi30UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 3))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("upper key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeMarathi", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi30LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accMarathi30LowerKey">
+                                        Lower Key
+                                    </button>
+                                </h2>
+                                <div id="accMarathi30LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 3))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("lower key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeMarathi", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <!--/ 30WPM -->
+            <!-- 40WPM -->
+            <h5>40 WPM</h5>
+            <div class="row g-6">
+                @if (subjectList40.Contains("English40"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">English 40 WPM</small>
+                        <div class="accordion mt-4" id="english30WPM">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng40HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accEng40HomeKey">
+                                        Home Key
+                                    </button>
+                                </h2>
+
+                                <div id="accEng40HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 4))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("home key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeChapter", "Student", new {practiceId = practice.Id, subjectId = 4})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng40UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accEng40UpperKey">
+                                        Upper Key
+                                    </button>
+                                </h2>
+                                <div id="accEng40UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 4))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("upper key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeChapter", "Student", new {practiceId = practice.Id, subjectId = 4})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accEng40LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accEng40LowerKey">
+                                        Lower Key
+                                    </button>
+                                </h2>
+                                <div id="accEng40LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#english30WPM">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 4))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("lower key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeChapter", "Student", new {practiceId = practice.Id, subjectId = 4})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (subjectList40.Contains("Hindi40"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">Hindi 40 WPM</small>
+                        <div class="accordion mt-4" id="accordionExample">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin40HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accHin40HomeKey">
+                                        Home Key
+                                    </button>
+                                </h2>
+
+                                <div id="accHin40HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 5))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("home key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeHindi", "Student", new {practiceId = practice.Id, subjectId = 5})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin40UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accHin40UpperKey">
+                                        Upper Key
+                                    </button>
+                                </h2>
+                                <div id="accHin40UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 5))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("upper key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeHindi", "Student", new {practiceId = practice.Id, subjectId = 5})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accHin40LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accHin40LowerKey">
+                                        Lower Key
+                                    </button>
+                                </h2>
+                                <div id="accHin40LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 5))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("lower key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeHindi", "Student", new {practiceId = practice.Id, subjectId = 5})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (subjectList40.Contains("Marathi40"))
+                {
+                    <div class="col-md">
+                        <small class="text-light fw-medium">Marathi 40 WPM</small>
+                        <div class="accordion mt-4" id="accordionExample">
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button type="button"
+                                            class="accordion-button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi40HomeKey"
+                                            aria-expanded="true"
+                                            aria-controls="accMarathi40HomeKey">
+                                        Home Key
+                                    </button>
+                                </h2>
+
+                                <div id="accMarathi40HomeKey"
+                                     class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 6))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("home key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeMarathi", "Student", new {practiceId = practice.Id, subjectId = 6})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi40UpperKey"
+                                            aria-expanded="false"
+                                            aria-controls="accMarathi40UpperKey">
+                                        Upper Key
+                                    </button>
+                                </h2>
+                                <div id="accMarathi40UpperKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 6))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("upper key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeMarathi", "Student", new {practiceId = practice.Id, subjectId = 6})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button type="button"
+                                            class="accordion-button collapsed"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#accMarathi40LowerKey"
+                                            aria-expanded="false"
+                                            aria-controls="accMarathi40LowerKey">
+                                        Lower Key
+                                    </button>
+                                </h2>
+                                <div id="accMarathi40LowerKey"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach (var practice in Model.Listcoursepractices.Where(x => x.SubjectId == 6))
+                                        {
+                                            if (practice.PracticeName.ToLower().Contains("lower key"))
+                                            {
+                                                var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                                <a href="@Url.Action("TypingPracticeMarathi", "Student", new {practiceId = practice.Id, subjectId = 6})" target="_blank">
+                                                    @cleanPracticeName
+                                                </a>
+
+                                                <br />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <!--/ 40WPM -->
+        }
+
+    </div>
+    <!-- / Content -->
+</div>

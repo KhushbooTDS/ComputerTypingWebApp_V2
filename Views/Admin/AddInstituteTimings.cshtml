@@ -1,0 +1,58 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "AddInstituteTimings";
+}
+
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        width: 10%;
+        height: 40px;
+    }
+
+    .select {
+        border-color: black;
+        height: 40px;
+        width: 10%;
+    }
+</style>
+
+
+<p class="h4"> <u>Add Institute Timings</u> </p>
+<span  style="color:red">@TempData["ErrorMsg"]</span>
+<form method="post">
+    <div>
+        <label for="StartSessions" style="width:10%;">Start Time</label>
+        <input type="text" class="textbox" name="starttime" id="starttime" />
+        <select id="StartAMPM" name="StartAMPM" class="select">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+        </select>
+    </div>
+    <br /><br />
+    <div >
+        <label for="EndSessions" style="width:10%;">End Time</label>
+        <input type="text" class="textbox" name="endtime" id="endtime" />
+        <select id="EndAMPM" name="EndAMPM" class="select">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+        </select>
+    </div>
+    <br /><br />
+    <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveInstituteTimings" asp-controller="Admin" />
+</form>
+
+
+

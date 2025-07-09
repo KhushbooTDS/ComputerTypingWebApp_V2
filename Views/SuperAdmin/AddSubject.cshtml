@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "AddSubject";
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        height: 20px;
+        width: 40%;
+    }
+</style>
+<p class="h4"> <u>Add Subject</u> </p>
+<br/>
+<form method="post">
+    <div class="form-group">
+        <label for="Course">Course Name</label>
+        @Html.DropDownList("Course", ViewBag.CourseList, "-- Select Course--", null)
+    </div>
+    <div class="form-group">
+        <label for="SubjectName">SubjectName</label>
+        <input type="text" class="form-control textbox" name="SubjectName" id="SubjectNameId" />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveSubject" asp-controller="SuperAdmin" />
+</form>
+

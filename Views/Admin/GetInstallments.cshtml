@@ -1,0 +1,92 @@
+﻿@model ComputerTypingWebApp.Models.InstallmentDetailsVM
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+<div class="container">    
+    <form asp-action="GetInstallments" asp-controller="Admin" method="post" id="installmentForm">
+        <div class="row g-3 align-items-center">
+            <div class="col-lg-3">
+                <div class="card p-3">
+                    <div class="form-group">
+                        <label for="Session">Session</label>
+                        <select asp-for="SearchSession" name="SearchSession" asp-items='(IEnumerable<SelectListItem>)TempData["SessionList"]' class="form-select">
+                            <option value="">-- Select Session --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card p-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Show Installments</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card p-3" style="display:none">
+                    <label>Enter Year:</label>
+                    <input asp-for="SearchGetDate" name="SearchGetDate" type="number" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                @*<button type="submit" class="btn btn-primary">Show Installments</button>*@
+            </div>
+        </div>
+    </form>
+
+    @if (Model != null && Model.ReceiptsList != null && Model.ReceiptsList.Any())
+    {
+        <div class="row mt-3">
+            <div class="col-lg-12">
+                <h5 class="card py-2 text-center" style="background-color:ghostwhite; color:black;">
+                    SHOWING STUDENT OUTSTANDING INSTALLMENTS (REGULAR)
+                </h5>
+                <table class="table table-responsive table-striped table-bordered table-hover">
+                    <thead style="color:black; background-color:ghostwhite">
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Admission Date</th>
+                            <th>Total Amount</th>
+                            <th>Amount Paid</th>
+                            <th>Total Due</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ReceiptsList)
+                        {
+                            <tr>
+                                <td>@item.StudentUserName</td>
+                                <td>@item.InstallmentDate.ToString("dd MMM yyyy")</td>
+                                <td class="text-end">@item.TotalAmountDue</td>
+                                <td class="text-end">@item.AmountPaid</td>
+                                <td class="text-end">@item.BalanceAmountDue</td>
+                                <td>
+                                    <a asp-action="GetShowPaidInstallmentDetails" asp-controller="Admin" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+                                        View Details
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    <div class="row mt-3">
+        @*<div class="col-lg-12 text-center">
+            <a class="btn btn-secondary" asp-action="" asp-controller="">Back</a>
+        </div>*@
+    </div>
+</div>

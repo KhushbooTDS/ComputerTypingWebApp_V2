@@ -1,0 +1,49 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        width: 40%;
+    }
+
+    .select {
+        border-color: black;
+        height: 40px;
+        width: 40%;
+    }
+</style>
+
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Add MCQ Section</h5>
+        <div class="card-body">
+            <form method="post">
+                <div class="form-group">
+                    <label for="Subject">Subject</label><br />
+                    @Html.DropDownList("Subject", ViewBag.SubjectList2, "-- Select Subject --", new { @class = "form-control select" })
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="SectionName">SectionName</label><br />
+                    @Html.DropDownList("Subject", ViewBag.SubjectList2, "-- Select Subject --", new { @class = "form-control select" })
+                </div>
+
+                <br /><br />
+                <input type="submit" class="btn btn-primary" value="Submit" asp-action="SaveMCQSection" asp-controller="Admin" />
+            </form>
+        </div>
+    </div>
+</div>
+

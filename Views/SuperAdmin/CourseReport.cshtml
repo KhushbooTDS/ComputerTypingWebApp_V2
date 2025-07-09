@@ -1,0 +1,33 @@
+﻿@model List<Course>
+
+@{
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+<input class="btn-info" type="button" value="Add Course" onclick="location.href='@Url.Action("AddCourse","SuperAdmin")'" />
+<hr />
+
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Course Report</h5>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Course Name
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CourseName)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

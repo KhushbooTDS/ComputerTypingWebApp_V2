@@ -1,0 +1,407 @@
+﻿@model ComputerTypingWebApp.Models.TypingCourceVM
+
+@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Training</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .custom-dropdown-width {
+            min-width: 300px; /* Set the desired dropdown width */
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown {
+            width: 300px;
+        }
+
+        .submenu a {
+            display: block;
+            margin: 5px 0;
+            color: #333;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+
+<div class="row col-12">
+    @foreach (var subject in Model.ListOfSubject)
+    {
+        var subjectList30 = (subject.SelectSub30wpm ?? "").Split(',').ToList();
+        var subjectList40 = (subject.SelectSub40wpm ?? "").Split(',').ToList();
+
+        if (subjectList30.Contains("English30"))
+        {
+            @*  //English 30 *@
+            <div class="row" style="text-align: center;">
+                <h2 class="card heading" >English30WPM</h2>
+            </div>
+            <div class="row col-12">
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Passage"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Letter"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Statement"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        if (subjectList30.Contains("Hindi30"))
+        {
+            @*  //Hindi 30 *@
+            <div class="row" style="text-align: center; margin-top:20px;">
+                <h2 class="card heading" >Hindi30WPM</h2>
+            </div>
+            <div class="row col-12">
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Passage"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Letter"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Statement"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        if (subjectList30.Contains("Marathi30"))
+        {
+            @*  //Marathi 30 *@
+            <div class="row" style="text-align: center; margin-top:20px;">
+                <h2 class="card heading" >Marathi 30 WPM</h2>
+            </div>
+            <div class="row col-12">
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Passage"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Letter"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Statement"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        if (subjectList40.Contains("English40"))
+        {
+            @*  //English 40 *@
+            <div class="row" style="text-align: center; margin-top:20px;">
+                <h2 class="card heading" >English40WPM</h2>
+            </div>
+            <div class="row col-12">
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Passage"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Letter"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Statement"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 1})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        if (subjectList40.Contains("Hindi40"))
+        {
+            @*  //Hindi 40 *@
+            <div class="row" style="text-align: center; margin-top:20px;">
+                <h2 class="card heading" >Hindi40WPM</h2>
+            </div>
+            <div class="row col-12">
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Passage"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Letter"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Statement"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 2})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        if (subjectList40.Contains("Marathi40"))
+        {
+            @*  //Marathi 40 *@
+            <div class="row" style="text-align: center; margin-top:20px;">
+                <h2 class="card heading" >Marathi 40 WPM</h2>
+            </div>
+            <div class="row col-12">
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Passage <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Passage"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedPassage", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Letter <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Letter"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedLetter", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="dropdown" tabindex="0">
+                        <button class="home-key">Statement <i class="fas fa-chevron-down"></i></button>
+                        <div class="submenu custom-dropdown-width">
+                            @foreach (var practice in Model.Listcoursepractices)
+                            {
+                                if (practice.PracticeName.Contains("Statement"))
+                                {
+                                    var cleanPracticeName = practice.PracticeName.Replace("(Accuracy)", " ");
+                                    <a href="@Url.Action("SpeedStatement", "Student", new {practiceId = practice.Id, subjectId = 3})" target="_blank">
+                                        @cleanPracticeName
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+

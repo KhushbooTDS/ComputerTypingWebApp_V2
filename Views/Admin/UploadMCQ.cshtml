@@ -1,0 +1,165 @@
+﻿@model List<ComputerTypingWebApp.Models.UploadMcqVM>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Upload MCQ</h5>
+        <div class="card-body">
+            <form method="post">                               
+                <input type="submit" class="btn btn-primary" value="Add MCQ" asp-action="AddMCQ" asp-controller="Admin" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<div style="overflow-x:auto;">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tbStudents" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Subject Name
+                                </th>
+                                <th>
+                                    Section Name
+                                </th>
+                                <th>
+                                    Question
+                                </th>
+                                <th>
+                                    Option1
+                                </th>
+                                <th>
+                                    Option2
+                                </th>
+                                <th>
+                                    Option3
+                                </th>
+                                <th>
+                                    Option4
+                                </th>
+                                <th>
+                                    Answer
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var Model in Model)
+                            {
+                                <tr>
+                                    <td>
+
+                                        @Html.DisplayFor(modelModel => Model.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.SubjectName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.SectionName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Question)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Option1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Option2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Option3)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Option4)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelModel => Model.Answer)
+                                    </td>
+                                    <td>
+                                        
+                                        <a onclick="DeleteMCQ(@Model.Id)" class="btn btn-danger btn-icon" style="width:100px;">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </a>
+                                        
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tbStudents').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            //to select and search from grid
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    });
+</script>
+
+<script>
+    function DeleteMCQ(Id) {
+        if (confirm("Are you sure you want to delete this MCQ Question?")) {
+            $.ajax({
+                url: '/Admin/DeleteMCQ',
+                type: 'POST',
+                data: { id: Id },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                        location.reload(true);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("An error occurred while deleting the MCQ Question.");
+                }
+            });
+        }
+    }
+</script>

@@ -1,0 +1,44 @@
+﻿@model List<Instructor>
+
+@{
+
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+<div class="card">
+    <h5 class="card-header">Instructor Report</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Instructor Name
+                </th>
+                <th>
+                    Mobile No
+                </th>
+                <th>
+                    Instructor Institute Name
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            @foreach (var items in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => items.InstructorFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => items.MobileNo)
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => items.Status)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

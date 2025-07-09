@@ -1,0 +1,144 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string DashId = @ViewBag.DashId;
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (DashId != null)
+    {
+        CurrentDashboard = DashId;
+    }
+
+    if (CurrentDashboard == "3")
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "AddPracticeData";
+}
+<link href="~/css/site.css" rel="stylesheet" />
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        height: 20px;
+        width: 40%;
+    }
+
+    .select {
+        border-color: black;
+        height: 40px;
+        width: 40%;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    textarea {
+        width: 100%;
+        height: 150px;
+        margin-bottom: 10px;
+    }
+
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<p class="h4"> <u>Add Practice Data</u> </p>
+<br />
+
+<form method="post">
+    @if (TempData["ErrorMsg"] != "" && @TempData["ErrorMsg"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMsg"]
+        </div>
+    }
+    @if (TempData["SuccessMsg"] != "" && @TempData["SuccessMsg"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["SuccessMsg"]
+        </div>
+    }
+    <div class="form-group">
+        <label for="Course">Course Name</label><br />
+        @Html.DropDownList("Course",ViewBag.CourseList, "--Select Course--",new{ @class = "select", @id = "courseDropdown", @required = "required" })
+    </div>
+
+    <div class="form-group">
+        <label for="Subject">Subject Name</label><br />
+        @*<select id="subjectDropdown" name="Subject" class="select" onchange="updateLanguage()" required>
+        <option value="">-- Select Subject --</option>
+        @if (ViewBag.SubjectList != null)
+        {
+        @foreach (var item in ViewBag.SubjectList)
+        {
+        <option value="@item.Value">@item.Text</option>
+        }
+        }
+        </select>*@
+
+        <select id="subjectDropdown" name="Subject" class="select" required>
+            <option value="">-- Select Subject --</option>
+            @if (ViewBag.SubjectList != null)
+            {
+                @foreach (var item in ViewBag.SubjectList)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="PracticeName">Practice Name</label><br />
+        @Html.DropDownList("PracticeName", ViewBag.PracticeNameList,"-- Select PracticeName--",new{ @class = "select", @required = "required"})
+    </div>
+    @*<div class="form-group">
+    <label for="PracticeData">Practice Data</label>
+    <textarea class="form-control textbox" style="height:100px;" name="PracticeData" id="PracticeData" required></textarea>
+    </div> *@
+    <div class="row">
+        <div class="col-6">
+            <label for="Unicode">Unicode</label>
+            <textarea id="textarea" class="" name="Unicode" rows="5" cols="50" placeholder="Type here..."></textarea>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary" style="font" value="Submit" asp-action="SaveCourseData" asp-controller="SuperAdmin" />
+</form>
+<script src="~/js/site.js"></script>
+
+<script type="text/javascript">
+
+    // subjectDropdown change event
+    document.getElementById("subjectDropdown").addEventListener("change", function () {
+        var subjectId = this.value;
+        var courseId = document.getElementById("courseDropdown").value;
+
+        if (subjectId && courseId) {
+            fetch(`/SuperAdmin/GetPracticeName?courseId=${courseId}&subjectId=${subjectId}`)
+                .then(response => response.json())
+                .then(data => {
+                    var practiceNameDropdown = document.getElementById("PracticeName");
+                    practiceNameDropdown.innerHTML = "";
+                    practiceNameDropdown.innerHTML = '<option value="">-- Select Practice Name --</option>';
+                    data.forEach(function (item) {
+                        console.log(item);
+                        var option = document.createElement("option");
+                        option.value = item.value;
+                        option.textContent = item.text;
+                        practiceNameDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching practice names:', error));
+        }
+    });
+
+</script>

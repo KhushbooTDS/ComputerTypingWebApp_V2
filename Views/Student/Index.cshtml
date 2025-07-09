@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+@*<div class="row quick-action-toolbar">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-header d-block d-md-flex">
+                <h5 class="mb-0">Notices</h5>
+            </div>
+            <div>
+                @ViewBag.Notice
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<!-- Quick Action Toolbar Starts-->
+<!--
+<div class="row quick-action-toolbar">
+    <div class="col-md-9 grid-margin">
+        <div class="card">
+            <div class="card-header d-block d-md-flex">
+                <h5 class="mb-0">Quick Actions</h5>
+            </div>
+            <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
+                <div class="col-sm-6 col-md-6 p-3 text-center btn-wrapper">
+                    <a class="btn px-0" href="@Url.Action("FeesInstallmentDetails", "Student")"><i class="icon-user me-2"></i> Fees Installments Details </a>
+                </div>
+                <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                    <button type="button" class="btn px-0"><i class="icon-docs me-2"></i> Attendance</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<!-- Quick Action Toolbar Ends-->
+
+
+<div class="col-xxl-8 mb-6 order-0">
+    <div class="card">
+        <div class="d-flex align-items-start row">
+            <div class="col-sm-7">
+                <div class="card-body">
+                    <h5 class="card-title text-primary mb-3">Notices</h5>
+                    <p class="mb-6">
+                        @ViewBag.Notice
+                    </p>
+
+                </div>
+            </div>
+            <div class="col-sm-5 text-center text-sm-left">
+                <div class="card-body pb-0 px-0 px-md-6">
+                    <img src="../assets/img/illustrations/man-with-laptop.png"
+                         height="175"
+                         class="scaleX-n1-rtl"
+                         alt="View Badge User" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 col-xx1-4">
+        <div class="row">
+            <div class="col-md-3 col-md-2 col-sm-4 mb-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                                <a class="btn p-0" href="@Url.Action("FeesInstallmentDetails", "Student")">
+                                    <img src="../assets/img/icons/unicons/chart-success.png"
+                                         alt="chart success"
+                                         class="rounded" />
+                                </a>
+                            </div>
+                        </div>
+                        <p class="mb-1">Fees Installments Details</p>
+                        @*<h4 class="card-title mb-3">@ViewBag.StudentCount</h4>*@
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+</div>

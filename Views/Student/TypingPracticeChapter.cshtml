@@ -1,0 +1,466 @@
+﻿@model ComputerTypingWebApp.Models.CoursesUpload
+
+@{
+    Layout = null;
+}
+<link href="~/css/typingpracticechapter/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/typingpracticechapter/style.css" rel="stylesheet" />
+<link href="~/css/typingpracticechapter/gesture.css" rel="stylesheet" />
+<div class="container-fluid typingBody">
+    <input type="hidden" value="@Model.SubjectId" id="SubjectId" />
+    <input type="hidden" value="@Model.PracticeId" id="PracticeId" />
+    <div id="timer" class="mt-3 p-1"></div>
+    <div class="" id="typingParagraphHolder">
+        <audio id="error" src="~/sound/typingpracticechapter/error.mp3" preload="auto" type="audio/mpeg" hidden></audio>
+        <audio id="keypress" src="~/sound/typingpracticechapter/keypress.mp3" preload="auto" type="audio/mpeg" hidden></audio>
+        <div class="typingParagraph m-2 text-wrap">
+            @if (Model.PracticeData != null)
+            {
+                var incr = 1;
+                foreach (char item in Model.PracticeData)
+                {
+                    if (item == ' ')
+                    {
+                        <span class="px-2 ch c-@incr">@item</span>
+                    }
+                    else if (item == '"')
+                    {
+                        <span class="px-1 ch c-@incr">"</span>
+                    }
+                    else
+                    {
+                        <span class="ch c-@incr">@item</span>
+                    }
+                    incr++;
+                }
+            }
+
+        </div>
+    </div>
+    <div id="typingKeyboard" class="">
+        <div id="typingBackground">
+            <div class="keyboard--hands keyboard--hasSettings  keyboard keyboard--a keyboard--c keyboard--full">
+                <div class="mx-3 my-2 d-flex justify-content-end">
+                    <button class="btn btn-sm btn-success" style="font-size: 12px;" onclick="Save()">
+                        SUBMIT
+                    </button>
+                </div>
+                <div class="keyboard-row">
+                    <div class="keyboard-key key key--a key-96 key-192 key--rspnsv key--duo key-126 key-96-dead">
+                        <div class="key-label">~</div>
+                        <div class="key-label">`</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-49 key--rspnsv key--duo key-33">
+                        <div class="key-label">!</div>
+                        <div class="key-label">1</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-50 key--rspnsv key--duo key-64">
+                        <div class="key-label">@@</div>
+                        <div class="key-label">2</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-51 key--rspnsv key--duo key-35">
+
+                        <div class="key-label">#</div>
+
+                        <div class="key-label">
+
+                            3
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-52 key--rspnsv key--duo key-36">
+
+                        <div class="key-label">$</div>
+
+                        <div class="key-label">
+
+                            4
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-53 key--rspnsv key--duo key-37">
+
+                        <div class="key-label">%</div>
+
+                        <div class="key-label">
+
+                            5
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-54 key--rspnsv key--duo key-94">
+
+                        <div class="key-label">^</div>
+
+                        <div class="key-label">
+
+                            6
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-55 key--rspnsv key--duo key-38">
+
+                        <div class="key-label">&amp;</div>
+
+                        <div class="key-label">
+
+                            7
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-56 key--rspnsv key--duo key-42">
+
+                        <div class="key-label">*</div>
+
+                        <div class="key-label">
+
+                            8
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-57 key--rspnsv key--duo key-40 key-170">
+
+                        <div class="key-label">(</div>
+
+                        <div class="key-label">
+
+                            9
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-48 key--rspnsv key--duo key-41">
+                        <div class="key-label">)</div>
+                        <div class="key-label">0</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-45 key--rspnsv key--duo key-95 key-189">
+                        <div class="key-label">_</div>
+                        <div class="key-label">-</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-61 key--rspnsv key--duo key-43 key-187">
+                        <div class="key-label">+</div>
+                        <div class="key-label">=</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-8 key--twoWords key--special key--special-r right"
+                         style="flex-basis:74px">
+                        <div class="key-label">
+                            <span class="key-label--0">Delete</span><span class="key-label--1">⌫</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="keyboard-key key key--a key-9 key--twoWords key--special key--special-l left"
+                         style="flex-basis:68px">
+
+                        <div class="key-label">
+                            <span class="key-label--0">Tab</span><span class="key-label--1">↹</span>
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-113 key--rspnsv">
+                        <div class="key-label">
+                            q
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-119 key--rspnsv">
+
+                        <div class="key-label">
+
+                            w
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-101 key--rspnsv key-180-dead">
+                        <div class="key-label">e</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-114 key--rspnsv">
+                        <div class="key-label">r</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-116 key--rspnsv">
+                        <div class="key-label">t</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-121 key--rspnsv">
+                        <div class="key-label">y</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-117 key--rspnsv key-168-dead">
+
+                        <div class="key-label">
+
+                            u
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-105 key--rspnsv key-710-dead">
+
+                        <div class="key-label">
+
+                            i
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-111 key--rspnsv">
+
+                        <div class="key-label">
+
+                            o
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-112 key--rspnsv">
+
+                        <div class="key-label">
+
+                            p
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-91 key--rspnsv key--duo key-123 key-219">
+                        <div class="key-label">{</div>
+                        <div class="key-label">[</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-93 key--rspnsv key--duo key-125 key-221">
+                        <div class="key-label">}</div>
+                        <div class="key-label">]</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-92 key--rspnsv key--duo key-124 key-220" style="flex-basis:48px">
+                        <div class="key-label">|</div>
+                        <div class="key-label">\</div>
+                    </div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="keyboard-key key key--a key-20 key--twoWords key--special key--special-l left"
+                         style="flex-basis:83px">
+                        <div class="key-label">
+                            <span class="key-label--0">Caps</span><span class="key-label--1">Lock</span><span class="key-label--2">⇪</span>
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-97 key--rspnsv">
+                        <div class="key-label">a</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-115 key--rspnsv">
+
+                        <div class="key-label">
+
+                            s
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-100 key--rspnsv">
+
+                        <div class="key-label">
+
+                            d
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-102 key--rspnsv">
+
+                        <div class="key-label">
+
+                            f
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-103 key--rspnsv">
+
+                        <div class="key-label">
+
+                            g
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-104 key--rspnsv">
+                        <div class="key-label">h</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-106 key--rspnsv">
+
+                        <div class="key-label">
+
+                            j
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-107 key--rspnsv">
+
+                        <div class="key-label">
+
+                            k
+
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-108 key--rspnsv">
+                        <div class="key-label">l</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-59 key--rspnsv key--duo key-58 key-186">
+                        <div class="key-label">:</div>
+                        <div class="key-label">;</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-39 key--rspnsv key--duo key-34 key-222">
+                        <div class="key-label">"</div>
+                        <div class="key-label">'</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-13 key--twoWords key--special key--special-r right"
+                         style="flex-basis:83px">
+                        <div class="key-label">
+                            <span class="key-label--0">Enter</span><span class="key-label--1">⏎</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="keyboard-key key key--a key-16 key--twoWords key--special key--special-l left"
+                         style="flex-basis:108px">
+
+                        <div class="key-label">
+                            <span class="key-label--0">Shift</span><span class="key-label--1">⇧</span>
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-122 key--rspnsv">
+                        <div class="key-label">z</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-120 key--rspnsv">
+                        <div class="key-label">x</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-99 key--rspnsv key-231">
+                        <div class="key-label">c</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-118 key--rspnsv">
+                        <div class="key-label">v</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-98 key--rspnsv">
+                        <div class="key-label">b</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-110 key--rspnsv key-126 key-126-dead">
+                        <div class="key-label">n</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-109 key--rspnsv">
+                        <div class="key-label">m</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-44 key--rspnsv key--duo key-60 key-188">
+                        <div class="key-label">&lt;</div>
+                        <div class="key-label">,</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-46 key--rspnsv key--duo key-62 key-190">
+                        <div class="key-label">&gt;</div>
+                        <div class="key-label">.</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-47 key--rspnsv key--duo key-63 key-191">
+                        <div class="key-label">?</div>
+                        <div class="key-label">/</div>
+                    </div>
+                    <div class="keyboard-key key key--a key-16 key--twoWords key--special key--special-r right"
+                         style="flex-basis:108px">
+
+                        <div class="key-label">
+                            <span class="key-label--0">⇧</span><span class="key-label--1">Shift</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="keyboard-row">
+                    <div class="keyboard-key key key--a key-17 key--oneWords key--special key--rspnsv key--special-l left"
+                         style="flex-basis:50px">
+                        <div class="key-label">
+                            Ctrl
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-18 key--oneWords key--special key--rspnsv key--special-l left"
+                         style="flex-basis:50px">
+                        <div class="key-label">
+                            Alt
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-157 key--oneWords key--special key--special-l left"
+                         style="flex-basis:70px">
+                        <div class="key-label">
+                            Cmd
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-32 key--twoWords key--special key--special-l left"
+                         style="flex-basis:336px">
+                        <div class="key-label">
+                            <span class="key-label--0"></span><span class="key-label--1"></span>
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-157 key--oneWords key--special key--special-r right"
+                         style="flex-basis:70px">
+                        <div class="key-label">
+                            Cmd
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-18 key--oneWords key--special key--rspnsv key--special-r right"
+                         style="flex-basis:50px">
+                        <div class="key-label">
+                            Alt
+                        </div>
+                    </div>
+                    <div class="keyboard-key key key--a key-17 key--oneWords key--special key--rspnsv key--special-r right"
+                         style="flex-basis:50px">
+                        <div class="key-label">
+                            Ctrl
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="handGesture" class="row">
+    <div class="col-6" id="leftHand"></div>
+    <div class="col-6" id="rightHand"></div>
+</div>
+<div class="container-fluid resultBody d-none col-md-9 my-5 ">
+    <div class="card ">
+        <div class="card-header tex-center">
+            <div class="row text-center my-1">
+                <h5><span id="studentName">Ravi</span></h5>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="text-center mt-2 mb-5">
+                <div class="d-flex justify-content-center">
+                    <div class="card resultCard  mx-1">
+                        <div class="card-header p-1">
+                            <div id="">Gross Speed (WPM)</div>
+                        </div>
+                        <div class="card-body">
+                            <div id="grossSpeed">55</div>
+                        </div>
+                    </div>
+                    <div class="card resultCard mx-1">
+                        <div class="card-header p-1">
+                            <div id="">Net Speed (WPM)</div>
+                        </div>
+                        <div class="card-body">
+                            <div id="netSpeed">50</div>
+                        </div>
+                    </div>
+                    <div class="card resultCard mx-1">
+                        <div class="card-header p-1">
+                            <div id="">Correct Key</div>
+                        </div>
+                        <div class="card-body">
+                            <div id="correctWord">100</div>
+                        </div>
+                    </div>
+                    <div class="card resultCard mx-1">
+                        <div class="card-header p-1">
+                            <div id="">Incorrect Key</div>
+                        </div>
+                        <div class="card-body">
+                            <div id="incorrectWord">10</div>
+                        </div>
+                    </div>
+                    <div class="card resultCard mx-1">
+                        <div class="card-header p-1">
+                            <div id="">Accuracy</div>
+                        </div>
+                        <div class="card-body">
+                            <div id="accuracy">90%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/typingpracticechapter/bootstrap.bundle.min.js"></script>
+<script src="~/js/typingpracticechapter/jquery.min.js"></script>
+<script src="~/js/typingpracticechapter/script.js"></script>
+<script src="~/js/typingpracticechapter/saveprogress.js"></script>

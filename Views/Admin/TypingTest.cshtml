@@ -1,0 +1,60 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+
+
+<form method="post">
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row g-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">Typing Test</h5>
+                        <div class="card-body demo-vertical-spacing demo-only-element"> 
+                            <label style="color:green;"> @TempData["Message"] </label>
+                            <div class="form-group">
+                                <label for="StudentName">Date</label>
+                                <input class="form-control"  type="date" name="date" id="date" />
+                            </div>
+                            <div class="form-group">
+                                <label for="StudentSub">Subject Name</label>
+                                @Html.DropDownList("Subject4",ViewBag.SubjectList4, "-- Select Subject --", new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="CenterName">Section</label>
+                                @Html.DropDownList("Section4",ViewBag.SectionList4, "-- Select Section --", new { @class = "form-control" })
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Submit" asp-action="TypingTestSubmit"asp-controller="Admin" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

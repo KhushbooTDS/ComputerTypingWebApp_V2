@@ -1,0 +1,353 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ComputerTypingWebApp
+build_property.RootNamespace = ComputerTypingWebApp
+build_property.ProjectDir = D:\TheDataSequence_Projects\ComputerTypingWebApp_V2\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\TheDataSequence_Projects\ComputerTypingWebApp_V2
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddCoursefee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkQ291cnNlZmVlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddGrNumber.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkR3JOdW1iZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddHallTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkSGFsbFRpY2tldC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddInstituteSessions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkSW5zdGl0dXRlU2Vzc2lvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddInstituteTimings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkSW5zdGl0dXRlVGltaW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddInstructor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkSW5zdHJ1Y3Rvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddMasterKeyboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkTWFzdGVyS2V5Ym9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddMCQ.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkTUNRLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddMCQSec.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkTUNRU2VjLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddMCQSection.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkTUNRU2VjdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddSpeedPractice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkU3BlZWRQcmFjdGljZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/AddStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkU3R1ZGVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/CoursefeeReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ291cnNlZmVlUmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/EditStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFN0dWRlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/GetInstallments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cR2V0SW5zdGFsbG1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/GrNumberReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cR3JOdW1iZXJSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/HallTicketReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSGFsbFRpY2tldFJlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/InstituteSessions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5zdGl0dXRlU2Vzc2lvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/InstituteTimingsReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5zdGl0dXRlVGltaW5nc1JlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/InstructorPayment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5zdHJ1Y3RvclBheW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/InstructorReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5zdHJ1Y3RvclJlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/MCQTest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTUNRVGVzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/PaymentReceipt.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGF5bWVudFJlY2VpcHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/StudentAttendance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3R1ZGVudEF0dGVuZGFuY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/StudentGrowthReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3R1ZGVudEdyb3d0aFJlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/StudentReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3R1ZGVudFJlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/TakeInstallment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGFrZUluc3RhbGxtZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/TotalStudentsReports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVG90YWxTdHVkZW50c1JlcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/TypingTest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVHlwaW5nVGVzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/UploadMasterKeyboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXBsb2FkTWFzdGVyS2V5Ym9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/UploadMCQ.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXBsb2FkTUNRLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/UploadSpeedPractice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXBsb2FkU3BlZWRQcmFjdGljZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/ViewStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld1N0dWRlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Admin/ViewStudentGrowthDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVmlld1N0dWRlbnRHcm93dGhEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Instructor/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zdHJ1Y3RvclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Shared/_InstructorLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9JbnN0cnVjdG9yTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Shared/_StudentLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TdHVkZW50TGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Shared/_SuperAdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TdXBlckFkbWluTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/FeesInstallmentDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxGZWVzSW5zdGFsbG1lbnREZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/GetStudentProfileDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxHZXRTdHVkZW50UHJvZmlsZURldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/KeywordPractice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxLZXl3b3JkUHJhY3RpY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/SpeedLetter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxTcGVlZExldHRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/SpeedPassage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxTcGVlZFBhc3NhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/SpeedPractice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxTcGVlZFByYWN0aWNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/SpeedStatement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxTcGVlZFN0YXRlbWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/TheoryCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxUaGVvcnlDb3Vyc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/TypingPracticeChapter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxUeXBpbmdQcmFjdGljZUNoYXB0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/TypingPracticeHindi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxUeXBpbmdQcmFjdGljZUhpbmRpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Student/TypingPracticeMarathi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxUeXBpbmdQcmFjdGljZU1hcmF0aGkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/AddAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxBZGRBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/AddCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxBZGRDb3Vyc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/AddGender.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxBZGRHZW5kZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/AddHandicap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxBZGRIYW5kaWNhcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/AddIdentityDoc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxBZGRJZGVudGl0eURvYy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/AddInstitute.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxBZGRJbnN0aXR1dGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/AddNotice.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxBZGROb3RpY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/AddPracticeData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxBZGRQcmFjdGljZURhdGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/AddSubject.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxBZGRTdWJqZWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/CourseReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxDb3Vyc2VSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/CoursesUpload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxDb3Vyc2VzVXBsb2FkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/GenderReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxHZW5kZXJSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/HandicapReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxIYW5kaWNhcFJlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/IdentityDocReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxJZGVudGl0eURvY1JlcG9ydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/InstituteReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxJbnN0aXR1dGVSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/InstructorReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxJbnN0cnVjdG9yUmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/LicenseActivation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxMaWNlbnNlQWN0aXZhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/LockUnlockStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxMb2NrVW5sb2NrU3R1ZGVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/NoticeReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxOb3RpY2VSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/Revenue.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxSZXZlbnVlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/Settings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxTZXR0aW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/StudentReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxTdHVkZW50UmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/SuperAdmin/SubjectReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwZXJBZG1pblxTdWJqZWN0UmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/TheDataSequence_Projects/ComputerTypingWebApp_V2/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ayxw0ru6y2

@@ -1,0 +1,70 @@
+﻿@model List<HallTicket>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string DashId = (string)@TempData["DashId"];
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (DashId != null)
+    {
+        CurrentDashboard = DashId;
+    }
+
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "HallTicketReport";
+}
+
+
+<input class="btn btn-info btn-icon" style="width:200px;" type="button" value="Add HallTicket" onclick="location.href='@Url.Action("AddHallTicket","Admin",new{dashId = 4})'" />
+<hr />
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Hall Ticket Report</h5>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            Student Gr No.
+                        </th>
+                        <th>
+                            Student Name
+                        </th>
+                        <th>
+                            Centre Name
+                        </th>
+                        <th>
+                            Exam Time
+                        </th>
+                    </tr>
+                    @foreach (var items in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => items.GrNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => items.StudentName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => items.CenterName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => items.ExamTime)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

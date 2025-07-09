@@ -1,0 +1,61 @@
+﻿@model List<FeeInstallmentVM>
+@{
+    ViewData["Title"] = "FeesInstallmentDetails";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<p class="h3">Fee Installment Details</p>
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            Student UserName
+        </th>
+        <th>
+            Subjects
+        </th>
+        <th>
+            Total Amount Due
+        </th>
+        <th>
+            Amount Paid
+        </th>
+        <th>
+            Balance Amount Due
+        </th>
+        <th>
+            Payment Made By
+        </th>
+        <th>
+            Installment Date
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmountDue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BalanceAmountDue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMadeBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstallmentDate)
+            </td>
+        </tr>
+    }
+</table>
+

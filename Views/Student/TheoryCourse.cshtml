@@ -1,0 +1,172 @@
+﻿@{
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        .dropbtn {
+            background-color: #fff;
+            color: black;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                overflow: auto;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+                .dropdown-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+
+            .dropdown a:hover {
+                background-color: #ddd;
+            }
+
+            .show {
+                display: block;
+            }
+
+            .header {
+                background: linear-gradient(to right, #ff7e5f, #fedd);
+                color: blue;
+                text-align: center;
+                padding: 2px 25px;
+                font-size: 2rem;
+                font-weight: bold;
+                margin: 0;
+            }
+
+        .card {
+            width: 433px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        </style>
+    </head>
+  @*   <style>
+        body {
+            background-color: azure;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+       
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            margin: 20px;
+        }
+
+       
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-button {
+            background-color: white;
+            color: black;
+            padding: 10px 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Hide the checkbox */
+        .dropdown-checkbox {
+            display: none;
+        }
+
+            /* Show the dropdown menu when checkbox is checked */
+            .dropdown-checkbox:checked + .dropdown-content {
+                display: block;
+            }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1;
+                }
+    </style> *@
+<body>
+    <header class="header">
+        THEORY
+    </header>
+    <div class="container">
+        <div class="card">
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Select Multiple Choice Question (MCQ) Type <i class="fas fa-chevron-down"></i></button>
+                    <div id="myDropdown" class="dropdown-content">
+                    <a href="#">MS-WORD</a>
+                    <a href="#">MS-Excel</a>
+                    <a href="#">MS-PowerPoint</a>
+                    <a href="#">PageMaker (Only for 40 wpm)</a>
+                    <a href="#">Computer Fundamentals</a>
+                    <a href="#">OS</a>
+                    <a href="#">Email</a>
+                    <a href="#">All</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>

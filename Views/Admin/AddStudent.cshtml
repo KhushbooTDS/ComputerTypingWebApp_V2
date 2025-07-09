@@ -1,0 +1,288 @@
+﻿@model ComputerTypingWebApp.Models.StudentVM
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+@*<style>
+    .form-container {
+        border-radius: 4px;
+        color: black;
+        background-color: mintcream;
+        width: 583px;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 700px;
+        margin: auto;
+    }
+
+        .form-container .textbox {
+            height: 40px;
+        }
+
+        .form-container h4 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+</style>*@
+
+
+<h4><u>Add New Student</u></h4>
+<form method="post" enctype="multipart/form-data" asp-action="SaveStudent" asp-controller="Admin">
+    @if (TempData["Msg"] != "" && @TempData["Msg"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["Msg"]
+        </div>
+    }
+
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row g-6">
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">Student Basic Information</h5>
+                        <div class="card-body demo-vertical-spacing demo-only-element">
+                            <label class="form-label" for="LastName">Last Name</label>
+                            <div class="input-group">
+                                <input type="text" asp-for="LastName" class="form-control" name="LastName" id="LastName" required />
+                            </div>
+
+                            <label class="form-label" for="FirstName">First Name</label>
+                            <div class="input-group">
+                                <input type="text" asp-for="FirstName" class="form-control" name="FirstName" id="FirstName" required />
+                            </div>
+
+                            <label class="form-label" for="FatherName">Father Name</label>
+                            <div class="input-group">
+                                <input type="text" asp-for="FatherName" class="form-control" name="FatherName" id="FatherName" />
+                            </div>
+
+                            <label class="form-label" for="MotherName">Mother Name</label>
+                            <div class="input-group">
+                                <input type="text" asp-for="MotherName" class="form-control" name="MotherName" id="MotherName" />
+                            </div>
+
+                            <label class="form-label" for="MobileNo">Mobile No.</label>
+                            <div class="input-group">
+                                <input type="text" asp-for="MobileNo" class="form-control textbox" name="MobileNo" id="MobileNo" required />
+                            </div>
+
+                            <label class="form-label" for="Email">Email</label>
+                            <div class="input-group">
+                                <input type="email" asp-for="Email" class="form-control textbox" name="Email" id="Email" required />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">Upload Pics</h5>
+                        <div class="card-body demo-vertical-spacing demo-only-element">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label class="form-label" for="PhotoIdentity">Photo Identity</label>
+                                        <input type="file" asp-for="PhotoIdentity" class="form-control" name="PhotoIdentity" id="PhotoIdentity" onchange="previewImage(this, 'PhotoIdentityPreview')" />
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="~/Logo/image1.jpg" style="width:100px; height:100px; border-radius:5px; padding:0px;" alt="Photo Identity" id="PhotoIdentityPreview" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label class="form-label" for="OtherIdentity">Other Identity</label>
+                                        <input type="file" asp-for="OtherIdentity" class="form-control" name="OtherIdentity" id="OtherIdentity" onchange="previewImage(this, 'otherIdentityPreview')" />
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="~/Logo/image1.jpg" style="width:100px; height:100px; border-radius:5px; padding:0px;" alt="Other Identity" id="otherIdentityPreview" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Image part 2-->
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label class="form-label" asp-for="StudentPicURL">Student Picture</label>
+                                        <input type="file" asp-for="StudentPicURL" class="form-control" name="StudentPicURL" id="StudentPic" onchange="previewImage(this, 'studentPicURLPreview')" />
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="~/Logo/image1.jpg" style="width:100px; height:100px; border-radius:5px; padding:0px;" alt="Home Banner" id="studentPicURLPreview" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label class="form-label" asp-for="IdentityPicURL">Identity Picture</label>
+                                        <input type="file" asp-for="IdentityPicURL" class="form-control" name="IdentityPicURL" id="IdentityPic" onchange="previewImage(this, 'identityPicURLPreview')" />
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="~/Logo/image1.jpg" style="width:100px; height:100px; border-radius:5px; padding:0px;" alt="Home Banner" id="identityPicURLPreview" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">Additional Info</h5>
+                        <div class="card-body demo-vertical-spacing demo-only-element">
+                            <label class="form-label" for="Gender">Gender</label>
+                            <div class="input-group">                               
+                                <select asp-for="Gender" name="Gender" asp-items="(IEnumerable<SelectListItem>)ViewBag.GenderList" class="form-select" id="Gender">
+                                    <option value="">-- Select Gender --</option>
+                                </select>
+                            </div>
+                            <label class="form-label" for="Handicap">Handicap</label>
+                            <div class="input-group">                               
+                                <select asp-for="Handicap" name="Handicap" asp-items="(IEnumerable<SelectListItem>)ViewBag.HandicapList" class="form-select" id="EditHandicap">
+                                    <option value="">-- Select Handicap --</option>
+                                </select>
+                            </div>
+                            <label class="form-label" for="StudentType">Student Type</label>
+                            <div class="input-group">                                
+                                <select asp-for="StudentType" name="StudentType" asp-items="(IEnumerable<SelectListItem>)ViewBag.StudentTypeList" class="form-select" id="EditHandicap">
+                                    <option value="">-- Select StudentType --</option>
+                                </select>
+                            </div>
+                            <label class="form-label" asp-for="PaermentAddress">Permanent Address</label>
+                            <div class="input-group">
+                                <input type="text" asp-for="PaermentAddress" class="form-control textbox" name="PaermentAddress" id="PermanentAddress" />
+                            </div>
+                            <label class="form-label" for="School">School</label>
+                            <div class="input-group">                                
+                                <input type="text" asp-for="School" class="form-control textbox" name="School" id="School" />
+                            </div>
+                            <label class="form-label" for="Edu">Education</label>
+                            <div class="input-group">                                
+                                <input type="text" asp-for="Education" class="form-control textbox" name="Education" id="Edu" />
+                            </div>
+                            <label class="form-label" for="UID">UID</label>
+                            <div class="input-group">                                
+                                <input type="text" asp-for="UID" class="form-control textbox" name="UID" id="uid" />
+                            </div>
+                            <label class="form-label" for="Cast">Cast</label>
+                            <div class="input-group">                                
+                                <input type="text" asp-for="Cast" class="form-control textbox" name="Cast" id="Castid" />
+                            </div>
+                            <label class="form-label" for="IdentityNo">Identity No</label>
+                            <div class="input-group">                                
+                                <input type="text" asp-for="IdentityNo" class="form-control textbox" name="IdentityNo" id="IdentityNo" />
+                            </div>
+                            <label class="form-label" for="Dob">Date of Birth</label>
+                            <div class="input-group">                                
+                                <input type="date" class="form-control textbox" name="Dob" id="Dob" required />
+                            </div>
+                            <label class="form-label" for="DateAdd">Date Added</label>
+                            <div class="input-group">                               
+                                <input type="date" asp-for="DateAdd" class="form-control textbox" name="DateAdd" id="DateAdd" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5 class="card-header">Subject Info</h5>
+                        <div class="card-body demo-vertical-spacing demo-only-element">
+                            <label class="form-label">Select Subjects (30 WPM)</label><br />
+                            <div class="input-group">                               
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" asp-for="English30" class="form-check-input" name="SelectSub30WPM" value="English30" id="English30">
+                                    <label class="form-label" for="English30">English30</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" asp-for="Hindi30" class="form-check-input" name="SelectSub30WPM" value="Hindi30" id="Hindi30">
+                                    <label class="form-label" for="Hindi30">Hindi30</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" asp-for="Marathi30" class="form-check-input" name="SelectSub30WPM" value="Marathi30" id="Marathi30">
+                                    <label class="form-label" for="Marathi30">Marathi30</label>
+                                </div>
+                            </div>
+                            <label class="form-label">Select Subjects (40 WPM)</label><br />
+                            <div class="input-group">                                
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" asp-for="English40" class="form-check-input" name="SelectSub40WPM" value="English40" id="English40">
+                                    <label class="form-label" asp-for="English40" for="English40">English40</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="form-check-input" name="SelectSub40WPM" value="Hindi40" id="Hindi40">
+                                    <label class="form-label" asp-for="Hindi40" for="Hindi40">Hindi40</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" asp-for="Marathi40" class="form-check-input" name="SelectSub40WPM" value="Marathi40" id="Marathi40">
+                                    <label class="form-label" for="Marathi40">Marathi40</label>
+                                </div>
+                            </div>
+                            <label class="form-label" for="Sessionp">Session</label>
+                            <div class="input-group">                                
+                                <select asp-for="Session" name="Session" asp-items="(IEnumerable<SelectListItem>)ViewBag.SessionList" class="form-select" id="EditHandicap">
+                                    <option value="">-- Select Sessionp --</option>
+                                </select>
+                            </div>
+                            <label class="form-label" asp-for="StudentUserName">Student Username</label>
+                            <div class="input-group">                                
+                                <input type="text" asp-for="StudentUserName" class="form-control textbox" name="StudentUserName" id="StudentUserName" required />
+                            </div>
+                            <label class="form-label" asp-for="StudentPassword">Password</label>
+                            <div class="input-group">                                
+                                <input type="password" asp-for="StudentPassword" class="form-control textbox" name="StudentPassword" id="Password" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+</form>
+
+
+<script>
+    function previewImage(input, previewId) {
+        var preview = document.getElementById(previewId);
+        var file = input.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = "block"; // Show the image
+            };
+
+            reader.readAsDataURL(file); // Convert file to Base64 URL
+        } else {
+            preview.src = "#"; // Reset image preview
+            preview.style.display = "none"; // Hide preview if no file is selected
+        }
+    }
+
+</script>

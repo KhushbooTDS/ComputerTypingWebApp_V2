@@ -1,0 +1,225 @@
+﻿@model ReceiptVM;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string DashId = (string)@TempData["DashId"];
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (DashId != null)
+    {
+        CurrentDashboard = DashId;
+    }
+
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "TakeInstallment";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+<script type="text/javascript">
+    $(function () {
+        $("#ddlStudentUserName").select2();
+    });
+</script>
+
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        width: 40%;
+    }
+
+</style>
+<p class="h4"> <u>Take Installment - Reciepts</u> </p>
+<br />
+
+<form method="post">
+    <div class="form-group">
+        <label for="ReceiptNo">Receipt No.</label>
+        <input type="text" class="form-control textbox" name="ReceiptNo" id="ReceiptNo" readonly="readonly" value="@Model.ReceiptNo" />
+    </div>
+    <div class="form-group">
+        <label for="InstallmentDate">Date</label>
+        <input type="date" class="form-control textbox" name="InstallmentDate" id="InstallmentDate" value="@Model.InstallmentDate.ToString("yyyy-MM-dd")" />
+    </div>
+    <div class="form-group">
+        <label for="ddlStudentUserName">Enter Student UserName</label><br />
+        @Html.DropDownList("ddlStudentUserName", ViewBag.StudentList, "", new { @class = "form-select", @style = "width:40%; margin-top:-14px" })
+    </div>
+
+    <div class="form-group">
+        <label for="Course">Course Name</label><br />
+        @Html.DropDownList("Course", ViewBag.CourseList, "--Select Course--", new { @class = "form-select", @style = "width:40%; background-color: white; color: black;", @id = "courseDropdown", @required = "required" })
+    </div>
+    <br />
+    <div class="list-group">
+        <label for="chkSubjects">Occupied Courses</label>
+        <div class="checkbox">
+            @foreach (var item in (List<Subject>)ViewBag.SubjectsList)
+            {
+                <label class="list-group-item" style="width:40%; background-color: white; color: black;">
+                    <input type="checkbox"
+                           name="chkSubjects"
+                           value="@item.SubjectName" disabled />
+                    @item.SubjectName
+                </label>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="TotalAmountDue">Total Amount Due</label>
+        <input type="text" class="form-control textbox" name="TotalAmountDue" id="TotalAmountDue" readonly="readonly" />
+        <label for="AmountPaid">Amount Paid</label>
+        <input type="text" class="form-control textbox" name="AmountPaid" id="AmountPaid" />
+        <label for="BalanceAmountDue">Balance Amount Due</label>
+        <input type="text" class="form-control textbox" name="BalanceAmountDue" id="BalanceAmountDue" readonly="readonly" />
+    </div>
+    <div class="form-group">
+        <label for="ddlPaymentMadeBy">Payment Mode</label>
+        <select name="ddlPaymentMadeBy" id="ddlPaymentMadeBy" class="form-select" style="width:40%; background-color: white; color: black;">
+            <option value="0">Select Payment Mode</option>
+            <option value="Cash">Cash</option>
+            <option value="Cheque">Cheque</option>
+            <option value="Online">Online</option>
+        </select>
+    </div>
+    <div class="form-group" id="chesction">
+        <label for="ChequeNo">Cheque No.</label>
+        <input type="text" class="form-control textbox" name="ChequeNo" id="ChequeNo" />
+        <label for="ChequeDate">Date</label>
+        <input type="date" class="form-control textbox" name="ChequeDate" id="ChequeDate" />
+    </div>
+    <div class="form-group">
+        <label for="NextInstallmentDate">Next Month Installment Date</label>
+        <input type="date" class="form-control textbox" name="NextInstallmentDate" id="NextInstallmentDate" />
+    </div>
+    <br />
+    <input type="submit" class="btn btn-primary" value="Take Amount" asp-action="TakeAmount" asp-controller="Admin" />
+</form>
+<script>
+    $(document).ready(function () {
+        $("#AmountPaid").keyup(function () {
+            var totalAmount = parseFloat($("#TotalAmountDue").val());
+            var amountPaid = parseFloat($("#AmountPaid").val());
+            var balanceAmount = (totalAmount - amountPaid);
+            $("#BalanceAmountDue").val(balanceAmount);
+        });
+
+
+
+        $("#ddlStudentUserName").change(function () {
+            var $this = $(this);
+            $.ajax({
+                type: "POST",
+                url: "/Instructor/GetSubjectList",
+                data: { StudentUserName: $this.val() },
+                success: function (data) {
+                    var isCourse30 = false;
+                    var isCourse40 = false;
+
+                    var isEnglish30 = false;
+                    var isEnglish40 = false;
+
+                    var isHindi30 = false;
+                    var isHindi40 = false;
+
+                    var isMarathi30 = false;
+                    var isMarathi40 = false;
+
+                    var course30Fees = 0;
+                    var course40Fees = 0;
+
+                    var feesEnglish30 = 0;
+                    var feesEnglish40 = 0;
+
+                    var feesHindi30 = 0;
+                    var feesHindi40 = 0;
+
+                    var feesMarathi30 = 0;
+                    var feesMarathi40 = 0;
+
+                    var totalFees = 0;
+
+                    $("input[name='chkSubjects']").prop("checked", false);
+
+                    if (data[0].sub30 && data[0].sub30.trim() !== '') {
+                        isCourse30 = true;
+                        var subjects = data[0].sub30.split(',');
+                        $.each(subjects, function (key, value) {
+                            $("input[name='chkSubjects'][value='" + value + "']").prop("checked", true);
+                            if (value == 'English30') { isEnglish30 = true; }
+                            if (value == 'Hindi30') { isHindi30 = true; }
+                            if (value == 'Marathi30') { isMarathi30 = true; }
+                        });
+                    }
+
+                    if (data[0].sub40 && data[0].sub40.trim() !== '') {
+                        isCourse40 = true;
+                        var subjects = data[0].sub40.split(',');
+                        $.each(subjects, function (key, value) {
+                            $("input[name='chkSubjects'][value='" + value + "']").prop("checked", true);
+                            if (value == 'English40') { isEnglish40 = true; }
+                            if (value == 'Hindi40') { isHindi40 = true; }
+                            if (value == 'Marathi40') { isMarathi40 = true; }
+                        });
+                    }
+
+                    $.each(data, function (key, value) {
+                        if (value.courseid == 1) {
+                            feesEnglish30 = value.fee;
+                        }
+                        if (value.courseid == 2) {
+                            feesHindi30 = value.fee;
+                        }
+                        if (value.courseid == 3) {
+                            feesMarathi30 = value.fee;
+                        }
+                        if (value.courseid == 4) {
+                            feesEnglish40 = value.fee;
+                        }
+                        if (value.courseid == 5) {
+                            feesHindi40 = value.fee;
+                        }
+                        if (value.courseid == 6) {
+                            feesMarathi40 = value.fee;
+                        }
+                    });
+
+                    if (isEnglish30) { totalFees += feesEnglish30 }
+
+                    if (isHindi30) { totalFees += feesHindi30 }
+
+                    if (isMarathi30) { totalFees += feesMarathi30 }
+
+                    if (isEnglish40) { totalFees += feesEnglish40 }
+
+                    if (isHindi40) { totalFees += feesHindi40 }
+
+                    if (isMarathi40) { totalFees += feesMarathi40 }
+
+
+                    $("#TotalAmountDue").val(totalFees);
+                }
+            });
+        });
+
+        $("#chesction").hide();
+        $("#ddlPaymentMadeBy").change(function () {
+            var ddlPayment = $("#ddlPaymentMadeBy").val();
+            if (ddlPayment == 'Cheque') {
+                $("#chesction").show();
+            } else {
+                $("#chesction").hide();
+            }
+        });
+    });
+</script>

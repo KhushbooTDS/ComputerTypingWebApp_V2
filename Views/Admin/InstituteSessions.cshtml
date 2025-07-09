@@ -1,0 +1,57 @@
+﻿@model List<InstituteSessionsVM>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@*@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}*@
+
+@{
+    ViewData["Title"] = "InstituteSessions";
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+
+<input class="btn btn-primary" type="button" value="Add InstituteSessions" onclick="location.href='@Url.Action("AddInstituteSessions", "Admin", new{dashId = 4})'" />
+<hr />
+
+<div class="card">
+    <h5 class="card-header">InstituteSessions Report</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    StartSessions
+                </th>
+                <th>
+                    EndSessions
+                </th>
+                <th>
+                    Institute
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartSession) - @Html.DisplayFor(modelItem => item.startSessionYY)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndSession) - @Html.DisplayFor(modelItem => item.endSessionYY)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.instituteName)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

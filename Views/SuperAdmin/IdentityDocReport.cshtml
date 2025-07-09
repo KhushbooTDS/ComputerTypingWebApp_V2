@@ -1,0 +1,23 @@
+﻿@model List<IdentityDoc>
+
+@{
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+}
+<p class="h3">IdentityDoc Report</p>
+<input class="btn-info" type="button" value="Add IdentityDoc" onclick="location.href='@Url.Action("AddIdentityDoc","SuperAdmin")'" />
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            Document Name
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DocName)
+            </td>
+        </tr>
+    }
+</table>

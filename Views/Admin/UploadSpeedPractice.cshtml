@@ -1,0 +1,176 @@
+﻿@model List<SpeedPracticeVM>
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "UploadSpeedPractice";
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<style>
+    .textbox {
+        border-color: black;
+        background-color: white;
+        width: 40%;
+    }
+
+    .select {
+        border-color: black;
+        height: 40px;
+        width: 40%;
+    }
+</style>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="row col-lg-12">
+            <div class="form-group">
+                <h5 class="row col-12 card py-2" style="text-align: center;">
+                    Upload Speed Practice
+                </h5>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form method="post">
+                <div class="row align-items-center g-3">
+                    <div class="row">
+                        <div class="form-group">
+                            <input class="btn btn-primary btn-icon" style="width:300px;" type="button" value="Add Practice" onclick="location.href='@Url.Action("AddSpeedPractice", "Admin",new{dashId = 3})'" />
+                            <input class="btn btn-primary btn-icon" style="width:300px;" type="submit" value="Search" asp-action="SearchSpeedPractice" asp-controller="Admin" />
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="card p-3">
+                                <label>Course Name</label>
+                                @Html.DropDownList("Course",ViewBag.CourseList1,"-- Select Course--",new{ @class = "form-control"})
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="card p-3">
+                                <label>Subject Name</label>
+                                @Html.DropDownList("Subject",ViewBag.SubjectList1,"-- Select Subject--",new{ @class = "form-control"})
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="card p-3">
+                                <label>Date</label>
+                                <input type="date" name="uploadDate" class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+                @*<div class="row mt-4">
+                <div class="col-lg-12" style="text-align: center;">
+                <input type="submit" class="btn btn-primary w-100" asp-action="SearchSpeedPractice" asp-controller="Admin" value="Search" />
+                </div>
+                </div>*@
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <h5 class="card-header">Speed Practice List</h5>
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                        <table id="speedPracticeTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>SubjectName</th>
+                                    <th>SectionName</th>
+                                    <th>DateUploaded</th>
+                                    <th>FileName</th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem=>item.SubjectName)
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem=> item.SectionName)
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DateUploaded)
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem=>item.FileName)
+                                        </td>
+                                        <td>
+                                            <a onclick="DeleteSpeedPractice(@item.Id)" class="btn btn-danger btn-icon" style="width:100px;">
+                                                <i class="fa fa-trash"></i> Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function DeleteSpeedPractice(Id) {
+        if (confirm("Are you sure you want to delete this Speed Practice?")) {
+            $.ajax({
+                url: '/Admin/DeleteSpeedPractice',
+                type: 'POST',
+                data: { id: Id },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                        location.reload(true);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                    alert("An error occurred while deleting the Speed Practice.");
+                }
+            });
+        }
+    }
+</script>

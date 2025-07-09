@@ -1,0 +1,294 @@
+﻿@model StudentViewVM
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+}
+@{
+    ViewData["Title"] = "View Student";
+}
+
+<h1 class="page-title">View Student Details</h1>
+
+<div class="form-container">
+    <div class="row">
+        <div class="col-6">
+            <label>Last Name:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.LastName</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <label>First Name:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.FirstName</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <label>Father Name:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.FatherName</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Mother Name:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.MotherName</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Mobile No:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.MobileNumber</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Email:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.EmailId</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Gender:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Genders.Name</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Handicap:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Handicaps.HadicapName</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Permanent Address:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.PaermentAddress</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>School:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.School</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Education:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.Education</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Subjects (30 WPM):</label>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <label>
+                    <input type="checkbox" disabled @(ViewBag.SelectSub30wpm != null && ViewBag.SelectSub30wpm.Contains("English") ? "checked" : "") /> Hindi
+                </label>
+                <label>
+                    <input type="checkbox" disabled @(ViewBag.SelectSub30wpm != null && ViewBag.SelectSub30wpm.Contains("Hindi") ? "checked" : "") /> Hindi
+                </label>
+                <label>
+                    <input type="checkbox" disabled @(ViewBag.SelectSub30wpm != null && ViewBag.SelectSub30wpm.Contains("Marathi") ? "checked" : "") /> Marathi
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Subjects (40 WPM):</label>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <label>
+                    <input type="checkbox" disabled @(ViewBag.SelectSub40wpm != null && ViewBag.SelectSub40wpm.Contains("English") ? "checked" : "") /> English
+                </label>
+                <label>
+                    <input type="checkbox" disabled @(ViewBag.SelectSub40wpm != null && ViewBag.SelectSub40wpm.Contains("Hindi") ? "checked" : "") /> English
+                </label>
+                <label>
+                    <input type="checkbox" disabled @(ViewBag.SelectSub40wpm != null && ViewBag.SelectSub40wpm.Contains("Marathi") ? "checked" : "") /> Marathi
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <label>Photo Identity:</label>
+        </div>
+        <div class="col-6">
+            @if (!string.IsNullOrEmpty(Model.Students.PhotoIdentityURL))
+            {
+                <img src="~/uploads/@Model.Students.PhotoIdentityURL" alt="Student Identity Image" class="identity-image" />
+            }
+            else
+            {
+                <span>No image available</span>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Other Identity:</label>
+        </div>
+        <div class="col-6">
+            @if (!string.IsNullOrEmpty(Model.Students.OtherIdentityURL))
+            {
+                <img src="~/uploads/@Model.Students.OtherIdentityURL" alt="Student Identity Image" class="identity-image" />
+            }
+            else
+            {
+                <span>No image available</span>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <label>Identity No:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.IdentityNo</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Date of Birth:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.DOB</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Date Added:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.DateAdd</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Session:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.Session</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Student Username:</label>
+        </div>
+        <div class="col-6">
+            <span>@Model.Students.StudentUserName</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <label>Student Picture:</label>
+        </div>
+        <div class="col-6">
+            @if (!string.IsNullOrEmpty(Model.Students.StudentPicURL))
+            {
+                <img src="~/uploads/@Model.Students.StudentPicURL" alt="Student Picture" class="identity-image" />
+            }
+            else
+            {
+                <span>No image available</span>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Identity Picture:</label>
+        </div>
+        <div class="col-6">
+            @if (!string.IsNullOrEmpty(Model.Students.IdentityPicURL))
+            {
+                <img src="~/uploads/@Model.Students.IdentityPicURL" alt="Identity Picture" class="identity-image" />
+            }
+            else
+            {
+                <span>No image available</span>
+            }
+        </div>
+    </div>
+    <a href="@Url.Action("StudentReport", "Admin", new{dashId = CurrentDashboard })">Back To List</a>
+</div>
+<style>
+    .form-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+    .page-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+
+    input[type="checkbox"]:disabled {
+        cursor: not-allowed;
+    }
+
+    .form-group div {
+        display: flex;
+        gap: 10px;
+    }
+
+    .identity-image {
+        max-width: 100px;
+        max-height: 110px;
+    }
+</style>

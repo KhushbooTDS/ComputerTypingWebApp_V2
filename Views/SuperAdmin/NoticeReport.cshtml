@@ -1,0 +1,136 @@
+﻿@model List<NoticeReportVM>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    string CurrentDashboard = HttpContextAccessor.HttpContext.Request.Query["dashId"];
+    if (CurrentDashboard == "4")
+    {
+        Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+    }
+    else
+    {
+        if (CurrentDashboard == "3")
+        {
+            Layout = "~/Views/Shared/_AdminLayout.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+        }
+    }
+}
+@{
+    ViewData["Title"] = "NoticeReport";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script>
+
+    function DeleteNotices(id) {
+        // ajax call for deleting institute timings
+        if (confirm("Are you sure you want to delete this notice?")) {
+            $.ajax({
+                url: '@Url.Action("DeleteNotices", "SuperAdmin")',
+                type: 'POST',
+                data: { id: id },
+                success: function (response) {
+                    if (response.success) {
+                        alert("Notice deleted successfully.");
+                        location.reload(); // Reload the page to reflect changes
+                    } else {
+                        alert("Error deleting Notice: " + response.message);
+                    }
+                },
+                error: function () {
+                    alert("An error occurred while trying to delete the Notice.");
+                }
+            });
+        }
+    }
+
+
+</script>
+
+<input class="btn btn-info btn-icon" style="width:200px;" type="button" value="Add Notice" onclick="location.href='@Url.Action("AddNotice","SuperAdmin", new{dashId = 3})'" />
+<hr />
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Notice Report</h5>
+        <div class="card-body">
+            <div class="table-responsive text-nowrap">
+                <table id="tblData" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                UserName
+                            </th>
+                            <th>
+                                NoticeText
+                            </th>
+                            <th>
+                                CreatedAt
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NoticeText)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-icon" style="width:100px;" onclick="DeleteNotices(@item.Id)">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblData').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            //to select and search from grid
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    });
+</script>

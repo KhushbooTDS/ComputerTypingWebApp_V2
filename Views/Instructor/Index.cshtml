@@ -1,0 +1,107 @@
+﻿@{
+    Layout = "~/Views/Shared/_InstructorLayout.cshtml";
+}
+@*<div class="row quick-action-toolbar">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-header d-block d-md-flex">
+                <h5 class="mb-0">Notices</h5>
+            </div>
+            <div>
+                @ViewBag.Notice
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<!-- Quick Action Toolbar Starts-->
+<!--
+<div class="row quick-action-toolbar">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-header d-block d-md-flex">
+                <h5 class="mb-0">Quick Actions</h5>
+            </div>
+            <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
+                <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                    <a class="btn px-0" href="@Url.Action("StudentReport", "Admin", new{dashId = 4})"><i class="icon-user me-2"></i><span style="font-weight:bold;">@ViewBag.StudentsCount</span> Total Number of Registered Students </a>
+                </div>
+                <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
+                    <a class="btn px-0" href="@Url.Action("InstituteReport", "Admin", new{dashId = 4})"><i class="icon-user me-2"></i>Revenue(Installments Total)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<!-- Quick Action Toolbar Ends-->
+
+
+<div class="col-xxl-8 mb-6 order-0">
+    <div class="card">
+        <div class="d-flex align-items-start row">
+            <div class="col-sm-7">
+                <div class="card-body">
+                    <h5 class="card-title text-primary mb-3">Notices</h5>
+                    <p class="mb-6">
+                        @ViewBag.Notice
+                    </p>
+
+                </div>
+            </div>
+            <div class="col-sm-5 text-center text-sm-left">
+                <div class="card-body pb-0 px-0 px-md-6">
+                    <img src="../assets/img/illustrations/man-with-laptop.png"
+                         height="175"
+                         class="scaleX-n1-rtl"
+                         alt="View Badge User" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 col-xx1-4">
+        <div class="row">
+            <div class="col-sm-4 col-md-2 col-sm-4 mb-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                                <a class="btn p-0" href="@Url.Action("StudentReport", "Admin", new{dashId = 4})">
+                                    <img src="../assets/img/icons/unicons/chart-success.png"
+                                         alt="chart success"
+                                         class="rounded" />
+                                </a>
+                            </div>
+                        </div>
+                        <p class="mb-1">Total Number of Registered Students</p>
+                        <h4 class="card-title mb-3">@ViewBag.StudentCount</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-md-2 col-sm-4 mb-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                                <a class="btn p-0"
+                                    href="@Url.Action("InstituteReport", "Admin", new{dashId = 4})">
+                                    <img src="../assets/img/icons/unicons/cc-primary.png"
+                                         alt="chart success"
+                                         class="rounded" />
+                                </a>
+                            </div>
+                        </div>
+                        <p class="mb-1">Revenue(Installments Total)</p>
+                        @*<h4 class="card-title mb-3">$@ViewBag.Revenue</h4>*@
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+</div>
