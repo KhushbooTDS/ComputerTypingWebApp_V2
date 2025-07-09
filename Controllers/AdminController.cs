@@ -1255,8 +1255,64 @@ namespace ComputerTypingWebApp.Controllers
             receiptVM.TotalAmountDue = receipts.TotalAmountDue;
             receiptVM.BalanceAmountDue = receipts.BalanceAmountDue;
 
+            receiptVM.InstitutePhone = instituteDetail.ContactNo;
+            receiptVM.School = studentData.School;
+            receiptVM.Section = studentData.Education;
+            receiptVM.AmountInWords = NumberToWords(Convert.ToInt32(receipts.AmountPaid));
+
             return View("PaymentReceipt", receiptVM);
         }
+
+        public static string NumberToWords(int number)
+        {
+            if (number == 0)
+                return "zero";
+
+            if (number < 0)
+                return "minus " + NumberToWords(Math.Abs(number));
+
+            string words = "";
+
+            if ((number / 1000000) > 0)
+            {
+                words += NumberToWords(number / 1000000) + " million ";
+                number %= 1000000;
+            }
+
+            if ((number / 1000) > 0)
+            {
+                words += NumberToWords(number / 1000) + " thousand ";
+                number %= 1000;
+            }
+
+            if ((number / 100) > 0)
+            {
+                words += NumberToWords(number / 100) + " hundred ";
+                number %= 100;
+            }
+
+            if (number > 0)
+            {
+                if (words != "")
+                    words += "and ";
+
+                var unitsMap = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+                var tensMap = new[] { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+
+                if (number < 20)
+                    words += unitsMap[number];
+                else
+                {
+                    words += tensMap[number / 10];
+                    if ((number % 10) > 0)
+                        words += "-" + unitsMap[number % 10];
+                }
+            }
+
+            return words;
+        }
+
+
         public IActionResult ExportToExcelGR()
         {
             if (HttpContext.Session.GetString("UserName") == null || HttpContext.Session.GetString("UserName") == "")
@@ -1265,21 +1321,23 @@ namespace ComputerTypingWebApp.Controllers
             }
 
             int instituteId = 0;
+            string instituteName = string.Empty;
             if (HttpContext.Session.GetString("InstituteID") != null && HttpContext.Session.GetString("InstituteID") != "")
             {
                 instituteId = Convert.ToInt32(HttpContext.Session.GetString("InstituteID"));
+                instituteName = HttpContext.Session.GetString("InstituteName");
             }
 
-            var GRDetails = from s in myDbContext.Students
+            var GRDetails = (from s in myDbContext.Students
                             join e in myDbContext.EnrolledSubject
-                                on s.Id equals e.EnrolledSubjectId into seGroup
+                                 on s.StudentUserName equals e.UserName //into seGroup
                             join usr in myDbContext.Users
                                 on s.StudentUserName equals usr.Username
                             where usr.InstituteId == instituteId
-                            from e in seGroup.DefaultIfEmpty()
+                            //from e in seGroup.DefaultIfEmpty()
                             select new GRDetailsExport
                             {
-                                Id = s.Id,
+                                StudentID = s.Id,
                                 GeneralRegNo = e != null ? e.GRNumber : null,
                                 UID = s.UID,
                                 AddmissionDate = s.DateAdd,
@@ -1296,39 +1354,66 @@ namespace ComputerTypingWebApp.Controllers
                                 SchoolCollegeName = s.School,
                                 Remark = ""
 
-                            };
+                            }).ToList();
 
             using var wb = new XLWorkbook();
             var ws = wb.AddWorksheet();
 
             // Inserts the collection to Excel as a table with a header row.
-            ws.Cell("A2").InsertTable(GRDetails);
-            ws.Range("B1:I1").Merge();
-            ws.Range("B1:I1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-            ws.Range("B1:I1").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
-            ws.Cell(1, 2).Value = "Basic Information";
-            ws.Range("A1:A2").Merge();
-            ws.Range("A1:A2").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-            ws.Range("A1:A2").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
-            ws.Range("K1:L1").Merge();
-            ws.Range("K1:L1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-            ws.Range("K1:L1").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
-            ws.Cell(1, 11).Value = "Address";
-            ws.Range("P1:P2").Merge();
-            ws.Range("P1:P2").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-            ws.Range("P1:P2").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
-            ws.Cell(1, 1).Value = "Student ID";
-            ws.Cell(1, 16).Value = "Remarks";
-            ws.Columns("A:P").Width = 20; // Set width for columns A to C
-            ws.Rows("1").Height = 25;      // Set height for the first row
-            ws.Rows("2").Height = 25;      // Set height for the first row
-            ws.Column("1").Width = 50;
-            ws.Column("16").Width = 30;
+            ws.Cell("A4").InsertTable(GRDetails);
+            ws.Range("A4:P4").Style.Font.Bold = true;
+            ws.Range("A4:P4").Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+            ws.Range("A4:P4").Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Range("A4:P4").Style.Fill.BackgroundColor = XLColor.LightGray;
+            ws.Range("A4:P4").Style.Font.FontColor = XLColor.Black;
+            ws.Range("A1:P1").Merge();
+
             ws.Range("A1:P1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-            ws.Range("A2:P2").Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
             ws.Range("A1:P1").Style.Font.Bold = true;
+            ws.Cell(1, 1).Value = "जनरल रजिस्टर नमूना नंबर";
+            ws.Range("A2:P2").Merge();
+            ws.Range("A2:P2").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
             ws.Range("A2:P2").Style.Font.Bold = true;
-            // Adjust column size to contents.
+
+            ws.Cell(2, 1).Value = "Name of Institute : " + instituteName;
+
+            ws.Range("A3:I3").Merge();
+            ws.Range("A3:I3").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            ws.Range("A3:I3").Style.Font.Bold = true;
+            ws.Range("A3:I3").Style.Font.FontColor = XLColor.Black;
+            ws.Range("A3:I3").Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Range("A3:I3").Style.Fill.BackgroundColor = XLColor.LightGray;
+            ws.Cell(3, 1).Value = "Basic Information";
+
+            ws.Range("K3:L3").Merge();
+            ws.Range("K3:L3").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            ws.Range("K3:L3").Style.Font.Bold = true;
+            ws.Range("K3:L3").Style.Font.FontColor = XLColor.Black;
+            ws.Range("K3:L3").Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Range("K3:L3").Style.Fill.BackgroundColor = XLColor.LightGray;
+            ws.Cell(3, 11).Value = "Address";
+
+            ws.Cell(3, 10).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 10).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 12).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 12).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 13).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 13).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 14).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 14).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 15).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 15).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 16).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 16).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Range("J3:J4").Merge();
+            ws.Cell(3, 10).Value = "Cast";
+
             ws.Columns().AdjustToContents();
 
             // Save to local file system.
@@ -1844,6 +1929,10 @@ namespace ComputerTypingWebApp.Controllers
             receiptVM.TotalAmountDue = receiptDetails.TotalAmountDue;
             receiptVM.BalanceAmountDue = receiptDetails.BalanceAmountDue;
 
+            receiptVM.InstitutePhone = instituteDetail.ContactNo;
+            receiptVM.School = studentData.School;
+            receiptVM.Section = studentData.Education;
+            receiptVM.AmountInWords = NumberToWords(Convert.ToInt32(receiptDetails.AmountPaid));
 
             //return View(installmentDetailsVM);
             return View("PaymentReceipt", receiptVM);

@@ -11,5 +11,10 @@
         public decimal AmountPaid { get; set; }
         public decimal TotalAmountDue { get; set; }
         public decimal BalanceAmountDue { get; set; }
+        public string InstitutePhone { get; set; }
+        public string School { get; set; }
+        public string Section { get; set; }
+
+        public string AmountInWords { get; set; }
     }
 }

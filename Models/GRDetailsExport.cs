@@ -2,7 +2,7 @@
 {
     public class GRDetailsExport
     {
-        public int? Id { get; set; }
+        public int? StudentID { get; set; }
         public int? GeneralRegNo { get; set; }
         public string? UID { get; set; }
         public string? AddmissionDate { get; set; }

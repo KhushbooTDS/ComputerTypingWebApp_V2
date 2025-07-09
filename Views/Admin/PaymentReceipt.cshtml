@@ -5,6 +5,13 @@
 
 <!DOCTYPE html>
 
+<style>
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -13,102 +20,170 @@
 <body>
     <form>
 
-        <table border="1" style="width:50%; float:left; font-weight:bold; border-color:darkgrey">
-            <tr style="height:100px; text-align:center;">
-                <td colspan="2">
-                    @Model.InstituteName
-                    <br />
-                    @Model.InstituteAddress
-                </td>
-            </tr>
-            <tr style="height:70px; font-size:24px; text-align:center;">
-                <td colspan="2">FEES RECEIPT</td>
-            </tr>
-            <tr>
-                <td>Receipt No.</td>
-                <td>@Model.ReceiptNo &nbsp;&nbsp; Date: &nbsp;&nbsp; @Model.InstallmentDate</td>
-            </tr>
-            <tr>
-                <td>Student Name</td>
-                <td>@Model.StudentName</td>
-            </tr>
-            <tr>
-                <td>Father's Name</td>
-                <td>@Model.FatherName</td>
-            </tr>
-            <tr style="text-align:center;">
-                <td>Student's Fees Details</td>
-                <td>Amount</td>
-            </tr>
-            <tr style="text-align:center; height:20px;">
-                <td></td>
-                <td></td>
-            </tr>
-            <tr style="text-align:center; background-color:dimgrey;">
-                <td></td>
-                <td>@Model.AmountPaid</td>
-            </tr>
-            <tr style="text-align:center;">
-                <td>Total Fee</td>
-                <td>@Model.TotalAmountDue</td>
-            </tr>
-            <tr style="text-align:center;">
-                <td>Paid Fee</td>
-                <td>@Model.AmountPaid</td>
-            </tr>
-            <tr style="text-align:center;">
-                <td>Balance Fee</td>
-                <td>@Model.BalanceAmountDue</td>
-            </tr>
-        </table>
-        <table border="1" style="width:50%; float:right; font-weight:bold; border-color:darkgrey">
-            <tr style="height:100px; text-align:center;">
-                <td colspan="2">
-                    @Model.InstituteName
-                    <br />
-                    @Model.InstituteAddress
-                </td>
-            </tr>
-            <tr style="height:70px; font-size:24px; text-align:center;">
-                <td colspan="2">FEES RECEIPT</td>
-            </tr>
-            <tr>
-                <td>Receipt No.</td>
-                <td>@Model.ReceiptNo &nbsp;&nbsp; Date: &nbsp;&nbsp; @Model.InstallmentDate</td>
-            </tr>
-            <tr>
-                <td>Student Name</td>
-                <td>@Model.StudentName</td>
-            </tr>
-            <tr>
-                <td>Father's Name</td>
-                <td>@Model.FatherName</td>
-            </tr>
-            <tr style="text-align:center;">
-                <td>Student's Fees Details</td>
-                <td>Amount</td>
-            </tr>
-            <tr style="text-align:center; height:20px;">
-                <td></td>
-                <td></td>
-            </tr>
-            <tr style="text-align:center; background-color:dimgrey;">
-                <td></td>
-                <td>@Model.AmountPaid</td>
-            </tr>
-            <tr style="text-align:center;">
-                <td>Total Fee</td>
-                <td>@Model.TotalAmountDue</td>
-            </tr>
-            <tr style="text-align:center;">
-                <td>Paid Fee</td>
-                <td>@Model.AmountPaid</td>
-            </tr>
-            <tr style="text-align:center;">
-                <td>Balance Fee</td>
-                <td>@Model.BalanceAmountDue</td>
-            </tr>
-        </table>
+        <div style="width:49%; float:left; border:ridge;">
+            <table style="font-weight:bold; width: 100%;">
+                <tr style="height:80px; text-align:center;">
+                    <td style="text-align:center;">
+                        <span style="font-size: 25px;"> @Model.InstituteName </span>
+                        <br />
+                        @Model.InstituteAddress
+                        <br />
+                        Ph.: @Model.InstitutePhone
+                    </td>
+                </tr>
+                <tr style="height:50px; font-size:24px; text-align:center;">
+                    <td style="text-align:center; border:outset;">
+                        <div> FEES RECEIPT </div>
+                    </td>
+                </tr>
+            </table>
+            <table border="1" style="font-weight:bold; width: 100%;">
+                <tr>
+                    <td>Receipt No</td>
+                    <td colspan="2">@Model.ReceiptNo &nbsp;&nbsp;&nbsp;&nbsp; Date: @Model.InstallmentDate.ToString("dd-MM-yyyy")</td>
+                </tr>
+                <tr>
+                    <td>
+                        Regn. No.
+                        <br /><br />
+                        Student name
+                        <br /><br />
+                        Father's Name'
+                    </td>
+                    <td colspan="2">
+                        @Model.ReceiptNo
+                        <br /><br />
+                        @Model.StudentName
+                        <br /><br />
+                        @Model.FatherName
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Class/Standard</td>
+                    <td>@Model.Section</td>
+                    <td>School : @Model.School</td>
+                </tr>
+                <tr>
+                    <td>
+                        Student's Fees Details
+                    </td>
+                    <td colspan="2">
+                        Amount
+                    </td>
+                </tr>
+                <tr style="height:40px">
+                    <td>
+                    </td>
+                    <td colspan="2">
+                    </td>
+                </tr>
+
+                <tr style="text-align:center; background-color: lightgrey;">
+                    <td></td>
+                    <td colspan="2">@Model.AmountPaid</td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td>Total Fee</td>
+                    <td colspan="2">@Model.TotalAmountDue</td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td>Paid Fee</td>
+                    <td colspan="2">@Model.AmountPaid</td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td>Balance Fee</td>
+                    <td colspan="2">@Model.BalanceAmountDue</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        Rupees @Model.AmountInWords.ToUpper() Only
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="width:49%; float:right; border:ridge;">
+            <table style="font-weight:bold; width: 100%;">
+                <tr style="height:80px; text-align:center;">
+                    <td style="text-align:center;">
+                        <span style="font-size: 25px;"> @Model.InstituteName </span>
+                        <br />
+                        @Model.InstituteAddress
+                        <br />
+                        Ph.: @Model.InstitutePhone
+                    </td>
+                </tr>
+                <tr style="height:50px; font-size:24px; text-align:center;">
+                    <td style="text-align:center; border:outset;">
+                        <div> FEES RECEIPT </div>
+                    </td>
+                </tr>
+            </table>
+            <table border="1" style="font-weight:bold; width: 100%;">
+                <tr>
+                    <td>Receipt No</td>
+                    <td colspan="2">@Model.ReceiptNo &nbsp;&nbsp;&nbsp;&nbsp; Date: @Model.InstallmentDate.ToString("dd-MM-yyyy")</td>
+                </tr>
+                <tr>
+                    <td>
+                        Regn. No.
+                        <br /><br />
+                        Student name
+                        <br /><br />
+                        Father's Name'
+                    </td>
+                    <td colspan="2">
+                        @Model.ReceiptNo
+                        <br /><br />
+                        @Model.StudentName
+                        <br /><br />
+                        @Model.FatherName
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Class/Standard</td>
+                    <td>@Model.Section</td>
+                    <td>School : @Model.School</td>
+                </tr>
+                <tr>
+                    <td>
+                        Student's Fees Details
+                    </td>
+                    <td colspan="2">
+                        Amount
+                    </td>
+                </tr>
+                <tr style="height:40px">
+                    <td>
+                    </td>
+                    <td colspan="2">
+                    </td>
+                </tr>
+                <tr style="text-align:center; background-color: lightgrey;">
+                    <td></td>
+                    <td colspan="2">@Model.AmountPaid</td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td>Total Fee</td>
+                    <td colspan="2">@Model.TotalAmountDue</td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td>Paid Fee</td>
+                    <td colspan="2">@Model.AmountPaid</td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td>Balance Fee</td>
+                    <td colspan="2">@Model.BalanceAmountDue</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        Rupees @Model.AmountInWords.ToUpper() Only
+                    </td>
+                </tr>
+            </table>
+        </div>
 
     </form>
 </body>
