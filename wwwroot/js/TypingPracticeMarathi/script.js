@@ -20,6 +20,8 @@ $(document).ready(function () {
         console.log("Key Code: " + event.keyCode);
         console.log("Key Pressed: " + event.key);
 
+        console.log($('.key-label').text());
+
         $(`.key-${event.keyCode}`).animate();
         if (event.keyCode == 20) {
             if (isCapsLockOn == 0) {
