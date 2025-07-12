@@ -13,25 +13,36 @@
     <div class="" id="typingParagraphHolder">
         <audio id="error" src="~/sound/typingpracticechapter/error.mp3" preload="auto" type="audio/mpeg" hidden></audio>
         <audio id="keypress" src="~/sound/typingpracticechapter/keypress.mp3" preload="auto" type="audio/mpeg" hidden></audio>
-        <div class="typingParagraph m-2">
+        <div class="typingParagraph m-2" style="height:220px; overflow-y:scroll; overflow-x:hidden; word-spacing:-5px;">
             @if (Model.PracticeData != null)
             {
                 var incr = 1;
-                foreach (char item in Model.PracticeData)
+                @*foreach (char item in Model.PracticeData)
+            {
+            if (item == ' ')
+            {
+            <span class="px-2 ch c-@incr marathi">@item</span>
+            }
+            else if (item == '"')
+            {
+            <span class="px-1 ch c-@incr marathi">"</span>
+            }
+            else
+            {
+            <span class="ch c-@incr marathi">@item</span>
+            }
+            incr++;
+            }*@
+
+                var str = Model.PracticeData;
+                var enumerator = System.Globalization.StringInfo.GetTextElementEnumerator(str);
+                while (enumerator.MoveNext())
                 {
-                    if (item == ' ')
-                    {
-                        <span class="px-2 ch c-@incr marathi">@item</span>
-                    }
-                    else if (item == '"')
-                    {
-                        <span class="px-1 ch c-@incr marathi">"</span>
-                    }
-                    else
-                    {
-                        <span class="ch c-@incr marathi">@item</span>
-                    }
+
+                    <span class="ch c-@incr marathi">@enumerator.Current</span>
+
                     incr++;
+
                 }
             }
         </div>
@@ -98,7 +109,7 @@
                         <div class="key-label marathi">=</div>
                     </div>
                     <div class="keyboard-key key key--a key-8 key--twoWords key--special key--special-r right"
-                        style="flex-basis:74px">
+                         style="flex-basis:74px">
                         <div class="key-label">
                             <span class="key-label--0">Delete</span><span class="key-label--1">⌫</span>
                         </div>
@@ -106,7 +117,7 @@
                 </div>
                 <div class="keyboard-row">
                     <div class="keyboard-key key key--a key-9 key--twoWords key--special key--special-l left"
-                        style="flex-basis:68px">
+                         style="flex-basis:68px">
                         <div class="key-label">
                             <span class="key-label--0">Tab</span><span class="key-label--1">↹</span>
                         </div>
@@ -166,10 +177,9 @@
                 </div>
                 <div class="keyboard-row">
                     <div class="keyboard-key key key--a key-20 key--twoWords key--special key--special-l left"
-                        style="flex-basis:83px">
+                         style="flex-basis:83px">
                         <div class="key-label">
-                            <span class="key-label--0">Caps</span><span class="key-label--1">Lock</span><span
-                                class="key-label--2">⇪</span>
+                            <span class="key-label--0">Caps</span><span class="key-label--1">Lock</span><span class="key-label--2">⇪</span>
                         </div>
                     </div>
                     <div class="keyboard-key key key--a key-97 key--rspnsv">
@@ -217,7 +227,7 @@
                         <div class="key-label marathi">'</div>
                     </div>
                     <div class="keyboard-key key key--a key-13 key--twoWords key--special key--special-r right"
-                        style="flex-basis:83px">
+                         style="flex-basis:83px">
                         <div class="key-label">
                             <span class="key-label--0">Enter</span><span class="key-label--1">⏎</span>
                         </div>
@@ -225,7 +235,7 @@
                 </div>
                 <div class="keyboard-row">
                     <div class="keyboard-key key key--a key-16 key--twoWords key--special key--special-l left"
-                        style="flex-basis:108px">
+                         style="flex-basis:108px">
 
                         <div class="key-label">
                             <span class="key-label--0">Shift</span><span class="key-label--1">⇧</span>
@@ -272,7 +282,7 @@
                         <div class="key-label marathi">/</div>
                     </div>
                     <div class="keyboard-key key key--a key-16 key--twoWords key--special key--special-r right"
-                        style="flex-basis:108px">
+                         style="flex-basis:108px">
                         <div class="key-label">
                             <span class="key-label--0">⇧</span><span class="key-label--1">Shift</span>
                         </div>
@@ -280,43 +290,43 @@
                 </div>
                 <div class="keyboard-row">
                     <div class="keyboard-key key key--a key-17 key--oneWords key--special key--rspnsv key--special-l left"
-                        style="flex-basis:50px">
+                         style="flex-basis:50px">
                         <div class="key-label">
                             Ctrl
                         </div>
                     </div>
                     <div class="keyboard-key key key--a key-18 key--oneWords key--special key--rspnsv key--special-l left"
-                        style="flex-basis:50px">
+                         style="flex-basis:50px">
                         <div class="key-label">
                             Alt
                         </div>
                     </div>
                     <div class="keyboard-key key key--a key-157 key--oneWords key--special key--special-l left"
-                        style="flex-basis:70px">
+                         style="flex-basis:70px">
                         <div class="key-label">
                             Cmd
                         </div>
                     </div>
                     <div class="keyboard-key key key--a key-32 key--twoWords key--special key--special-l left"
-                        style="flex-basis:336px">
+                         style="flex-basis:336px">
                         <div class="key-label">
                             <span class="key-label--0"></span><span class="key-label--1"></span>
                         </div>
                     </div>
                     <div class="keyboard-key key key--a key-157 key--oneWords key--special key--special-r right"
-                        style="flex-basis:70px">
+                         style="flex-basis:70px">
                         <div class="key-label">
                             Cmd
                         </div>
                     </div>
                     <div class="keyboard-key key key--a key-18 key--oneWords key--special key--rspnsv key--special-r right"
-                        style="flex-basis:50px">
+                         style="flex-basis:50px">
                         <div class="key-label">
                             Alt
                         </div>
                     </div>
                     <div class="keyboard-key key key--a key-17 key--oneWords key--special key--rspnsv key--special-r right"
-                        style="flex-basis:50px">
+                         style="flex-basis:50px">
                         <div class="key-label">
                             Ctrl
                         </div>

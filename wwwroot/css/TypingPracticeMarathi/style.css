@@ -105,9 +105,8 @@ body {
 }
 
 .ch {
-    font-size: 18px;
-    font-weight: bold;
-    padding: 2px;
+    font-size: 16px;
+    padding: 1px;
 }
 @font-face {
     font-family: 'DV-TTSurekh';
