@@ -554,5 +554,38 @@ namespace ComputerTypingWebApp.Controllers
             string fullPath = Path.Combine(path, fileName);
             return File(System.IO.File.ReadAllBytes(fullPath), System.Net.Mime.MediaTypeNames.Application.Octet, System.IO.Path.GetFileName(fullPath));
         }
+
+        public IActionResult TypingPracticeMarathiV2(int practiceId, int subjectId, int courseId = 1)
+        {
+            try
+            {
+                if (HttpContext.Session.GetString("UserName") == null || HttpContext.Session.GetString("UserName") == "")
+                {
+                    return RedirectToAction("Index", "Login");
+                }
+                var courseName = myDbContext.CoursesUpload
+                    .Where(e => e.PracticeId == practiceId && e.CourseId == courseId && e.SubjectId == subjectId)
+                    .Select(e => new { e.SubjectId, e.PracticeData })
+                    .FirstOrDefault();
+
+                if (courseName == null)
+                {
+                    return NotFound("No data found for the given parameters.");
+                }
+                ViewBag.SubjectId = courseName.SubjectId;
+                var data = new CoursesUpload()
+                {
+                    PracticeData = courseName.PracticeData,
+                    SubjectId = courseName.SubjectId,
+                    PracticeId = practiceId
+                };
+
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

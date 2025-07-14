@@ -1,4 +1,4 @@
-let isCapsLockOn = 0;
+﻿let isCapsLockOn = 0;
 let paragraphLength = 0;
 let currentChar = "";
 let currentCharkeyCode = 0;
@@ -19,8 +19,6 @@ $(document).ready(function () {
         }
         console.log("Key Code: " + event.keyCode);
         console.log("Key Pressed: " + event.key);
-
-        console.log($('.key-label').text());
 
         $(`.key-${event.keyCode}`).animate();
         if (event.keyCode == 20) {
@@ -68,19 +66,37 @@ function StartTyping(key, code) {
 function Check(code) {
     paragraphLength = $(".ch").length;
     console.log(code);
+
+    var marathiKeys = {};
+    marathiKeys[101] = "क"; // E
+
+
     if (paragraphLength >= currentCharPosition) {
         currentChar = $(`.c-${currentCharPosition}`)
             .html()
             .replace(/&nbsp;/g, " ").replace(/&gt;/g, ">").replace(/&lt;/g, "<");;
         currentCharkeyCode = charToKeycode(currentChar);
         console.log(currentCharkeyCode + " === " + code);
-        if (currentCharkeyCode === code) {
+        //if (currentCharkeyCode === code) {
+        //    keyPressAudio.currentTime = 0;
+        //    keyPressAudio.play();
+        //    DeactiveKey();
+        //    currentCharPosition++;
+        //    ActiveKey();
+        //} else {
+        //    errorAudio.currentTime = 0;
+        //    errorAudio.play();
+        //    $(`.c-${currentCharPosition}`).addClass("text-error");
+        //}
+
+        if (jQuery.inArray(code, marathiKeys) == -1) {
             keyPressAudio.currentTime = 0;
             keyPressAudio.play();
             DeactiveKey();
             currentCharPosition++;
             ActiveKey();
-        } else {
+        }
+        else {
             errorAudio.currentTime = 0;
             errorAudio.play();
             $(`.c-${currentCharPosition}`).addClass("text-error");
