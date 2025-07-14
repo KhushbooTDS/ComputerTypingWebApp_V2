@@ -1563,6 +1563,7 @@ namespace ComputerTypingWebApp.Controllers
                         DateTime date = new DateTime(Convert.ToDateTime(fromDate).Year, Convert.ToDateTime(fromDate).Month, i);
                         var outTime = myDbContext.UserLogins.Where(x => x.UserId == st.Id
                         && (x.LogOut.Date.Day == date.Day && x.LogOut.Date.Month == date.Month && x.LogOut.Date.Year == date.Year))
+                            .OrderByDescending(x => x)
                             .Select(x => x.LogOut.ToShortTimeString()).FirstOrDefault();
 
                         worksheet.Cells[row, col4, row, col4].Value = outTime;
@@ -1586,6 +1587,7 @@ namespace ComputerTypingWebApp.Controllers
 
                         var outTime = myDbContext.UserLogins.Where(x => x.UserId == st.Id
                         && (x.LogOut.Date.Day == date.Day && x.LogOut.Date.Month == date.Month && x.LogOut.Date.Year == date.Year))
+                            .OrderByDescending(x => x)
                             .Select(x => x.LogOut.ToShortTimeString()).FirstOrDefault();
 
                         var work = outTime != null && inTime != null ? Convert.ToDateTime(outTime).Subtract(Convert.ToDateTime(inTime)).TotalMinutes : 0;
