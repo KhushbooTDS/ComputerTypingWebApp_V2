@@ -2326,7 +2326,7 @@ namespace ComputerTypingWebApp.Controllers
 
             List<SpeedPracticeVM> speedPracticeList = new List<SpeedPracticeVM>();
 
-            if (uploadDate != "" || uploadDate != null)
+            if (uploadDate != "" && uploadDate != null && uploadDate != " ")
             {
                 DateTime dtUploadDateFormat = Convert.ToDateTime(uploadDate);
 
