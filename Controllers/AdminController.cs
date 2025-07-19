@@ -2337,6 +2337,7 @@ namespace ComputerTypingWebApp.Controllers
                                      && (string.IsNullOrEmpty(course) || sp.CourseId.ToString() == course)
                                      && (string.IsNullOrEmpty(subject) || sp.SubjectId.ToString() == subject)
                                      && (sp.DateUploaded.Date == dtUploadDateFormat.Date)
+                                     where sp.IsDeleted == false
                                      select new SpeedPracticeVM
                                      {
                                          Id = sp.Id,
@@ -2354,6 +2355,7 @@ namespace ComputerTypingWebApp.Controllers
                                      where sp.InstituteId == instituteId
                                      && (string.IsNullOrEmpty(course) || sp.CourseId.ToString() == course)
                                      && (string.IsNullOrEmpty(subject) || sp.SubjectId.ToString() == subject)
+                                     where sp.IsDeleted == false
                                      select new SpeedPracticeVM
                                      {
                                          Id = sp.Id,
