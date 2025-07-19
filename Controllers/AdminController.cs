@@ -1334,11 +1334,12 @@ namespace ComputerTypingWebApp.Controllers
                              join usr in myDbContext.Users
                                  on s.StudentUserName equals usr.Username
                              where usr.InstituteId == instituteId
+                             && usr.IsActive == true && s.IsDeleted == false
                              //from e in seGroup.DefaultIfEmpty()
                              select new GRDetailsExport
                              {
                                  StudentID = s.Id,
-                                 GeneralRegNo = e != null ? e.GRNumber : null,
+                                 GeneralRegNo = e != null ? e.GRNumber.ToString() : null,
                                  UID = s.UID,
                                  AddmissionDate = s.DateAdd,
                                  Subject = e.SubjectName,
@@ -1355,6 +1356,128 @@ namespace ComputerTypingWebApp.Controllers
                                  Remark = ""
 
                              }).ToList();
+
+            using var wb = new XLWorkbook();
+            var ws = wb.AddWorksheet();
+
+            // Inserts the collection to Excel as a table with a header row.
+            ws.Cell("A4").InsertTable(GRDetails);
+            ws.Range("A4:P4").Style.Font.Bold = true;
+            ws.Range("A4:P4").Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+            ws.Range("A4:P4").Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Range("A4:P4").Style.Fill.BackgroundColor = XLColor.LightGray;
+            ws.Range("A4:P4").Style.Font.FontColor = XLColor.Black;
+            ws.Range("A1:P1").Merge();
+
+            ws.Range("A1:P1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            ws.Range("A1:P1").Style.Font.Bold = true;
+            ws.Cell(1, 1).Value = "जनरल रजिस्टर नमूना नंबर";
+            ws.Range("A2:P2").Merge();
+            ws.Range("A2:P2").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            ws.Range("A2:P2").Style.Font.Bold = true;
+
+            ws.Cell(2, 1).Value = "Name of Institute : " + instituteName;
+
+            ws.Range("A3:I3").Merge();
+            ws.Range("A3:I3").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            ws.Range("A3:I3").Style.Font.Bold = true;
+            ws.Range("A3:I3").Style.Font.FontColor = XLColor.Black;
+            ws.Range("A3:I3").Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Range("A3:I3").Style.Fill.BackgroundColor = XLColor.LightGray;
+            ws.Cell(3, 1).Value = "Basic Information";
+
+            ws.Range("K3:L3").Merge();
+            ws.Range("K3:L3").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+            ws.Range("K3:L3").Style.Font.Bold = true;
+            ws.Range("K3:L3").Style.Font.FontColor = XLColor.Black;
+            ws.Range("K3:L3").Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Range("K3:L3").Style.Fill.BackgroundColor = XLColor.LightGray;
+            ws.Cell(3, 11).Value = "Address";
+
+            ws.Cell(3, 10).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 10).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 12).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 12).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 13).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 13).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 14).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 14).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 15).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 15).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Cell(3, 16).Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+            ws.Cell(3, 16).Style.Fill.BackgroundColor = XLColor.LightGray;
+
+            ws.Range("J3:J4").Merge();
+            ws.Cell(3, 10).Value = "Cast";
+
+            ws.Columns().AdjustToContents();
+
+            // Save to local file system.
+            var filename = $"Export - {DateTime.UtcNow:yyyyMMddHHmmss}.xlsx";
+
+            using var stream = new MemoryStream();
+            wb.SaveAs(stream);
+            var content = stream.ToArray();
+            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            return File(content, contentType, filename);
+        }
+
+        public IActionResult GRStudentWise()
+        {
+            if (HttpContext.Session.GetString("UserName") == null || HttpContext.Session.GetString("UserName") == "")
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            int instituteId = 0;
+            string instituteName = string.Empty;
+            if (HttpContext.Session.GetString("InstituteID") != null && HttpContext.Session.GetString("InstituteID") != "")
+            {
+                instituteId = Convert.ToInt32(HttpContext.Session.GetString("InstituteID"));
+                instituteName = HttpContext.Session.GetString("InstituteName");
+            }
+
+            var GRDetails = (from s in myDbContext.Students
+                             join usr in myDbContext.Users
+                                 on s.StudentUserName equals usr.Username
+                             where usr.InstituteId == instituteId && usr.IsActive == true && s.IsDeleted == false
+                             select new GRDetailsExport
+                             {
+                                 StudentID = s.Id,
+                                 UID = s.UID,
+                                 AddmissionDate = s.DateAdd,
+                                 Subject = s.SelectSub30wpm + "," + s.SelectSub40wpm,
+                                 FirstName = s.FirstName,
+                                 FatherName = s.FatherName,
+                                 Surname = s.LastName,
+                                 MotherName = s.MotherName,
+                                 Cast = s.Cast,
+                                 CityVillage = s.PaermentAddress,
+                                 TalukaDistrict = "",
+                                 DateOfBirth = s.DOB,
+                                 Education = s.Education,
+                                 SchoolCollegeName = s.School,
+                                 Remark = ""
+
+                             }).ToList();
+
+            foreach(var item in GRDetails)
+            {
+                var studentUsername = myDbContext.Students
+                    .Where(s => s.Id == item.StudentID)
+                    .Select(s => s.StudentUserName)
+                    .FirstOrDefault();
+
+                var details = string.Join(",", myDbContext.EnrolledSubject.Where(x => x.UserName == studentUsername).Select(x => x.GRNumber.ToString()));
+                item.GeneralRegNo = details;
+                
+            }
+
 
             using var wb = new XLWorkbook();
             var ws = wb.AddWorksheet();
