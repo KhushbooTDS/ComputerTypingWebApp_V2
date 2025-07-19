@@ -975,7 +975,7 @@ namespace ComputerTypingWebApp.Controllers
 
             var inst = new Instructor()
             {
-               
+
                 LastName = instructor.LastName,
                 InstructorFirstName = instructor.InstructorFirstName,
                 FatherName = instructor.FatherName,
@@ -996,7 +996,7 @@ namespace ComputerTypingWebApp.Controllers
 
             AddInstructorLogin(instructor.InstructorUserName, instructor.InstructorPassword, instructor.Email);
             //duplicate validation
-            if (myDbContext.Instructor.Any(x => x.InstructorUserName == inst.InstructorUserName && x.InstituteId == inst.InstituteId && x.InstructorFirstName== inst.InstructorFirstName && x.MobileNo==inst.MobileNo))
+            if (myDbContext.Instructor.Any(x => x.InstructorUserName == inst.InstructorUserName && x.InstituteId == inst.InstituteId && x.InstructorFirstName == inst.InstructorFirstName && x.MobileNo == inst.MobileNo))
             {
                 TempData["ErrorMessage"] = "Instructor already exists!";
                 return RedirectToAction("AddInstructor");
@@ -1329,32 +1329,32 @@ namespace ComputerTypingWebApp.Controllers
             }
 
             var GRDetails = (from s in myDbContext.Students
-                            join e in myDbContext.EnrolledSubject
-                                 on s.StudentUserName equals e.UserName //into seGroup
-                            join usr in myDbContext.Users
-                                on s.StudentUserName equals usr.Username
-                            where usr.InstituteId == instituteId
-                            //from e in seGroup.DefaultIfEmpty()
-                            select new GRDetailsExport
-                            {
-                                StudentID = s.Id,
-                                GeneralRegNo = e != null ? e.GRNumber : null,
-                                UID = s.UID,
-                                AddmissionDate = s.DateAdd,
-                                Subject = e.SubjectName,
-                                FirstName = s.FirstName,
-                                FatherName = s.FatherName,
-                                Surname = s.LastName,
-                                MotherName = s.MotherName,
-                                Cast = s.Cast,
-                                CityVillage = s.PaermentAddress,
-                                TalukaDistrict = "",
-                                DateOfBirth = s.DOB,
-                                Education = s.Education,
-                                SchoolCollegeName = s.School,
-                                Remark = ""
+                             join e in myDbContext.EnrolledSubject
+                                  on s.StudentUserName equals e.UserName //into seGroup
+                             join usr in myDbContext.Users
+                                 on s.StudentUserName equals usr.Username
+                             where usr.InstituteId == instituteId
+                             //from e in seGroup.DefaultIfEmpty()
+                             select new GRDetailsExport
+                             {
+                                 StudentID = s.Id,
+                                 GeneralRegNo = e != null ? e.GRNumber : null,
+                                 UID = s.UID,
+                                 AddmissionDate = s.DateAdd,
+                                 Subject = e.SubjectName,
+                                 FirstName = s.FirstName,
+                                 FatherName = s.FatherName,
+                                 Surname = s.LastName,
+                                 MotherName = s.MotherName,
+                                 Cast = s.Cast,
+                                 CityVillage = s.PaermentAddress,
+                                 TalukaDistrict = "",
+                                 DateOfBirth = s.DOB,
+                                 Education = s.Education,
+                                 SchoolCollegeName = s.School,
+                                 Remark = ""
 
-                            }).ToList();
+                             }).ToList();
 
             using var wb = new XLWorkbook();
             var ws = wb.AddWorksheet();
@@ -2331,37 +2331,37 @@ namespace ComputerTypingWebApp.Controllers
                 DateTime dtUploadDateFormat = Convert.ToDateTime(uploadDate);
 
                 speedPracticeList = (from sp in myDbContext.speedPracticeUpload
-                                         join sb in myDbContext.Subject on sp.SubjectId equals sb.Id
-                                         join s in myDbContext.section on sp.sectionid equals s.Id
-                                         where sp.InstituteId == instituteId
-                                         && (string.IsNullOrEmpty(course) || sp.CourseId.ToString() == course)
-                                         && (string.IsNullOrEmpty(subject) || sp.SubjectId.ToString() == subject)
-                                         && (sp.DateUploaded.Date == dtUploadDateFormat.Date)
+                                     join sb in myDbContext.Subject on sp.SubjectId equals sb.Id
+                                     join s in myDbContext.section on sp.sectionid equals s.Id
+                                     where sp.InstituteId == instituteId
+                                     && (string.IsNullOrEmpty(course) || sp.CourseId.ToString() == course)
+                                     && (string.IsNullOrEmpty(subject) || sp.SubjectId.ToString() == subject)
+                                     && (sp.DateUploaded.Date == dtUploadDateFormat.Date)
                                      select new SpeedPracticeVM
-                                         {
-                                             Id = sp.Id,
-                                             SubjectName = sb.SubjectName,
-                                             SectionName = s.SectionName,
-                                             DateUploaded = sp.DateUploaded,
-                                             FileName = sp.FileName
-                                         }).ToList();
+                                     {
+                                         Id = sp.Id,
+                                         SubjectName = sb.SubjectName,
+                                         SectionName = s.SectionName,
+                                         DateUploaded = sp.DateUploaded,
+                                         FileName = sp.FileName
+                                     }).ToList();
             }
             else
             {
                 speedPracticeList = (from sp in myDbContext.speedPracticeUpload
-                                         join sb in myDbContext.Subject on sp.SubjectId equals sb.Id
-                                         join s in myDbContext.section on sp.sectionid equals s.Id
-                                         where sp.InstituteId == instituteId
-                                         && (string.IsNullOrEmpty(course) || sp.CourseId.ToString() == course)
-                                         && (string.IsNullOrEmpty(subject) || sp.SubjectId.ToString() == subject)
-                                         select new SpeedPracticeVM
-                                         {
-                                             Id = sp.Id,
-                                             SubjectName = sb.SubjectName,
-                                             SectionName = s.SectionName,
-                                             DateUploaded = sp.DateUploaded,
-                                             FileName = sp.FileName
-                                         }).ToList();
+                                     join sb in myDbContext.Subject on sp.SubjectId equals sb.Id
+                                     join s in myDbContext.section on sp.sectionid equals s.Id
+                                     where sp.InstituteId == instituteId
+                                     && (string.IsNullOrEmpty(course) || sp.CourseId.ToString() == course)
+                                     && (string.IsNullOrEmpty(subject) || sp.SubjectId.ToString() == subject)
+                                     select new SpeedPracticeVM
+                                     {
+                                         Id = sp.Id,
+                                         SubjectName = sb.SubjectName,
+                                         SectionName = s.SectionName,
+                                         DateUploaded = sp.DateUploaded,
+                                         FileName = sp.FileName
+                                     }).ToList();
             }
 
             var CourseList1 = myDbContext.Course
@@ -2788,10 +2788,15 @@ namespace ComputerTypingWebApp.Controllers
                 .Select(x => x.SectionName)
                 .FirstOrDefault();
 
-            var uploadDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Courses");
-            var sampleFileFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFile\\Passage\\Samplefile.docx");
-            var sampleExcelFileFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFile\\Statement\\SampleExcel.xlsx");
-            var samplePowerpointFileFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFile\\Powerpoint\\Samplefile.pptx");
+            //var uploadDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Courses");
+            //var sampleFileFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFile\\Passage\\Samplefile.docx");
+            //var sampleExcelFileFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFile\\Statement\\SampleExcel.xlsx");
+            //var samplePowerpointFileFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFile\\Powerpoint\\Samplefile.pptx");
+
+            var uploadDirectory = Path.Combine("C:\\", "CourseUpload", "Courses");
+            var sampleFileFolder = Path.Combine("C:\\", "CourseUpload","SampleFile\\Passage\\Samplefile.docx");
+            var sampleExcelFileFolder = Path.Combine("C:\\", "CourseUpload", "SampleFile\\Statement\\SampleExcel.xlsx");
+            var samplePowerpointFileFolder = Path.Combine("C:\\", "CourseUpload", "SampleFile\\Powerpoint\\Samplefile.pptx");
 
             string newPath = Path.Combine(uploadDirectory, sectionName);
             string institutePath = Path.Combine(newPath, instituteId.ToString());
@@ -2851,7 +2856,7 @@ namespace ComputerTypingWebApp.Controllers
             // Save the uploaded file
             if (file != null && file.Length > 0)
             {
-                string lastFileToken = myDbContext.speedPracticeUpload.Where(x => x.SubjectId == SubjectId && x.sectionid == sectionId && x.InstituteId == instituteId && x.CourseId == courseId).Select(x => x.FilToken).Take(1).OrderByDescending(x => x).FirstOrDefault();
+                string lastFileToken = myDbContext.speedPracticeUpload.Where(x => x.SubjectId == SubjectId && x.sectionid == sectionId && x.InstituteId == instituteId && x.CourseId == courseId).Select(x => x.FilToken).OrderByDescending(x => x).FirstOrDefault();
                 int sectionOrder = 1;
 
                 if (!string.IsNullOrEmpty(lastFileToken))
@@ -2927,24 +2932,26 @@ namespace ComputerTypingWebApp.Controllers
                 //    }
                 //}
 
-                if (fileName.Contains("Answer"))
+                //if (fileName.Contains("Answer"))
+                //{
+                answerFileName = sectionName + "_" + sectionOrder + "Answer" + Path.GetExtension(fileName);
+                string destinationAnswerFilePath = Path.Combine(subjectPath, answerFileName);
+                using (var stream = new FileStream(destinationAnswerFilePath, FileMode.Create))
                 {
-                    answerFileName = sectionName + "_" + sectionOrder + "Answer" + Path.GetExtension(fileName);
-                    string destinationAnswerFilePath = Path.Combine(subjectPath, answerFileName);
-                    using (var stream = new FileStream(destinationAnswerFilePath, FileMode.Create))
-                    {
-                        var sampleFileStream = new FileStream(destinationSamplePath, FileMode.Open);
-                        sampleFileStream.CopyTo(stream);
-                    }
-
-                    // Save Use File
-                    string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
-                    string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
-                    using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
+                    var sampleFileStream = new FileStream(destinationSamplePath, FileMode.Open);
+                    sampleFileStream.CopyTo(stream);
+                    sampleFileStream.Close();
                 }
+
+                // Save Use File
+                string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
+                string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
+                using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                    stream.Close();
+                }
+                //}
 
                 speedPracticeUpload speedPractice = new speedPracticeUpload
                 {
