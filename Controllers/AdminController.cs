@@ -1570,8 +1570,13 @@ namespace ComputerTypingWebApp.Controllers
             string fromDate = Request.Form["fromdate"].ToString();
 
             var students = (from us in myDbContext.Users
+                            join s in myDbContext.Students on us.Username equals s.StudentUserName
                             where us.InstituteId == InstId && us.RoleId == 1 && us.IsActive == true
-                            select us).ToList();
+                            select new
+                            {
+                                UserId = us.Id,
+                                Name = s.FirstName + " " + s.LastName,
+                            }).ToList();
 
             ExcelPackage.License.SetNonCommercialPersonal("DSequence"); // Set the license context for EPPlus
             using (ExcelPackage package = new ExcelPackage())
@@ -1604,7 +1609,7 @@ namespace ComputerTypingWebApp.Controllers
                     int iPresent = 0;
                     int iAbsent = 0;
 
-                    worksheet.Cells[row, 2, row, 7].Value = st.Username;
+                    worksheet.Cells[row, 2, row, 7].Value = st.Name;
                     worksheet.Cells[row, 2, row, 7].Merge = true;
                     worksheet.Cells[row, 2, row, 7].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
                     worksheet.Cells[row, 2, row, 7].Style.Font.Bold = true;
@@ -1666,7 +1671,7 @@ namespace ComputerTypingWebApp.Controllers
                     for (int i = 1; i <= maxDays; i++)
                     {
                         DateTime date = new DateTime(Convert.ToDateTime(fromDate).Year, Convert.ToDateTime(fromDate).Month, i);
-                        var inTime = myDbContext.UserLogins.Where(x => x.UserId == st.Id
+                        var inTime = myDbContext.UserLogins.Where(x => x.UserId == st.UserId
                         && (x.Login.Date.Day == date.Day && x.Login.Date.Month == date.Month && x.Login.Date.Year == date.Year))
                             .Select(x => x.Login.ToShortTimeString()).FirstOrDefault();
 
@@ -1684,7 +1689,7 @@ namespace ComputerTypingWebApp.Controllers
                     for (int i = 1; i <= maxDays; i++)
                     {
                         DateTime date = new DateTime(Convert.ToDateTime(fromDate).Year, Convert.ToDateTime(fromDate).Month, i);
-                        var outTime = myDbContext.UserLogins.Where(x => x.UserId == st.Id
+                        var outTime = myDbContext.UserLogins.Where(x => x.UserId == st.UserId
                         && (x.LogOut.Date.Day == date.Day && x.LogOut.Date.Month == date.Month && x.LogOut.Date.Year == date.Year))
                             .OrderByDescending(x => x)
                             .Select(x => x.LogOut.ToShortTimeString()).FirstOrDefault();
@@ -1704,11 +1709,11 @@ namespace ComputerTypingWebApp.Controllers
                     {
                         DateTime date = new DateTime(Convert.ToDateTime(fromDate).Year, Convert.ToDateTime(fromDate).Month, i);
 
-                        var inTime = myDbContext.UserLogins.Where(x => x.UserId == st.Id
+                        var inTime = myDbContext.UserLogins.Where(x => x.UserId == st.UserId
                         && (x.Login.Date.Day == date.Day && x.Login.Date.Month == date.Month && x.Login.Date.Year == date.Year))
                             .Select(x => x.Login.ToShortTimeString()).FirstOrDefault();
 
-                        var outTime = myDbContext.UserLogins.Where(x => x.UserId == st.Id
+                        var outTime = myDbContext.UserLogins.Where(x => x.UserId == st.UserId
                         && (x.LogOut.Date.Day == date.Day && x.LogOut.Date.Month == date.Month && x.LogOut.Date.Year == date.Year))
                             .OrderByDescending(x => x)
                             .Select(x => x.LogOut.ToShortTimeString()).FirstOrDefault();
@@ -1727,7 +1732,7 @@ namespace ComputerTypingWebApp.Controllers
                     {
                         DateTime date = new DateTime(Convert.ToDateTime(fromDate).Year, Convert.ToDateTime(fromDate).Month, i);
 
-                        var inTime = myDbContext.UserLogins.Where(x => x.UserId == st.Id
+                        var inTime = myDbContext.UserLogins.Where(x => x.UserId == st.UserId
                         && (x.Login.Date.Day == date.Day && x.Login.Date.Month == date.Month && x.Login.Date.Year == date.Year))
                             .Select(x => x.Login.ToShortTimeString()).FirstOrDefault();
 

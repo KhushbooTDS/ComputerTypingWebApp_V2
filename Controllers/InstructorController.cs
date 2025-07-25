@@ -38,10 +38,16 @@ namespace ComputerTypingWebApp.Controllers
         public JsonResult GetSubjectList(string StudentUserName)
         {
             int InstituteId = Convert.ToInt32(HttpContext.Session.GetString("InstituteID"));
+
+            var studentReceipts = myDbContext.Receipts.Where(x => x.StudentUserName == StudentUserName).ToList();
+            decimal totalAmountDue = 0;
+            bool isPaid = studentReceipts.Any();
+            totalAmountDue = myDbContext.Receipts.Where(x => x.StudentUserName == StudentUserName).OrderByDescending(x => x).Select(x => x.BalanceAmountDue).FirstOrDefault();
+
             var data = (from st in myDbContext.Students
                         join crs in myDbContext.Coursefee on st.StudentType.ToString() equals crs.StudentType
                         where st.StudentUserName == StudentUserName && crs.Instituteid == InstituteId
-                        select new { sub30 = st.SelectSub30wpm, sub40 = st.SelectSub40wpm, courseid = crs.subjectid, fee = crs.Fees }
+                        select new { sub30 = st.SelectSub30wpm, sub40 = st.SelectSub40wpm, courseid = crs.subjectid, fee = crs.Fees, isfeespaidAlready = isPaid, totalDue = Convert.ToInt64(totalAmountDue), username = st.StudentUserName }
                         ).ToList();
 
             return Json(data);

@@ -148,6 +148,7 @@
                     var feesMarathi40 = 0;
 
                     var totalFees = 0;
+                    var isFeePaidAlready = false;
 
                     $("input[name='chkSubjects']").prop("checked", false);
 
@@ -171,6 +172,13 @@
                             if (value == 'Hindi40') { isHindi40 = true; }
                             if (value == 'Marathi40') { isMarathi40 = true; }
                         });
+                    }
+
+                    isFeePaidAlready = data[0].isfeespaidAlready;
+                    if (isFeePaidAlready == true){
+                        totalFees = data[0].totalDue;
+                        $("#TotalAmountDue").val(totalFees);
+                        return false;
                     }
 
                     $.each(data, function (key, value) {
