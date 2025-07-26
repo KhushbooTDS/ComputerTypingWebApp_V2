@@ -1811,9 +1811,19 @@ namespace ComputerTypingWebApp.Controllers
             var students = (from i in myDbContext.Students
                             join ins in myDbContext.Users
                             on i.StudentUserName equals ins.Username
+                            join sess in myDbContext.InstituteSessions
+                            on i.Session equals sess.Id.ToString()
                             where ins.InstituteId == InstituteId
-                            && i.Session == HttpContext.Session.GetString("CurrentSessionId")
-                            select i).ToList();
+                            //&& i.Session == sess.Id.ToString()
+                            select new TotalStudentVM
+                            {
+                                DateAdd = i.DateAdd,
+                                FirstName = i.FirstName,
+                                LastName = i.LastName,
+                                Status = i.Status,
+                                StartSession = sess.StartSession + " " + sess.startSessionYY,
+                                EndSession = sess.EndSession + " " + sess.endSessionYY,
+                            }).ToList();
             return View(students);
         }
         public async Task<IActionResult> ViewStudentGrowthDetails(int id)
