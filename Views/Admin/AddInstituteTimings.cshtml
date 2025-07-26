@@ -31,20 +31,20 @@
 
 
 <p class="h4"> <u>Add Institute Timings</u> </p>
-<span  style="color:red">@TempData["ErrorMsg"]</span>
+<span style="color:red">@TempData["ErrorMsg"]</span>
 <form method="post">
     <div>
         <label for="StartSessions" style="width:10%;">Start Time</label>
-        <input type="text" class="textbox" name="starttime" id="starttime" />
+        <input type="text" class="textbox" name="starttime" id="starttime" onkeypress="return validateInput(event);" />
         <select id="StartAMPM" name="StartAMPM" class="select">
             <option value="AM">AM</option>
             <option value="PM">PM</option>
         </select>
     </div>
     <br /><br />
-    <div >
+    <div>
         <label for="EndSessions" style="width:10%;">End Time</label>
-        <input type="text" class="textbox" name="endtime" id="endtime" />
+        <input type="text" class="textbox" name="endtime" id="endtime" onkeypress="return validateInput(event);" />
         <select id="EndAMPM" name="EndAMPM" class="select">
             <option value="AM">AM</option>
             <option value="PM">PM</option>
@@ -55,4 +55,14 @@
 </form>
 
 
+<script>
+    function validateInput(event) {
+        var allowedRegex = new RegExp("^[0-9-:?]+$");
+        var key = String.fromCharCode(event.charCode ? event.which : event.charCode);
 
+        if (!allowedRegex.test(key)) {
+            event.preventDefault(); // Prevent the character from being entered
+            return false;
+        }
+    }
+</script>
