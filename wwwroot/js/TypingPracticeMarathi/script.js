@@ -12,6 +12,18 @@ $(document).ready(function () {
     // Ensure audio does not loop
     keyPressAudio.loop = false;
     errorAudio.loop = false;
+
+    var arrayMarathiKeys = [
+        { key: "115", value: "न" },
+        { key: "49", value: "फ" },
+        { key: "87", value: "ॅ" },
+        { key: "69", value: "म" },
+        { key: "82", value: "त" },
+        { key: "84", value: "ज" },
+        { key: "121", value: "ल" },
+        { key: "73", value: "प" },
+    ];
+
     $(document).keydown(function (event) {
         if (isTimerStart == 0) {
             startTimer(1)
@@ -19,6 +31,8 @@ $(document).ready(function () {
         }
         console.log("Key Code: " + event.keyCode);
         console.log("Key Pressed: " + event.key);
+
+        var pressedKey = arrayMarathiKeys.find(item => item.key == event.keyCode);
 
         $(`.key-${event.keyCode}`).animate();
         if (event.keyCode == 20) {
@@ -35,7 +49,7 @@ $(document).ready(function () {
             setTimeout(() => {
                 $(`.key-${event.keyCode + 32}`).css("background", "none"); // Change back after 1 second
             }, 100);
-            StartTyping(event.key, event.keyCode);
+            StartTyping(event.key, event.keyCode, pressedKey);
         } else if (
             event.keyCode == 32 ||
             (event.keyCode >= 48 && event.keyCode <= 57)
@@ -44,14 +58,14 @@ $(document).ready(function () {
             setTimeout(() => {
                 $(`.key-${event.keyCode}`).css("background", "none"); // Change back after 1 second
             }, 50);
-            StartTyping(event.key, event.keyCode);
+            StartTyping(event.key, event.keyCode, pressedKey);
         } else if (event.key != "Shift") {
             //alert(event.key+'\n'+event.keyCode)
             $(`.key-${event.keyCode}`).css("background-color", "green"); // Change to red immediately
             setTimeout(() => {
                 $(`.key-${event.keyCode}`).css("background", "none"); // Change back after 1 second
             }, 50);
-            StartTyping(event.key, event.keyCode);
+            StartTyping(event.key, event.keyCode, pressedKey);
         }
     });
     //
@@ -60,16 +74,12 @@ $(document).ready(function () {
 function charToKeycode(char) {
     return char.charCodeAt(0);
 }
-function StartTyping(key, code) {
-    Check(charToKeycode(key));
+function StartTyping(key, code, pressedKey) {
+    Check(charToKeycode(key), pressedKey);
 }
-function Check(code) {
+function Check(code, pressedKey) {
     paragraphLength = $(".ch").length;
     console.log(code);
-
-    var marathiKeys = {};
-    marathiKeys[101] = "क"; // E
-
 
     if (paragraphLength >= currentCharPosition) {
         currentChar = $(`.c-${currentCharPosition}`)
@@ -89,12 +99,18 @@ function Check(code) {
         //    $(`.c-${currentCharPosition}`).addClass("text-error");
         //}
 
-        if (jQuery.inArray(code, marathiKeys) == -1) {
-            keyPressAudio.currentTime = 0;
-            keyPressAudio.play();
-            DeactiveKey();
-            currentCharPosition++;
-            ActiveKey();
+        if (pressedKey != undefined) {
+            if (currentChar === pressedKey.value) {
+                keyPressAudio.currentTime = 0;
+                keyPressAudio.play();
+                DeactiveKey();
+                currentCharPosition++;
+                ActiveKey();
+            } else {
+                errorAudio.currentTime = 0;
+                errorAudio.play();
+                $(`.c-${currentCharPosition}`).addClass("text-error");
+            }
         }
         else {
             errorAudio.currentTime = 0;
