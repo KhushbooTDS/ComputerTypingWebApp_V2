@@ -1,4 +1,4 @@
-let isCapsLockOn = 0;
+﻿let isCapsLockOn = 0;
 let paragraphLength = 0;
 let currentChar = "";
 let currentCharkeyCode = 0;
@@ -12,13 +12,27 @@ $(document).ready(function () {
     // Ensure audio does not loop
     keyPressAudio.loop = false;
     errorAudio.loop = false;
+
+    var arrayHindiKeys = [
+        { key: "85", value: "न" },
+        { key: "49", value: "फ" },
+        { key: "87", value: "ॅ" },
+        { key: "69", value: "म" },
+        { key: "82", value: "त" },
+        { key: "84", value: "ज" },
+        { key: "121", value: "ल" },
+        { key: "73", value: "प" },
+    ];
+
     $(document).keydown(function (event) {
         if (isTimerStart == 0) {
             startTimer(1)
             isTimerStart = 1;
         }
         console.log("Key Code: " + event.keyCode);
-        console.log("Key Pressed: " + event.key);
+        console.log("Key Pressed: " + event.key);  
+
+        var pressedKey = arrayHindiKeys.find(item => item.key == event.keyCode);
 
         $(`.key-${event.keyCode}`).animate();
         if (event.keyCode == 20) {
@@ -35,7 +49,7 @@ $(document).ready(function () {
             setTimeout(() => {
                 $(`.key-${event.keyCode + 32}`).css("background", "none"); // Change back after 1 second
             }, 100);
-            StartTyping(event.key, event.keyCode);
+            StartTyping(event.key, event.keyCode, pressedKey);
         } else if (
             event.keyCode == 32 ||
             (event.keyCode >= 48 && event.keyCode <= 57)
@@ -44,14 +58,14 @@ $(document).ready(function () {
             setTimeout(() => {
                 $(`.key-${event.keyCode}`).css("background", "none"); // Change back after 1 second
             }, 50);
-            StartTyping(event.key, event.keyCode);
+            StartTyping(event.key, event.keyCode, pressedKey);
         } else if (event.key != "Shift") {
             //alert(event.key+'\n'+event.keyCode)
             $(`.key-${event.keyCode}`).css("background-color", "green"); // Change to red immediately
             setTimeout(() => {
                 $(`.key-${event.keyCode}`).css("background", "none"); // Change back after 1 second
             }, 50);
-            StartTyping(event.key, event.keyCode);
+            StartTyping(event.key, event.keyCode, pressedKey);
         }
     });
     //
@@ -60,10 +74,10 @@ $(document).ready(function () {
 function charToKeycode(char) {
     return char.charCodeAt(0);
 }
-function StartTyping(key, code) {
-    Check(charToKeycode(key));
+function StartTyping(key, code, pressedKey) {
+    Check(charToKeycode(key), pressedKey);
 }
-function Check(code) {
+function Check(code, pressedKey) {
     paragraphLength = $(".ch").length;
     console.log(code);
     if (paragraphLength >= currentCharPosition) {
@@ -72,13 +86,32 @@ function Check(code) {
             .replace(/&nbsp;/g, " ").replace(/&gt;/g, ">").replace(/&lt;/g, "<");;
         currentCharkeyCode = charToKeycode(currentChar);
         console.log(currentCharkeyCode + " === " + code);
-        if (currentCharkeyCode === code) {
-            keyPressAudio.currentTime = 0;
-            keyPressAudio.play();
-            DeactiveKey();
-            currentCharPosition++;
-            ActiveKey();
-        } else {
+        //if (currentCharkeyCode === code) {
+        //    keyPressAudio.currentTime = 0;
+        //    keyPressAudio.play();
+        //    DeactiveKey();
+        //    currentCharPosition++;
+        //    ActiveKey();
+        //} else {
+        //    errorAudio.currentTime = 0;
+        //    errorAudio.play();
+        //    $(`.c-${currentCharPosition}`).addClass("text-error");
+        //}
+
+        if (pressedKey != undefined) {
+            if (currentChar === pressedKey.value) {
+                keyPressAudio.currentTime = 0;
+                keyPressAudio.play();
+                DeactiveKey();
+                currentCharPosition++;
+                ActiveKey();
+            } else {
+                errorAudio.currentTime = 0;
+                errorAudio.play();
+                $(`.c-${currentCharPosition}`).addClass("text-error");
+            }
+        }
+        else {
             errorAudio.currentTime = 0;
             errorAudio.play();
             $(`.c-${currentCharPosition}`).addClass("text-error");

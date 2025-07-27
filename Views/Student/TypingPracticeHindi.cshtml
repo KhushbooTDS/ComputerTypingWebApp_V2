@@ -17,7 +17,7 @@
             @if (Model.PracticeData != null)
             {
                 var incr = 1;
-                foreach (char item in Model.PracticeData)
+                @*foreach (char item in Model.PracticeData)
                 {
                     if (item == ' ')
                     {
@@ -32,6 +32,23 @@
                         <span class="ch c-@incr krutidev">@item</span>
                     }
                     incr++;
+                }*@
+
+                var str = Model.PracticeData;
+                var enumerator = System.Globalization.StringInfo.GetTextElementEnumerator(str);
+                while (enumerator.MoveNext())
+                {
+                    if (@enumerator.Current == " ")
+                    {
+                        <span class="ch c-@incr krutidev">@enumerator.Current @enumerator.Current</span>
+                    }
+                    else
+                    {
+                        <span class="ch c-@incr krutidev">@enumerator.Current</span>
+                    }
+
+                    incr++;
+
                 }
             }
             
@@ -387,5 +404,5 @@
 </div>
 <script src="~/js/typingpracticechapter/bootstrap.bundle.min.js"></script>
 <script src="~/js/typingpracticechapter/jquery.min.js"></script>
-<script src="~/js/typingpracticehindi/script.js"></script>
+<script src="~/js/typingpracticehindi/script.js?v=3"></script>
 <script src="~/js/typingpracticehindi/saveprogress.js"></script>
