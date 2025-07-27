@@ -16,8 +16,8 @@
         <label for="StudentName">Student Name</label>
         @Html.DropDownList("StudentName",ViewBag.StudentList,"-- Select StudentName--",null)
     </div>
-    
-
+    <br />
+    <br />
     <input type="submit" class="btn btn-primary" value="Lock" asp-action="LockStudent" asp-controller="SuperAdmin" />
     <input type="submit" class="btn btn-primary" value="Unlock" asp-action="UnlockLockStudent" asp-controller="SuperAdmin" />
 
