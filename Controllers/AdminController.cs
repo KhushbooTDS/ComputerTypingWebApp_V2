@@ -2909,7 +2909,7 @@ namespace ComputerTypingWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveSpeedPractice(IFormFile file)
+        public IActionResult SaveSpeedPractice(List<IFormFile> file)
         {
             if (HttpContext.Session.GetString("UserName") == null || HttpContext.Session.GetString("UserName") == "")
             {
@@ -2922,6 +2922,11 @@ namespace ComputerTypingWebApp.Controllers
             int courseId = Convert.ToInt32(Request.Form["Course"]);
             int SubjectId = Convert.ToInt32(Request.Form["Subject"]);
             int sectionId = Convert.ToInt32(Request.Form["Section"]);
+            string LetterType = Request.Form["radioLetterType"];
+            string newFileName = string.Empty;
+            string destinationPath = string.Empty;
+            int sectionOrder = 1;
+            string formattedLetterPath = string.Empty;
 
             string sectionName = myDbContext.section
                 .Where(x => x.Id == sectionId)
@@ -2994,122 +2999,165 @@ namespace ComputerTypingWebApp.Controllers
             }
 
             // Save the uploaded file
-            if (file != null && file.Length > 0)
+            for (int i = 0; i < file.Count; i++)
             {
-                string lastFileToken = myDbContext.speedPracticeUpload.Where(x => x.SubjectId == SubjectId && x.sectionid == sectionId && x.InstituteId == instituteId && x.CourseId == courseId).Select(x => x.FilToken).OrderByDescending(x => x).FirstOrDefault();
-                int sectionOrder = 1;
-
-                if (!string.IsNullOrEmpty(lastFileToken))
+                if (file[i] != null && file[i].Length > 0)
                 {
-                    sectionOrder = Convert.ToInt32(lastFileToken) + 1;
+                    string lastFileToken = myDbContext.speedPracticeUpload.Where(x => x.SubjectId == SubjectId && x.sectionid == sectionId && x.InstituteId == instituteId && x.CourseId == courseId).Select(x => x.FilToken).OrderByDescending(x => x).FirstOrDefault();
+                    
+                    if (!string.IsNullOrEmpty(lastFileToken))
+                    {
+                        sectionOrder = Convert.ToInt32(lastFileToken) + 1;
+                    }
+
+                    string fileName = Path.GetFileName(file[i].FileName);
+                    string filePath = Path.Combine(subjectPath, fileName);
+                    
+                    //if (subjectName == "English40" && sectionName == "Letter")
+                    //{
+                    //    if (fileName.Contains("Unformat"))
+                    //    {
+                    //        newFileName = sectionName + "_" + sectionOrder;
+                    //        destinationPath = Path.Combine(subjectPath, newFileName + Path.GetExtension(fileName));
+                    //        using (var stream = new FileStream(destinationPath, FileMode.Create))
+                    //        {
+                    //            file.CopyTo(stream);
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    newFileName = sectionName + "_" + sectionOrder;
+                    //    destinationPath = Path.Combine(subjectPath, newFileName + Path.GetExtension(fileName));
+                    //    using (var stream = new FileStream(destinationPath, FileMode.Create))
+                    //    {
+                    //        file.CopyTo(stream);
+                    //    }
+                    //}
+
+                    if ((sectionName == "Letter" || sectionName == "Statement") && (subjectName.Contains("40") && fileName.ToLower().Contains("unformat")))
+                    {
+                        newFileName = sectionName + "Unformat" + "_" + sectionOrder;
+                        destinationPath = Path.Combine(subjectPath, newFileName + Path.GetExtension(fileName));
+                        using (var stream = new FileStream(destinationPath, FileMode.Create))
+                        {
+                            file[i].CopyTo(stream);
+                        }
+                    }
+                    else
+                    {
+                        if ((sectionName == "Letter" || sectionName == "Statement") && (subjectName.Contains("40") && fileName.ToLower().Contains("correct")))
+                        {
+                            newFileName = sectionName + "Correct" + "_" + sectionOrder;
+                            destinationPath = Path.Combine(subjectPath, newFileName + Path.GetExtension(fileName));
+                            formattedLetterPath = destinationPath;
+                            using (var stream = new FileStream(destinationPath, FileMode.Create))
+                            {
+                                file[i].CopyTo(stream);
+                            }
+                        }
+                        else
+                        {
+                            newFileName = sectionName + "_" + sectionOrder;
+                            destinationPath = Path.Combine(subjectPath, newFileName + Path.GetExtension(fileName));
+                            using (var stream = new FileStream(destinationPath, FileMode.Create))
+                            {
+                                file[i].CopyTo(stream);
+                            }
+                        }
+                    }                    
+
+                    string answerFileName = string.Empty;
+
+                    //if (subjectName == "English40" && sectionName == "Letter")
+                    //{
+                    //    if (fileName.Contains("Answer"))
+                    //    {
+                    //        answerFileName = sectionName + "_" + sectionOrder + "Answer" + Path.GetExtension(fileName);
+                    //        string destinationAnswerFilePath = Path.Combine(subjectPath, answerFileName);
+                    //        using (var stream = new FileStream(destinationAnswerFilePath, FileMode.Create))
+                    //        {
+                    //            file.CopyTo(stream);
+                    //        }
+
+                    //        // Save Use File
+                    //        string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
+                    //        string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
+                    //        using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
+                    //        {
+                    //            file.CopyTo(stream);
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    // Save Use File
+                    //    string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
+                    //    string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
+                    //    using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
+                    //    {
+                    //        file.CopyTo(stream);
+                    //    }
+                    //}
+
+                    //if (fileName.Contains("Answer"))
+                    //{
+                    answerFileName = sectionName + "_" + sectionOrder + "Answer" + Path.GetExtension(fileName);
+                    string destinationAnswerFilePath = Path.Combine(subjectPath, answerFileName);
+                    using (var stream = new FileStream(destinationAnswerFilePath, FileMode.Create))
+                    {
+                        var sampleFileStream = new FileStream(destinationSamplePath, FileMode.Open);
+                        sampleFileStream.CopyTo(stream);
+                        sampleFileStream.Close();
+                    }
+
+                    // Save Use File
+                    if ((sectionName == "Letter" || sectionName == "Statement") && subjectName.Contains("40") && fileName.ToLower().Contains("correct"))
+                    {
+                        string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
+                        string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
+                        using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
+                        {
+                            file[i].CopyTo(stream);
+                            stream.Close();
+                        }
+                    }
+                    else
+                    {
+                        if (sectionName == "Passage")
+                        {
+                            string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
+                            string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
+                            using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
+                            {
+                                file[i].CopyTo(stream);
+                                stream.Close();
+                            }
+                        }
+                    }
+                    //}
+
+                    
                 }
-
-                string fileName = Path.GetFileName(file.FileName);
-                string filePath = Path.Combine(subjectPath, fileName);
-
-                string destinationPath = string.Empty;
-                string newFileName = string.Empty;
-
-                //if (subjectName == "English40" && sectionName == "Letter")
-                //{
-                //    if (fileName.Contains("Unformat"))
-                //    {
-                //        newFileName = sectionName + "_" + sectionOrder;
-                //        destinationPath = Path.Combine(subjectPath, newFileName + Path.GetExtension(fileName));
-                //        using (var stream = new FileStream(destinationPath, FileMode.Create))
-                //        {
-                //            file.CopyTo(stream);
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    newFileName = sectionName + "_" + sectionOrder;
-                //    destinationPath = Path.Combine(subjectPath, newFileName + Path.GetExtension(fileName));
-                //    using (var stream = new FileStream(destinationPath, FileMode.Create))
-                //    {
-                //        file.CopyTo(stream);
-                //    }
-                //}
-
-                newFileName = sectionName + "_" + sectionOrder;
-                destinationPath = Path.Combine(subjectPath, newFileName + Path.GetExtension(fileName));
-                using (var stream = new FileStream(destinationPath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-
-                string answerFileName = string.Empty;
-
-                //if (subjectName == "English40" && sectionName == "Letter")
-                //{
-                //    if (fileName.Contains("Answer"))
-                //    {
-                //        answerFileName = sectionName + "_" + sectionOrder + "Answer" + Path.GetExtension(fileName);
-                //        string destinationAnswerFilePath = Path.Combine(subjectPath, answerFileName);
-                //        using (var stream = new FileStream(destinationAnswerFilePath, FileMode.Create))
-                //        {
-                //            file.CopyTo(stream);
-                //        }
-
-                //        // Save Use File
-                //        string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
-                //        string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
-                //        using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
-                //        {
-                //            file.CopyTo(stream);
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    // Save Use File
-                //    string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
-                //    string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
-                //    using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
-                //    {
-                //        file.CopyTo(stream);
-                //    }
-                //}
-
-                //if (fileName.Contains("Answer"))
-                //{
-                answerFileName = sectionName + "_" + sectionOrder + "Answer" + Path.GetExtension(fileName);
-                string destinationAnswerFilePath = Path.Combine(subjectPath, answerFileName);
-                using (var stream = new FileStream(destinationAnswerFilePath, FileMode.Create))
-                {
-                    var sampleFileStream = new FileStream(destinationSamplePath, FileMode.Open);
-                    sampleFileStream.CopyTo(stream);
-                    sampleFileStream.Close();
-                }
-
-                // Save Use File
-                string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
-                string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
-                using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                    stream.Close();
-                }
-                //}
-
-                speedPracticeUpload speedPractice = new speedPracticeUpload
-                {
-                    CourseId = courseId,
-                    SubjectId = SubjectId,
-                    sectionid = sectionId,
-                    FileName = newFileName,
-                    FilePath = destinationPath,
-                    DateUploaded = DateTime.Now,
-                    InstituteId = instituteId,
-                    IsDeleted = false,
-                    FilToken = sectionOrder.ToString(),
-                    UserId = userId,
-                };
-                myDbContext.speedPracticeUpload.Add(speedPractice);
-                myDbContext.SaveChanges();
             }
 
+            speedPracticeUpload speedPractice = new speedPracticeUpload
+            {
+                CourseId = courseId,
+                SubjectId = SubjectId,
+                sectionid = sectionId,
+                FileName = newFileName,
+                FilePath = destinationPath,
+                DateUploaded = DateTime.Now,
+                InstituteId = instituteId,
+                IsDeleted = false,
+                FilToken = sectionOrder.ToString(),
+                UserId = userId,
+                LetterType = LetterType,
+                FormattedLetterPath = formattedLetterPath,
+            };
+            myDbContext.speedPracticeUpload.Add(speedPractice);
+            myDbContext.SaveChanges();
 
             return RedirectToAction("UploadSpeedPractice");
 

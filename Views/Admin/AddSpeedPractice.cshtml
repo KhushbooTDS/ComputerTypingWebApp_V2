@@ -11,7 +11,7 @@
     }
 }
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <form method="post" enctype="multipart/form-data">
     <div class="content-wrapper">
@@ -36,7 +36,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="file">Upload File</label><br />
-                                <input type="file" class="form-control" name="file" required />
+                                <input type="file" class="form-control" name="file" multiple required />
+                            </div>
+                            <div id="LetterTypeSection" class="form-group" style="display:none;">
+                                <label for="LetterType">Letter Type</label><br />
+                                <span style="font-weight:bold;"> BusinessLetter </span> <input type="radio" name="radioLetterType" value="BusinessLetter" checked="checked" />
+                                <span style="font-weight:bold;"> PersonalLetter </span> <input type="radio" name="radioLetterType" value="PersonalLetter" />
                             </div>
                             <br /><br />
 
@@ -50,3 +55,23 @@
     </div>
 
 </form>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        // Jquery dropdown change event
+        $('select[id="Section"]').on('change', function () {
+            var section = $("#Section option:selected").text();
+            var subject = $("#Subject option:selected").text();
+
+            if (section == "Letter" && (subject == "English40" || subject == "Hindi40" || subject == "Marathi40")) { // Letter
+                $('#LetterTypeSection').show();
+            } else {
+                $('#LetterTypeSection').hide();
+            }
+            
+        });
+    });
+
+</script>

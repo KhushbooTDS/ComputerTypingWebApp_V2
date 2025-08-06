@@ -15,5 +15,7 @@
         public DateTime DateUploaded { get; set; } 
         public string FileName { get; set; }
         public bool IsDeleted { get; set; }
+        public string LetterType { get; set; }
+        public string FormattedLetterPath { get; set; }
     }
 }

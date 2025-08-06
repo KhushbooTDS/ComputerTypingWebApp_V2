@@ -74,7 +74,8 @@
                         </tr>
                     </thead>
 
-                    <tbody @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                    <tbody>
+                    @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
                     {
                             <tr>
                                 <td>
