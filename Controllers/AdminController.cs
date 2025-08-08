@@ -3141,6 +3141,8 @@ namespace ComputerTypingWebApp.Controllers
                 }
             }
 
+            if(sectionName != "Letter") { LetterType = ""; } else { if (!subjectName.Contains("40")) { LetterType = ""; } }
+
             speedPracticeUpload speedPractice = new speedPracticeUpload
             {
                 CourseId = courseId,
