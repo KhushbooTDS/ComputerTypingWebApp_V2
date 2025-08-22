@@ -3124,7 +3124,7 @@ namespace ComputerTypingWebApp.Controllers
                     }
                     else
                     {
-                        if (sectionName == "Passage")
+                        if ((sectionName == "Letter" || sectionName == "Statement") && subjectName.Contains("30"))
                         {
                             string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
                             string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
@@ -3132,6 +3132,19 @@ namespace ComputerTypingWebApp.Controllers
                             {
                                 file[i].CopyTo(stream);
                                 stream.Close();
+                            }
+                        }
+                        else
+                        {
+                            if (sectionName == "Passage")
+                            {
+                                string UseFileName = sectionName + "_" + sectionOrder + "Use" + Path.GetExtension(fileName);
+                                string destinationFileUsePath = Path.Combine(subjectPath, UseFileName);
+                                using (var stream = new FileStream(destinationFileUsePath, FileMode.Create))
+                                {
+                                    file[i].CopyTo(stream);
+                                    stream.Close();
+                                }
                             }
                         }
                     }
