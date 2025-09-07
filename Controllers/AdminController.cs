@@ -3003,7 +3003,7 @@ namespace ComputerTypingWebApp.Controllers
             {
                 if (file[i] != null && file[i].Length > 0)
                 {
-                    string lastFileToken = myDbContext.speedPracticeUpload.Where(x => x.SubjectId == SubjectId && x.sectionid == sectionId && x.InstituteId == instituteId && x.CourseId == courseId).Select(x => x.FilToken).OrderByDescending(x => x).FirstOrDefault();
+                    string lastFileToken = myDbContext.speedPracticeUpload.Where(x => x.SubjectId == SubjectId && x.sectionid == sectionId && x.InstituteId == instituteId && x.CourseId == courseId).OrderByDescending(x => x.Id).Select(x => x.FilToken).FirstOrDefault();
                     
                     if (!string.IsNullOrEmpty(lastFileToken))
                     {
@@ -3150,29 +3150,50 @@ namespace ComputerTypingWebApp.Controllers
                     }
                     //}
 
-                    
+
+                    if (sectionName != "Letter") { LetterType = ""; } else { if (!subjectName.Contains("40")) { LetterType = ""; } }
+
+                    speedPracticeUpload speedPractice = new speedPracticeUpload
+                    {
+                        CourseId = courseId,
+                        SubjectId = SubjectId,
+                        sectionid = sectionId,
+                        FileName = newFileName,
+                        FilePath = destinationPath,
+                        DateUploaded = DateTime.Now,
+                        InstituteId = instituteId,
+                        IsDeleted = false,
+                        FilToken = sectionOrder.ToString(),
+                        UserId = userId,
+                        LetterType = LetterType,
+                        FormattedLetterPath = formattedLetterPath,
+                    };
+                    myDbContext.speedPracticeUpload.Add(speedPractice);
+                    myDbContext.SaveChanges();
+
+
                 }
             }
 
-            if(sectionName != "Letter") { LetterType = ""; } else { if (!subjectName.Contains("40")) { LetterType = ""; } }
+            //if(sectionName != "Letter") { LetterType = ""; } else { if (!subjectName.Contains("40")) { LetterType = ""; } }
 
-            speedPracticeUpload speedPractice = new speedPracticeUpload
-            {
-                CourseId = courseId,
-                SubjectId = SubjectId,
-                sectionid = sectionId,
-                FileName = newFileName,
-                FilePath = destinationPath,
-                DateUploaded = DateTime.Now,
-                InstituteId = instituteId,
-                IsDeleted = false,
-                FilToken = sectionOrder.ToString(),
-                UserId = userId,
-                LetterType = LetterType,
-                FormattedLetterPath = formattedLetterPath,
-            };
-            myDbContext.speedPracticeUpload.Add(speedPractice);
-            myDbContext.SaveChanges();
+            //speedPracticeUpload speedPractice = new speedPracticeUpload
+            //{
+            //    CourseId = courseId,
+            //    SubjectId = SubjectId,
+            //    sectionid = sectionId,
+            //    FileName = newFileName,
+            //    FilePath = destinationPath,
+            //    DateUploaded = DateTime.Now,
+            //    InstituteId = instituteId,
+            //    IsDeleted = false,
+            //    FilToken = sectionOrder.ToString(),
+            //    UserId = userId,
+            //    LetterType = LetterType,
+            //    FormattedLetterPath = formattedLetterPath,
+            //};
+            //myDbContext.speedPracticeUpload.Add(speedPractice);
+            //myDbContext.SaveChanges();
 
             return RedirectToAction("UploadSpeedPractice");
 
